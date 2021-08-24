@@ -1,6 +1,6 @@
-import { createMuiTheme } from '@material-ui/core/styles';
+import { createTheme } from "@material-ui/core";
 
-const theme = createMuiTheme({
+const theme = createTheme({
   breakpoints: {
     values: {
       xxs: 375,
