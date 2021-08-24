@@ -7,7 +7,7 @@ function TextFieldCustom(props) {
   console.log(props);
   const classes = useStyle();
 
-  return <TextField classes={classes} inputProps={props} variant="filled" />;
+  return <TextField classes={classes} {...props} variant="filled" />;
 }
 
 export default TextFieldCustom;

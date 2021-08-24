@@ -13,21 +13,17 @@ function Register() {
         <div className="t-center mt-5">Entionary</div>
       </div>
 
-      <div className="flex=col">
+      <div className="flex-col">
         <TextFieldCustom
           label="Name"
           size="small"
           placeholder="Input Name"
         />
       </div>
-      <div className="flex=col">
-        <TextFieldCustom
-          label="Email"
-          size="small"
-          placeholder="Input email"
-        />
+      <div className="flex-col">
+        <TextFieldCustom label="Email" size="small" placeholder="Input email" />
       </div>
-      <div className="flex=col">
+      <div className="flex-col">
         <TextFieldCustom
           label="Password"
           size="small"
