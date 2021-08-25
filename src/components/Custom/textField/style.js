@@ -1,4 +1,4 @@
-const textFieldStyle = () => ({
+const textFieldStyle = {
   root: {
     // input
     "& .MuiInputBase-root": {
@@ -36,6 +36,6 @@ const textFieldStyle = () => ({
       borderColor: "var(--error-color)",
     },
   },
-});
+};
 
 export default textFieldStyle;

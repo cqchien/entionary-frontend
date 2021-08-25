@@ -44,4 +44,4 @@ const formStyle = {
   },
 };
 
-export { formStyle };
+export default formStyle;

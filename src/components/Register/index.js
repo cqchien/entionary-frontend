@@ -1,6 +1,7 @@
 import { Button, makeStyles } from "@material-ui/core";
-import { formStyle } from "../Custom/globalStyle";
+import formStyle from "../Custom/globalStyle";
 import TextFieldCustom from "../Custom/textField";
+import SocialNetworkLogin from "../Login/SocialNetwork";
 
 // style with hook api.
 // It receive the object/ function to interact with theme
@@ -38,6 +39,10 @@ function Register() {
       >
         Sign Up
       </Button>
+
+      <div className="or_option w-100 t-center">
+        <SocialNetworkLogin />
+      </div>
     </form>
   );
 }

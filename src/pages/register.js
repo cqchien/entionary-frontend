@@ -1,4 +1,4 @@
-import Register from "../components/register";
+import Register from "../components/Register";
 import './styles/login-signup.scss';
 
 function RegisterPage() {
