@@ -1,8 +1,19 @@
-# Sơ lược về React Hooks
+# React Hooks
 
-Trước khi có Hooks thì viết React như thế nào?
+Before Hooks, how to write with React?
 
-* Class components (Stateful components): là những component được viết bằng class, chúng được cung cấp rất nhiều các tính năng như State, Lifecycle, refs, …
-* Functional components (Stateless components): là những component được viết như một function của JS, chỉ nhận vào dữ liệu thông qua props và render nó ra. Chúng không có State, Lifecycle và cũng không hỗ trợ refs.
+- **Class components (Stateful components)**: are components written in class, they are provided with a lot of features such as State, Lifecycle, refs, ...
+- **Functional components (Stateless components)**: are components written as a function of JS, only receiving data through props and rendering it. They do not have State, Lifecycle and also do not support refs.
 
-React Hooks ra đời với nhiệm vụ hỗ trợ chúng ta **viết một functional component có đầy đủ các tính năng như một class component ** thông qua các hooks
+React Hooks was created with the task of helping us **write a functional component with all the features like a class component** through hooks.
+
+**So, Why you should use Hooks**
+- Code component is much more concise and easy to understand than using class
+- Full-feature as class component
+- Enjoy the benefits of functional components such as the ease of testing a function (taking input and returning results).
+- Getting rid of the "this" keyword is often confusing when using classes.
+- No need to rewrite old component classes. New components should be written with hooks.
+- React Hooks are only used in functional components.
+- Easily customize hooks as you like for each different business logic.
+
+## 1. useState()
