@@ -1,6 +1,6 @@
 import { Button, makeStyles } from "@material-ui/core";
-import { formStyle } from "../custom/globalStyle";
-import TextFieldCustom from "../custom/textField";
+import { formStyle } from "../Custom/globalStyle";
+import TextFieldCustom from "../Custom/textField";
 
 // style with hook api.
 // It receive the object/ function to interact with theme
