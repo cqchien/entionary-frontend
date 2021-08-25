@@ -13,7 +13,11 @@ function Google() {
       // Render prop to use a custom element, use renderProps.onClick
       render={() => (
         <div className={classes.socialBtn}>
-          <img className={classes.socialImg} src={googleIcon} alt="Google Icon" />
+          <img
+            className={classes.socialImg}
+            src={googleIcon}
+            alt="Google Icon"
+          />
           <span className={classes.socialName}>Google</span>
         </div>
       )}
