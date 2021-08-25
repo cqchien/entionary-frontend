@@ -3,7 +3,6 @@ const formStyle = {
     padding: "2.4rem 3.6rem",
     boxShadow: "var(--box-shadow)",
     borderRadius: "var(--border-radius)",
-    width: "35rem",
     backgroundColor: "var(--bg-color-sec)",
 
     "& > *": {

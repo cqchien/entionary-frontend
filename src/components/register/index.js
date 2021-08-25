@@ -1,4 +1,4 @@
-import { makeStyles } from "@material-ui/core";
+import { Button, makeStyles } from "@material-ui/core";
 import { formStyle } from "../custom/globalStyle";
 import TextFieldCustom from "../custom/textField";
 
@@ -18,11 +18,7 @@ function Register() {
       </div>
 
       <div className="flex-col">
-        <TextFieldCustom
-          label="Name"
-          size="small"
-          placeholder="Input Name"
-        />
+        <TextFieldCustom label="Name" size="small" placeholder="Input Name" />
       </div>
       <div className="flex-col">
         <TextFieldCustom label="Email" size="small" placeholder="Input email" />
@@ -34,6 +30,14 @@ function Register() {
           placeholder="Input Password"
         />
       </div>
+      <Button
+        className="_btn _btn-primary"
+        type="submit"
+        color="primary"
+        size="large"
+      >
+        Sign Up
+      </Button>
     </form>
   );
 }
