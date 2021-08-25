@@ -2,9 +2,13 @@ import { makeStyles } from "@material-ui/core";
 import { formStyle } from "../custom/globalStyle";
 import TextFieldCustom from "../custom/textField";
 
+// style with hook api.
+// It receive the object/ function to interact with theme
+// It return a hook.
 const useStyle = makeStyles(formStyle);
 
 function Register() {
+  // useStyle return className list with example syntax {forgotPw: "makeStyles-forgotPw-4",..}.
   const classes = useStyle();
   return (
     <form className={`${classes.root} flex-col`} autoComplete="off">

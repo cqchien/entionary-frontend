@@ -4,6 +4,8 @@ import RegisterPage from "./pages/register";
 
 function App() {
   return (
+    // ThemeProvider to the top level of component tree.
+    // theme is used for all child components.
     <ThemeProvider theme={theme}>
       <RegisterPage />
     </ThemeProvider>

@@ -1,4 +1,4 @@
-const formStyle = () => ({
+const formStyle = {
   root: {
     padding: "2.4rem 3.6rem",
     boxShadow: "var(--box-shadow)",
@@ -43,6 +43,6 @@ const formStyle = () => ({
   visiblePw: {
     color: "var(--primary-color)",
   },
-});
+};
 
 export { formStyle };
