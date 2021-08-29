@@ -4,14 +4,18 @@ import textFieldStyle from "./style";
 const useStyle = makeStyles(textFieldStyle);
 
 function TextFieldCustom(props) {
-  console.log(props);
   const classes = useStyle();
-
+  const { inputProps, ...otherProps } = props;
+  console.log(inputProps);
   // classes: Override or extend the styles applied to the component.
   return (
     <TextField
       classes={classes}
-      {...props}
+      inputProps={inputProps}
+      InputProps={{
+        disableUnderline: true,
+      }}
+      {...otherProps}
       variant="filled"
     />
   );
