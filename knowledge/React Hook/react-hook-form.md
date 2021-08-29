@@ -16,4 +16,6 @@
 
     **NOTE**:
       - Can not start with a number or use number as key name.
+      - Using dot syntax only for typescript usage consistency, so bracket [] will not work for array form value. -> register('test.0.firstName');  
+      - Disabled input will result in an undefined form value.
   ### handleSubmit
