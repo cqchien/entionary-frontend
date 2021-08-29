@@ -26,7 +26,11 @@ function Register() {
   const classes = useStyle();
   // useForm return hook.
   // register, handleSubmit are function
-  const { register, handleSubmit } = useForm({ resolver: yupResolver(schema) });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(schema) });
   return (
     <form
       className={`${classes.root} flex-col`}
@@ -41,40 +45,46 @@ function Register() {
         <TextFieldCustom
           label="Name"
           size="small"
+          error={Boolean(errors.name)}
           placeholder="Input Name"
           inputProps={{
             name: "name",
             ...register("name"),
-            required: true,
             autoFocus: true,
           }}
         />
+        {errors.name && <p className="text-error">{errors.name?.message}</p>}
       </div>
       <div className="flex-col">
         <TextFieldCustom
           label="Email"
           size="small"
           placeholder="Input email"
+          error={Boolean(errors.email)}
           inputProps={{
             ...register("email"),
             name: "email",
-            required: true,
             type: "email",
           }}
         />
+        {errors.email && <p className="text-error">{errors.email?.message}</p>}
       </div>
       <div className="flex-col">
         <TextFieldCustom
           label="Password"
           size="small"
           placeholder="Input Password"
+          error={Boolean(errors.password)}
           inputProps={{
             ...register("password"),
             name: "password",
-            required: true,
             minLength: 8,
+            type: "password",
           }}
         />
+        {errors.password && (
+          <p className="text-error">{errors.password?.message}</p>
+        )}
       </div>
       <Button
         className="_btn _btn-primary"
