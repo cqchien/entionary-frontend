@@ -97,11 +97,14 @@ function Register() {
           endAdornment={
             <InputAdornment position="end">
               <IconButton
-                className={`${classes.icon}`}
                 // change visible password state based on previous state
                 onClick={() => changeVisiblePass((prevState) => !prevState)}
               >
-                {isVisiblePass ? <Visibility /> : <VisibilityOff />}
+                {isVisiblePass ? (
+                  <Visibility className={`${classes.icon}`} />
+                ) : (
+                  <VisibilityOff className={`${classes.icon}`} />
+                )}
               </IconButton>
             </InputAdornment>
           }

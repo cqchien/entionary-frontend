@@ -9,6 +9,10 @@ const formStyle = {
       marginTop: "1.2rem",
       marginBottom: "1.2rem",
     },
+
+    "& .MuiIconButton-root": {
+      padding: "0px",
+    },
   },
 
   title: {
