@@ -38,10 +38,6 @@ const formStyle = {
     color: "var(--grey)",
     cursor: "pointer",
   },
-
-  visiblePw: {
-    color: "var(--primary-color)",
-  },
 };
 
 export default formStyle;

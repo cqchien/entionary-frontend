@@ -1,10 +1,17 @@
-import { Button, makeStyles } from "@material-ui/core";
+import {
+  Button,
+  IconButton,
+  InputAdornment,
+  makeStyles,
+} from "@material-ui/core";
 import { useForm } from "react-hook-form";
 import formStyle from "../Custom/globalStyle";
 import TextFieldCustom from "../Custom/textField";
 import SocialNetworkLogin from "../Login/SocialNetwork";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Visibility, VisibilityOff } from "@material-ui/icons";
+import { useState } from "react";
 
 // style with hook api.
 // It receive the object/ function to interact with theme
@@ -24,6 +31,7 @@ const schema = yup.object().shape({
 function Register() {
   // useStyle return className list with example syntax {forgotPw: "makeStyles-forgotPw-4",..}.
   const classes = useStyle();
+
   // useForm return hook.
   // register, handleSubmit are function
   const {
@@ -33,6 +41,9 @@ function Register() {
     // errors: 	An object with field errors to retrieve error message easily.
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
+
+  // Change state to view password
+  const [isVisiblePass, changeVisiblePass] = useState(false);
 
   const onSubmit = (data) => {
     console.log(data);
@@ -81,8 +92,19 @@ function Register() {
           helperText={errors.password?.message}
           inputProps={{
             ...register("password"),
-            type: "password",
+            type: isVisiblePass ? "text" : "password",
           }}
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton
+                className={`${classes.icon}`}
+                // change visible password state based on previous state
+                onClick={() => changeVisiblePass((prevState) => !prevState)}
+              >
+                {isVisiblePass ? <Visibility /> : <VisibilityOff />}
+              </IconButton>
+            </InputAdornment>
+          }
         />
       </div>
       <Button className="_btn _btn-primary" type="submit" size="large">
