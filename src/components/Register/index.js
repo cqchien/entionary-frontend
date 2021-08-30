@@ -1,10 +1,17 @@
-import { Button, makeStyles } from "@material-ui/core";
+import {
+  Button,
+  IconButton,
+  InputAdornment,
+  makeStyles,
+} from "@material-ui/core";
 import { useForm } from "react-hook-form";
 import formStyle from "../Custom/globalStyle";
 import TextFieldCustom from "../Custom/textField";
 import SocialNetworkLogin from "../Login/SocialNetwork";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Visibility, VisibilityOff } from "@material-ui/icons";
+import { useState } from "react";
 
 // style with hook api.
 // It receive the object/ function to interact with theme
@@ -18,24 +25,34 @@ const schema = yup.object().shape({
     .string()
     .trim()
     .required("Input Password")
-    .min(8, `Password has at least 8 characteristic`),
+    .min(8, "Password has at least 8 characteristic"),
 });
 
 function Register() {
   // useStyle return className list with example syntax {forgotPw: "makeStyles-forgotPw-4",..}.
   const classes = useStyle();
+
   // useForm return hook.
   // register, handleSubmit are function
   const {
     register,
     handleSubmit,
+    // Read the formState before render to subscribe the form state through the Proxy
+    // errors: 	An object with field errors to retrieve error message easily.
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
+
+  // Change state to view password
+  const [isVisiblePass, changeVisiblePass] = useState(false);
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
   return (
     <form
       className={`${classes.root} flex-col`}
       autoComplete="off"
-      onSubmit={handleSubmit}
+      onSubmit={handleSubmit(onSubmit)}
     >
       <div className="flex-col">
         <h1 className={`${classes.title} t-center`}>Create New Account</h1>
@@ -48,12 +65,11 @@ function Register() {
           error={Boolean(errors.name)}
           placeholder="Input Name"
           inputProps={{
-            name: "name",
             ...register("name"),
             autoFocus: true,
           }}
+          helperText={errors.name?.message}
         />
-        {errors.name && <p className="text-error">{errors.name?.message}</p>}
       </div>
       <div className="flex-col">
         <TextFieldCustom
@@ -63,11 +79,9 @@ function Register() {
           error={Boolean(errors.email)}
           inputProps={{
             ...register("email"),
-            name: "email",
-            type: "email",
           }}
+          helperText={errors.email?.message}
         />
-        {errors.email && <p className="text-error">{errors.email?.message}</p>}
       </div>
       <div className="flex-col">
         <TextFieldCustom
@@ -75,23 +89,28 @@ function Register() {
           size="small"
           placeholder="Input Password"
           error={Boolean(errors.password)}
+          helperText={errors.password?.message}
           inputProps={{
             ...register("password"),
-            name: "password",
-            minLength: 8,
-            type: "password",
+            type: isVisiblePass ? "text" : "password",
           }}
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton
+                // change visible password state based on previous state
+                onClick={() => changeVisiblePass((prevState) => !prevState)}
+              >
+                {isVisiblePass ? (
+                  <Visibility className={`${classes.icon}`} />
+                ) : (
+                  <VisibilityOff className={`${classes.icon}`} />
+                )}
+              </IconButton>
+            </InputAdornment>
+          }
         />
-        {errors.password && (
-          <p className="text-error">{errors.password?.message}</p>
-        )}
       </div>
-      <Button
-        className="_btn _btn-primary"
-        type="submit"
-        color="primary"
-        size="large"
-      >
+      <Button className="_btn _btn-primary" type="submit" size="large">
         Sign Up
       </Button>
 
