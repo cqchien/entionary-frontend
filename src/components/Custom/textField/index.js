@@ -1,8 +1,19 @@
 import { makeStyles, TextField } from "@material-ui/core";
 import textFieldStyle from "./style";
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 
 const useStyle = makeStyles(textFieldStyle);
+
+const propType = {
+  error: PropTypes.bool,
+  helperText: PropTypes.string,
+  inputProps: PropTypes.object,
+};
+
+const defaultProps = {
+  error: false,
+  inputProps: {},
+};
 
 function TextFieldCustom(props) {
   const classes = useStyle();
@@ -18,19 +29,12 @@ function TextFieldCustom(props) {
       }}
       {...otherProps}
       variant="filled"
-      helperText={helperText}
+      helperText={helperText} // error message
     />
   );
 }
 
-// TextFieldCustom.propTypes = {
-//   error: PropTypes.bool,
-//   inputProps: PropTypes.any,
-// };
-
-// TextFieldCustom.defaultProps = {
-//   error: false,
-//   inputProps: {},
-// };
+TextFieldCustom.propTypes = propType;
+TextFieldCustom.defaultProps = defaultProps;
 
 export default TextFieldCustom;

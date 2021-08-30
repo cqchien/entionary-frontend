@@ -18,4 +18,12 @@
       - Can not start with a number or use number as key name.
       - Using dot syntax only for typescript usage consistency, so bracket [] will not work for array form value. -> register('test.0.firstName');  
       - Disabled input will result in an undefined form value.
+    
   ### handleSubmit
+  - This function will receive the form data if form validation is successful.
+  - Disabled inputs -> return undefined
+  - **Props**: SubmitHandler and SubmitErrorHandler are callback function
+
+### FormState: Object
+ - errors: An object with field errors. There is also an ErrorMessage component to retrieve error message easily.
+ - Read the formState before render to subscribe the form state through the Proxy
