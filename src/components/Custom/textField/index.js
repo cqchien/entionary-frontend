@@ -1,11 +1,12 @@
 import { makeStyles, TextField } from "@material-ui/core";
 import textFieldStyle from "./style";
+// import PropTypes from "prop-types";
 
 const useStyle = makeStyles(textFieldStyle);
 
 function TextFieldCustom(props) {
   const classes = useStyle();
-  const { error, inputProps, ...otherProps } = props;
+  const { helperText, error, inputProps, ...otherProps } = props;
   // classes: Override or extend the styles applied to the component.
   return (
     <TextField
@@ -15,13 +16,21 @@ function TextFieldCustom(props) {
       InputProps={{
         disableUnderline: true,
       }}
-      InputLabelProps={{
-        shrink: true,
-      }}
       {...otherProps}
       variant="filled"
+      helperText={helperText}
     />
   );
 }
+
+// TextFieldCustom.propTypes = {
+//   error: PropTypes.bool,
+//   inputProps: PropTypes.any,
+// };
+
+// TextFieldCustom.defaultProps = {
+//   error: false,
+//   inputProps: {},
+// };
 
 export default TextFieldCustom;

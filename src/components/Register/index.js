@@ -18,7 +18,7 @@ const schema = yup.object().shape({
     .string()
     .trim()
     .required("Input Password")
-    .min(8, 'Password has at least 8 characteristic'),
+    .min(8, "Password has at least 8 characteristic"),
 });
 
 function Register() {
@@ -29,6 +29,8 @@ function Register() {
   const {
     register,
     handleSubmit,
+    // Read the formState before render to subscribe the form state through the Proxy
+    // errors: 	An object with field errors to retrieve error message easily.
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
@@ -55,8 +57,8 @@ function Register() {
             ...register("name"),
             autoFocus: true,
           }}
+          helperText={errors.name?.message}
         />
-        {errors.name && <p className="text-error">{errors.name?.message}</p>}
       </div>
       <div className="flex-col">
         <TextFieldCustom
@@ -66,10 +68,9 @@ function Register() {
           error={Boolean(errors.email)}
           inputProps={{
             ...register("email"),
-            type: "email",
           }}
+          helperText={errors.email?.message}
         />
-        {errors.email && <p className="text-error">{errors.email?.message}</p>}
       </div>
       <div className="flex-col">
         <TextFieldCustom
@@ -77,20 +78,14 @@ function Register() {
           size="small"
           placeholder="Input Password"
           error={Boolean(errors.password)}
+          helperText={errors.password?.message}
           inputProps={{
             ...register("password"),
             type: "password",
           }}
         />
-        {errors.password && (
-          <p className="text-error">{errors.password?.message}</p>
-        )}
       </div>
-      <Button
-        className="_btn _btn-primary"
-        type="submit"
-        size="large"
-      >
+      <Button className="_btn _btn-primary" type="submit" size="large">
         Sign Up
       </Button>
 
