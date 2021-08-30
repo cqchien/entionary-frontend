@@ -18,7 +18,7 @@ const schema = yup.object().shape({
     .string()
     .trim()
     .required("Input Password")
-    .min(8, `Password has at least 8 characteristic`),
+    .min(8, 'Password has at least 8 characteristic'),
 });
 
 function Register() {
@@ -31,11 +31,15 @@ function Register() {
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
   return (
     <form
       className={`${classes.root} flex-col`}
       autoComplete="off"
-      onSubmit={handleSubmit}
+      onSubmit={handleSubmit(onSubmit)}
     >
       <div className="flex-col">
         <h1 className={`${classes.title} t-center`}>Create New Account</h1>
@@ -48,7 +52,6 @@ function Register() {
           error={Boolean(errors.name)}
           placeholder="Input Name"
           inputProps={{
-            name: "name",
             ...register("name"),
             autoFocus: true,
           }}
@@ -63,7 +66,6 @@ function Register() {
           error={Boolean(errors.email)}
           inputProps={{
             ...register("email"),
-            name: "email",
             type: "email",
           }}
         />
@@ -77,8 +79,6 @@ function Register() {
           error={Boolean(errors.password)}
           inputProps={{
             ...register("password"),
-            name: "password",
-            minLength: 8,
             type: "password",
           }}
         />
@@ -89,7 +89,6 @@ function Register() {
       <Button
         className="_btn _btn-primary"
         type="submit"
-        color="primary"
         size="large"
       >
         Sign Up
