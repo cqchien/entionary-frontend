@@ -19,7 +19,7 @@ import { useState } from "react";
 const useStyle = makeStyles(formStyle);
 
 const schema = yup.object().shape({
-  email: yup.string().trim().required("Input Email").email("Email invalid"),
+  email: yup.string().trim().required("Input Email").email("Email is invalid"),
   name: yup.string().trim().required("Input Name"),
   password: yup
     .string()
@@ -56,7 +56,6 @@ function Register() {
     >
       <div className="flex-col">
         <h1 className={`${classes.title} t-center`}>Create New Account</h1>
-        <div className="t-center mt-5">Entionary</div>
       </div>
       <div className="flex-col">
         <TextFieldCustom
@@ -98,7 +97,7 @@ function Register() {
             <InputAdornment position="end">
               <IconButton
                 // change visible password state based on previous state
-                onClick={() => changeVisiblePass((prevState) => !prevState)}
+                onClick={() => changeVisiblePass(!isVisiblePass)}
               >
                 {isVisiblePass ? (
                   <Visibility className={`${classes.icon}`} />
