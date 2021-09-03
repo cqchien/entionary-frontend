@@ -1,28 +1,27 @@
 import axios from "axios";
+import queryString from "query-string";
 import { getAccessToken } from "./authority";
 
 const request = axios.create({
-  baseURL:
-    process.env.NODE_ENV === "development"
-      ? process.env.LOCAL_BASE_API_URL
-      : process.env.PRO_BASE_API_URL,
+  baseURL: "http://localhost:5000",
   withCredentials: true,
+  paramsSerializer: (params) => queryString.stringify(params),
 });
 
 // Add a request interceptor
-request.interceptors.request.use((url, options) => {
-  const authority = getAccessToken();
-  return {
-    url,
-    options: {
-      ...options,
-      headers: {
-        Authorization: (authority && `Bearer ${authority}`) || undefined,
-        "Content-Type": "application/json",
-      },
-    },
-  };
-});
+// request.interceptors.request.use((url, options) => {
+//   // const authority = getAccessToken();
+//   return {
+//     url,
+//     options: {
+//       ...options,
+//       headers: {
+//         // Authorization: (authority && `Bearer ${authority}`) || undefined,
+//         "Content-Type": "application/json",
+//       },
+//     },
+//   };
+// });
 
 // Add a response interceptor
 axios.interceptors.response.use(

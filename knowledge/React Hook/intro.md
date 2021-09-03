@@ -18,14 +18,51 @@ React Hooks was created with the task of helping us **write a functional compone
 - React Hooks are only used in functional components.
 - Easily customize hooks as you like for each different business logic.
 
-## 1. Effect Hook
+## Rules of Hooks
+- Only call Hooks at the top level
+- Only call Hooks from React function components.
+
+## 1. State Hook - useState()
+`const [count, setCount] = useState(0);`
+
+`[]` in useState() is **array destructuring** 
+  - unlike this.setState in a class, updating a state variable always replaces it instead of merging it.
+## 2. Effect Hook - useEffect()
 **Side Effect:** *data fetching, subscriptions, or manually changing the DOM from React components*
 
-*The Effect Hook,* useEffect, adds the ability to perform side effects from a function component. 
+*The Effect Hook,* useEffect, lets you perform side effects in function components: 
 - It serves the same purpose as **componentDidMount, componentDidUpdate, and componentWillUnmount** in React classes, but unified into a single API
 - Effects are declared inside the component so they have access to its props and state.
 - By default, React runs the effects after every render — including the first render.
 
-**Rules of Hooks**
-- Only call Hooks at the top level
-- Only call Hooks from React function components.
+### Effects without cleanup
+*Network requests, manual DOM mutations, and logging*  -> don't need cleanup
+  
+    useEffect(() => {
+      document.title = `You clicked ${count} times`;
+    });
+### Effects with cleanup
+*subscription, fetching data, call api* -> clean up -> don’t a memory leak!
+
+**your effect returns a function, React will run it when it is time to clean up:**
+
+    useEffect(() => {
+      // Specify how to clean up after this effect:
+      return function cleanup() {
+        ChatAPI.unsubscribeFromFriendStatus(props.friend.id, handleStatusChange);
+      };
+    });
+
+- Cleanup when the component unmounts. 
+- Hooks let us split the code based on what it is doing rather than a lifecycle method name.
+- **Cleans up the previous effects before applying the next effects**
+
+### Optimizing Performance by Skipping Effects
+*Skip applying an effect if certain values haven’t changed between re-renders.*
+
+    useEffect(() => {
+      document.title = `You clicked ${count} times`;
+    }, [count]); // Only re-run the effect if count changes 
+
+- **M ake sure the array includes all values from the component scope (such as props and state) that change over time and that are used by the effect.**
+- If you want to **run an effect and clean it up only once** (on mount and unmount), you can **pass an empty array** ([]) as a second argument

@@ -12,6 +12,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { useState } from "react";
+import { registerUser } from "../../apis/account";
 
 // style with hook api.
 // It receive the object/ function to interact with theme
@@ -20,7 +21,12 @@ const useStyle = makeStyles(formStyle);
 
 const schema = yup.object().shape({
   email: yup.string().trim().required("Input Email").email("Email is invalid"),
-  name: yup.string().trim().required("Input Name"),
+  name: yup
+    .string()
+    .trim()
+    .min(2, "Too Short!")
+    .max(50, "Too Long!")
+    .required("Input Name"),
   password: yup
     .string()
     .trim()
@@ -45,14 +51,15 @@ function Register() {
   // Change state to view password
   const [isVisiblePass, changeVisiblePass] = useState(false);
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const handleRegister = async (account) => {
+    const user = await registerUser(account);
+    // console.log(user);
   };
   return (
     <form
       className={`${classes.root} flex-col`}
       autoComplete="off"
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit(handleRegister)}
     >
       <div className="flex-col">
         <h1 className={`${classes.title} t-center`}>Create New Account</h1>
@@ -95,10 +102,7 @@ function Register() {
           }}
           endAdornment={
             <InputAdornment position="end">
-              <IconButton
-                // change visible password state based on previous state
-                onClick={() => changeVisiblePass(!isVisiblePass)}
-              >
+              <IconButton onClick={() => changeVisiblePass(!isVisiblePass)}>
                 {isVisiblePass ? (
                   <Visibility className={`${classes.icon}`} />
                 ) : (
