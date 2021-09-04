@@ -3,25 +3,24 @@ import queryString from "query-string";
 import { getAccessToken } from "./authority";
 
 const request = axios.create({
-  baseURL: "http://localhost:5000",
-  withCredentials: true,
+  baseURL: process.env.REACT_APP_BASE_API_URL,
   paramsSerializer: (params) => queryString.stringify(params),
 });
 
 // Add a request interceptor
-// request.interceptors.request.use((url, options) => {
-//   // const authority = getAccessToken();
-//   return {
-//     url,
-//     options: {
-//       ...options,
-//       headers: {
-//         // Authorization: (authority && `Bearer ${authority}`) || undefined,
-//         "Content-Type": "application/json",
-//       },
-//     },
-//   };
-// });
+request.interceptors.request.use(
+  async (config) => {
+    const token = getAccessToken();
+    config.headers = {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    };
+    return config;
+  },
+  (error) => {
+    Promise.reject(error);
+  }
+);
 
 // Add a response interceptor
 axios.interceptors.response.use(
