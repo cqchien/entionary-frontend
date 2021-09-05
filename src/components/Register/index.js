@@ -5,14 +5,15 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import { useForm } from "react-hook-form";
-import formStyle from "../Custom/globalStyle";
+import formStyle from "../globalStyle";
 import TextFieldCustom from "../Custom/textField";
-import SocialNetworkLogin from "../Login/SocialNetwork";
+import SocialNetworkLogin from "./SocialNetwork";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { useState } from "react";
 import { registerUser } from "../../apis/account";
+import LoopIcon from "@material-ui/icons/Loop";
 
 // style with hook api.
 // It receive the object/ function to interact with theme
@@ -50,11 +51,22 @@ function Register() {
 
   // Change state to view password
   const [isVisiblePass, changeVisiblePass] = useState(false);
+  // state to set loading when call api
+  const [loading, setLoading] = useState(false);
 
   const handleRegister = async (account) => {
-    const user = await registerUser(account);
-    // console.log(user);
+    setLoading(true);
+    try {
+      const response = await registerUser(account);
+      // create new user so status code = 201
+      if (response.success) {
+        setLoading(false);
+      }
+    } catch (error) {
+      setLoading(false);
+    }
   };
+
   return (
     <form
       className={`${classes.root} flex-col`}
@@ -113,7 +125,14 @@ function Register() {
           }
         />
       </div>
-      <Button className="_btn _btn-primary" type="submit" size="large">
+      <Button
+        className="_btn _btn-primary"
+        type="submit"
+        size="large"
+        disabled={loading}
+        //Element placed after the children.
+        endIcon={loading && <LoopIcon className="ani-spin" />}
+      >
         Sign Up
       </Button>
 

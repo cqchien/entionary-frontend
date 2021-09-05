@@ -9,7 +9,7 @@ const request = axios.create({
 
 // Add a request interceptor
 request.interceptors.request.use(
-  async (config) => {
+  (config) => {
     const token = getAccessToken();
     config.headers = {
       Authorization: `Bearer ${token}`,
@@ -23,11 +23,10 @@ request.interceptors.request.use(
 );
 
 // Add a response interceptor
-axios.interceptors.response.use(
+request.interceptors.response.use(
   function (response) {
     // Any status code that lie within the range of 2xx cause this function to trigger
-    // Do something with response data
-    return response;
+    return response.data;
   },
   function (error) {
     // Any status codes that falls outside the range of 2xx cause this function to trigger
