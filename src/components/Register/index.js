@@ -8,64 +8,32 @@ import { useForm } from "react-hook-form";
 import formStyle from "../globalStyle";
 import TextFieldCustom from "../Custom/textField";
 import SocialNetworkLogin from "./SocialNetwork";
-import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { useState } from "react";
-import { registerUser } from "../../apis/account";
 import LoopIcon from "@material-ui/icons/Loop";
+import PropTypes from "prop-types";
 
 // style with hook api.
 // It receive the object/ function to interact with theme
 // It return a hook.
 const useStyle = makeStyles(formStyle);
 
-const schema = yup.object().shape({
-  email: yup.string().trim().required("Input Email").email("Email is invalid"),
-  name: yup
-    .string()
-    .trim()
-    .min(2, "Too Short!")
-    .max(50, "Too Long!")
-    .required("Input Name"),
-  password: yup
-    .string()
-    .trim()
-    .required("Input Password")
-    .min(8, "Password has at least 8 characteristic"),
-});
-
-function Register() {
+function RegisterForm({ validationSchema, handleRegister, loading }) {
   // useStyle return className list with example syntax {forgotPw: "makeStyles-forgotPw-4",..}.
   const classes = useStyle();
-
   // useForm return hook.
   // register, handleSubmit are function
   const {
     register,
     handleSubmit,
     // Read the formState before render to subscribe the form state through the Proxy
-    // errors: 	An object with field errors to retrieve error message easily.
+    // errors: 	An  object with field errors to retrieve error message easily.
     formState: { errors },
-  } = useForm({ resolver: yupResolver(schema) });
+  } = useForm({ resolver: yupResolver(validationSchema) });
 
   // Change state to view password
   const [isVisiblePass, changeVisiblePass] = useState(false);
-  // state to set loading when call api
-  const [loading, setLoading] = useState(false);
-
-  const handleRegister = async (account) => {
-    setLoading(true);
-    try {
-      const response = await registerUser(account);
-      // create new user so status code = 201
-      if (response.success) {
-        setLoading(false);
-      }
-    } catch (error) {
-      setLoading(false);
-    }
-  };
 
   return (
     <form
@@ -143,4 +111,13 @@ function Register() {
   );
 }
 
-export default Register;
+RegisterForm.propType = {
+  handleRegister: PropTypes.func,
+  loading: PropTypes.bool,
+};
+
+RegisterForm.defaultProps = {
+  loading: false,
+  handleRegister: function () {},
+};
+export default RegisterForm;

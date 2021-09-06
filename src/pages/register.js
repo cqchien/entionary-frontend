@@ -1,5 +1,5 @@
-import Register from "../components/Register";
-import './styles/login-signup.scss';
+import Register from "../containers/Register";
+import "./styles/login-signup.scss";
 
 function RegisterPage() {
   return (
