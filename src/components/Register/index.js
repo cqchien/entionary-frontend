@@ -5,58 +5,44 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import { useForm } from "react-hook-form";
-import formStyle from "../Custom/globalStyle";
+import formStyle from "../globalStyle";
 import TextFieldCustom from "../Custom/textField";
-import SocialNetworkLogin from "../Login/SocialNetwork";
-import * as yup from "yup";
+import SocialNetworkLogin from "./SocialNetwork";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { useState } from "react";
+import LoopIcon from "@material-ui/icons/Loop";
+import PropTypes from "prop-types";
 
 // style with hook api.
 // It receive the object/ function to interact with theme
 // It return a hook.
 const useStyle = makeStyles(formStyle);
 
-const schema = yup.object().shape({
-  email: yup.string().trim().required("Input Email").email("Email invalid"),
-  name: yup.string().trim().required("Input Name"),
-  password: yup
-    .string()
-    .trim()
-    .required("Input Password")
-    .min(8, "Password has at least 8 characteristic"),
-});
-
-function Register() {
+function RegisterForm({ validationSchema, handleRegister, loading }) {
   // useStyle return className list with example syntax {forgotPw: "makeStyles-forgotPw-4",..}.
   const classes = useStyle();
-
   // useForm return hook.
   // register, handleSubmit are function
   const {
     register,
     handleSubmit,
     // Read the formState before render to subscribe the form state through the Proxy
-    // errors: 	An object with field errors to retrieve error message easily.
+    // errors: 	An  object with field errors to retrieve error message easily.
     formState: { errors },
-  } = useForm({ resolver: yupResolver(schema) });
+  } = useForm({ resolver: yupResolver(validationSchema) });
 
   // Change state to view password
   const [isVisiblePass, changeVisiblePass] = useState(false);
 
-  const onSubmit = (data) => {
-    console.log(data);
-  };
   return (
     <form
       className={`${classes.root} flex-col`}
       autoComplete="off"
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit(handleRegister)}
     >
       <div className="flex-col">
         <h1 className={`${classes.title} t-center`}>Create New Account</h1>
-        <div className="t-center mt-5">Entionary</div>
       </div>
       <div className="flex-col">
         <TextFieldCustom
@@ -96,10 +82,7 @@ function Register() {
           }}
           endAdornment={
             <InputAdornment position="end">
-              <IconButton
-                // change visible password state based on previous state
-                onClick={() => changeVisiblePass((prevState) => !prevState)}
-              >
+              <IconButton onClick={() => changeVisiblePass(!isVisiblePass)}>
                 {isVisiblePass ? (
                   <Visibility className={`${classes.icon}`} />
                 ) : (
@@ -110,7 +93,14 @@ function Register() {
           }
         />
       </div>
-      <Button className="_btn _btn-primary" type="submit" size="large">
+      <Button
+        className="_btn _btn-primary"
+        type="submit"
+        size="large"
+        disabled={loading}
+        //Element placed after the children.
+        endIcon={loading && <LoopIcon className="ani-spin" />}
+      >
         Sign Up
       </Button>
 
@@ -121,4 +111,13 @@ function Register() {
   );
 }
 
-export default Register;
+RegisterForm.propType = {
+  handleRegister: PropTypes.func,
+  loading: PropTypes.bool,
+};
+
+RegisterForm.defaultProps = {
+  loading: false,
+  handleRegister: function () {},
+};
+export default RegisterForm;
