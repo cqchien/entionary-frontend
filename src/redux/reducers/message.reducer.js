@@ -8,7 +8,6 @@ const messageReducer = createSlice({
   // The initial state for the reducer
   initialState: {
     open: false,
-    duration: 5000,
     message: "",
     type: "",
   },

@@ -5,7 +5,7 @@ import { closeMessage } from "../../redux/reducers/message.reducer";
 
 const MessageAlert = () => {
   // Allows you to extract data from the Redux store state, using a selector function.
-  const { open, duration, type, message } = useSelector(
+  const { open, type, message } = useSelector(
     (state) => state.message
   );
   const dispatch = useDispatch();
@@ -13,11 +13,9 @@ const MessageAlert = () => {
   const handleClose = () => {
     dispatch(closeMessage());
   };
-  console.log("1")
   return (
     <Message
       open={open}
-      duration={duration}
       type={type}
       message={message}
       handleClose={handleClose}
