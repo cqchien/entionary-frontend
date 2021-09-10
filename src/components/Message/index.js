@@ -9,7 +9,7 @@ const Message = ({ open, type, message, handleClose }) => {
       anchorOrigin={{ vertical: "top", horizontal: "right" }}
       open={open}
       onClose={handleClose}
-      autoHideDuration={5000}
+      autoHideDuration={3000}
     >
       <Alert onClose={handleClose} severity={type} variant={"filled"}>
         {message}
