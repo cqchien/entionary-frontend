@@ -10,7 +10,7 @@ import TextFieldCustom from "../Custom/textField";
 import SocialNetworkLogin from "./SocialNetwork";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LoopIcon from "@material-ui/icons/Loop";
 import PropTypes from "prop-types";
 
@@ -29,8 +29,20 @@ function RegisterForm({ validationSchema, handleRegister, loading }) {
     handleSubmit,
     // Read the formState before render to subscribe the form state through the Proxy
     // errors: 	An  object with field errors to retrieve error message easily.
-    formState: { errors },
+    formState: { errors, isSubmitSuccessful },
+    reset,
   } = useForm({ resolver: yupResolver(validationSchema) });
+
+  // Reset field after submit successfully
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset({
+        name: "",
+        email: "",
+        password: "",
+      });
+    }
+  }, [isSubmitSuccessful, reset]);
 
   // Change state to view password
   const [isVisiblePass, changeVisiblePass] = useState(false);
