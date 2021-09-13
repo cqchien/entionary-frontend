@@ -7,7 +7,7 @@ import {
 import { useForm } from "react-hook-form";
 import formStyle from "../globalStyle";
 import TextFieldCustom from "../Custom/textField";
-import SocialNetworkLogin from "./SocialNetwork";
+import SocialNetworkLogin from "../SocialNetwork/index";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { useEffect, useState } from "react";
