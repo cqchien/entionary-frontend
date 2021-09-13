@@ -10,12 +10,13 @@ function Google() {
   const classes = useStyle();
 
   const authenWithGoogle = (response) => {
+    console.log(process.env.REACT_APP_GG_CLIENT_ID)
     console.log("res", response);
   };
 
   return (
     <GoogleLogin
-      clientId={process.env.REACT_APP_GG_CLIENT_ID}
+      clientId="79538994406-136dab2kechleira2d2tu4cn44dht7pg.apps.googleusercontent.com"
       autoLoad={false}
       // Render prop to use a custom element, use renderProps.onClick
       render={(props) => (
