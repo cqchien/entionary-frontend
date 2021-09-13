@@ -6,19 +6,24 @@ import socialNetworkStyle from "./style";
 
 const useStyle = makeStyles(socialNetworkStyle);
 
-const authenWithGoogle = (response) => {
-  console.log(response);
-};
-
 function Google() {
   const classes = useStyle();
+
+  const authenWithGoogle = (response) => {
+    console.log("res", response);
+  };
+
   return (
     <GoogleLogin
-      clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+      clientId={process.env.REACT_APP_GG_CLIENT_ID}
       autoLoad={false}
       // Render prop to use a custom element, use renderProps.onClick
-      render={() => (
-        <div className={classes.socialBtn}>
+      render={(props) => (
+        <div
+          onClick={props.onClick}
+          disabled={props.disabled}
+          className={classes.socialBtn}
+        >
           <img
             className={classes.socialImg}
             src={googleIcon}
