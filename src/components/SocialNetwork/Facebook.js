@@ -2,7 +2,7 @@ import { makeStyles } from "@material-ui/core";
 import React from "react";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 import socialNetworkStyle from "./style";
-import facebookIcon from "../../../assets/icons/fb-icon.png";
+import facebookIcon from "../../assets/icons/fb-icon.png";
 
 const useStyle = makeStyles(socialNetworkStyle);
 function Facebook() {
