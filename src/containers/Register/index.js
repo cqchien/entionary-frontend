@@ -28,14 +28,15 @@ function Register() {
   const handleRegister = async (account) => {
     setLoading(true);
     try {
-      const response = await registerUser(account);
-      console.log(response);
+      const apiResponse = await registerUser(account);
+      const {data, success} = apiResponse;
       // create new user so status code = 201
-      if (response.success) {
+      if (success) {
         const payloadSuccess = {
           message: "Register Successfully",
           type: "success",
         };
+
         dispatch(setMessage(payloadSuccess));
         setLoading(false);
       }

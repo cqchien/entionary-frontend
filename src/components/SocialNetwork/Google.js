@@ -6,17 +6,12 @@ import socialNetworkStyle from "./style";
 
 const useStyle = makeStyles(socialNetworkStyle);
 
-function Google() {
+function Google({ loginGoogle }) {
   const classes = useStyle();
-
-  const authenWithGoogle = (response) => {
-    console.log(process.env.REACT_APP_GG_CLIENT_ID)
-    console.log("res", response);
-  };
 
   return (
     <GoogleLogin
-      clientId="79538994406-136dab2kechleira2d2tu4cn44dht7pg.apps.googleusercontent.com"
+      clientId={process.env.REACT_APP_GG_CLIENT_ID}
       autoLoad={false}
       // Render prop to use a custom element, use renderProps.onClick
       render={(props) => (
@@ -33,8 +28,8 @@ function Google() {
           <span className={classes.socialName}>Google</span>
         </div>
       )}
-      onSuccess={authenWithGoogle}
-      onFailure={authenWithGoogle}
+      onSuccess={loginGoogle}
+      onFailure={loginGoogle}
       // isSignedIn={true} attribute will call onSuccess callback on load to keep the user signed in.
       isSignedIn={true}
       cookiePolicy={"single_host_origin"}

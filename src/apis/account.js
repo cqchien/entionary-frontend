@@ -7,4 +7,11 @@ const registerUser = async (params) => {
   });
 };
 
-export { registerUser };
+const loginWithSocialNetwork = async (params) => {
+  return request("/auth/login-gg", {
+    method: "POST",
+    data: params,
+  });
+};
+
+export { registerUser, loginWithSocialNetwork };
