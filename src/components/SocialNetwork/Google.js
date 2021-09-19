@@ -31,7 +31,6 @@ function Google({ loginGoogle }) {
       onSuccess={loginGoogle}
       onFailure={loginGoogle}
       // isSignedIn={true} attribute will call onSuccess callback on load to keep the user signed in.
-      isSignedIn={true}
       cookiePolicy={"single_host_origin"}
     />
   );

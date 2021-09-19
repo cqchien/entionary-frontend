@@ -4,6 +4,7 @@ import { registerUser } from "../../apis/account";
 import RegisterForm from "../../components/Register";
 import { useDispatch } from "react-redux";
 import { setMessage } from "../../redux/reducers/message.reducer";
+import SocialNetworkLogin from "../../components/SocialNetwork";
 
 const schema = yup.object().shape({
   email: yup.string().trim().required("Input Email").email("Email is invalid"),
@@ -29,7 +30,7 @@ function Register() {
     setLoading(true);
     try {
       const apiResponse = await registerUser(account);
-      const {data, success} = apiResponse;
+      const { data, success } = apiResponse;
       // create new user so status code = 201
       if (success) {
         const payloadSuccess = {
@@ -54,7 +55,9 @@ function Register() {
       validationSchema={schema}
       handleRegister={handleRegister}
       loading={loading}
-    />
+    >
+      <SocialNetworkLogin />
+    </RegisterForm>
   );
 }
 

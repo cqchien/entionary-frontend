@@ -1,33 +1,23 @@
+import { yupResolver } from "@hookform/resolvers/yup";
 import {
   Button,
   IconButton,
   InputAdornment,
   makeStyles,
 } from "@material-ui/core";
-import { useForm } from "react-hook-form";
-import formStyle from "../globalStyle";
-import TextFieldCustom from "../Custom/textField";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import TextFieldCustom from "../Custom/textField";
+import formStyle from "../globalStyle";
 import LoopIcon from "@material-ui/icons/Loop";
-import PropTypes from "prop-types";
 
-// style with hook api.
-// It receive the object/ function to interact with theme
-// It return a hook.
 const useStyle = makeStyles(formStyle);
 
-function RegisterForm({ validationSchema, handleRegister, loading, children }) {
-  // useStyle return className list with example syntax {forgotPw: "makeStyles-forgotPw-4",..}.
-  const classes = useStyle();
-  // useForm return hook.
-  // register, handleSubmit are function
+const Login = ({ handleLogin, validationSchema, loading, children }) => {
   const {
-    register,
     handleSubmit,
-    // Read the formState before render to subscribe the form state through the Proxy
-    // errors: 	An  object with field errors to retrieve error message easily.
+    register,
     formState: { errors, isSubmitSuccessful },
     reset,
   } = useForm({ resolver: yupResolver(validationSchema) });
@@ -46,29 +36,13 @@ function RegisterForm({ validationSchema, handleRegister, loading, children }) {
   // Change state to view password
   const [isVisiblePass, changeVisiblePass] = useState(false);
 
+  const classes = useStyle();
   return (
-    <form
-      className={`${classes.root} flex-col`}
-      autoComplete="off"
-      onSubmit={handleSubmit(handleRegister)}
-    >
+    <form onSubmit={handleSubmit(handleLogin)}>
       <div className="flex-col">
-        <h1 className={`${classes.title} t-center`}>Create New Account</h1>
+        <h1 className={`${classes.title} t-center`}>Log In</h1>
       </div>
-      <div className="flex-col">
-        <TextFieldCustom
-          label="Name"
-          size="small"
-          error={Boolean(errors.name)}
-          placeholder="Input Name"
-          inputProps={{
-            ...register("name"),
-            autoFocus: true,
-          }}
-          helperText={errors.name?.message}
-        />
-      </div>
-      <div className="flex-col">
+      <div>
         <TextFieldCustom
           label="Email"
           size="small"
@@ -85,7 +59,7 @@ function RegisterForm({ validationSchema, handleRegister, loading, children }) {
           label="Password"
           size="small"
           placeholder="Input Password"
-          error={Boolean(errors.password)}
+          error={Boolean(errors.me.password)}
           helperText={errors.password?.message}
           inputProps={{
             ...register("password"),
@@ -112,21 +86,12 @@ function RegisterForm({ validationSchema, handleRegister, loading, children }) {
         //Element placed after the children.
         endIcon={loading && <LoopIcon className="ani-spin" />}
       >
-        Sign Up
+        Sign In
       </Button>
 
       <div className="or_option w-100 t-center">{children}</div>
     </form>
   );
-}
-
-RegisterForm.propType = {
-  handleRegister: PropTypes.func,
-  loading: PropTypes.bool,
 };
 
-RegisterForm.defaultProps = {
-  loading: false,
-  handleRegister: function () {},
-};
-export default RegisterForm;
+export default Login;
