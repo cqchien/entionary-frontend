@@ -14,7 +14,7 @@ import LoopIcon from "@material-ui/icons/Loop";
 
 const useStyle = makeStyles(formStyle);
 
-const Login = ({ handleLogin, validationSchema, loading, children }) => {
+const LoginForm = ({ handleLogin, validationSchema, loading, children }) => {
   const {
     handleSubmit,
     register,
@@ -94,4 +94,4 @@ const Login = ({ handleLogin, validationSchema, loading, children }) => {
   );
 };
 
-export default Login;
+export default LoginForm;
