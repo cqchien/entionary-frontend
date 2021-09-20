@@ -38,7 +38,11 @@ const LoginForm = ({ handleLogin, validationSchema, loading, children }) => {
 
   const classes = useStyle();
   return (
-    <form onSubmit={handleSubmit(handleLogin)}>
+    <form
+      className={`${classes.root} flex-col`}
+      autoComplete="off"
+      onSubmit={handleSubmit(handleLogin)}
+    >
       <div className="flex-col">
         <h1 className={`${classes.title} t-center`}>Log In</h1>
       </div>
@@ -59,7 +63,7 @@ const LoginForm = ({ handleLogin, validationSchema, loading, children }) => {
           label="Password"
           size="small"
           placeholder="Input Password"
-          error={Boolean(errors.me.password)}
+          error={Boolean(errors.password)}
           helperText={errors.password?.message}
           inputProps={{
             ...register("password"),
