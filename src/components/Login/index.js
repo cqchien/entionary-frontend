@@ -46,7 +46,7 @@ const LoginForm = ({ handleLogin, validationSchema, loading, children }) => {
       <div className="flex-col">
         <h1 className={`${classes.title} t-center`}>Log In</h1>
       </div>
-      <div>
+      <div className="flex-col">
         <TextFieldCustom
           label="Email"
           size="small"

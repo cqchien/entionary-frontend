@@ -8,9 +8,7 @@ import { routes } from "./configs/router";
 
 const extractRoutes = routes.map((route, index) => {
   const { path, exact, component } = route;
-  return (
-    <Route path={path} exact={exact} index={index} component={component} />
-  );
+  return <Route path={path} exact={exact} key={index} component={component} />;
 });
 
 function App() {
@@ -21,11 +19,10 @@ function App() {
       {/* Routing */}
       <BrowserRouter>
         {/* Suspense lets your components “wait” for something before they can render. */}
-        <Suspense fallback={<CircularProgress />}>
+        <Suspense fallback={<CircularProgress color="success" />}>
           <Switch>{extractRoutes}</Switch>
         </Suspense>
       </BrowserRouter>
-
       {/* <div id="_overlay"></div> */}
       <MessageAlert />
     </ThemeProvider>

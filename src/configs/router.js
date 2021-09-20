@@ -1,6 +1,7 @@
+import React from "react";
 import { ROUTES } from "../constant/routePath";
-import LoginPage from "../pages/login";
-import RegisterPage from "../pages/register";
+const LoginPage = React.lazy(() => import('../pages/login'));
+const RegisterPage = React.lazy(() => import('../pages/register'));
 
 export const routes = [
   {
