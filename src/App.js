@@ -19,7 +19,7 @@ function App() {
       {/* Routing */}
       <BrowserRouter>
         {/* Suspense lets your components “wait” for something before they can render. */}
-        <Suspense fallback={<CircularProgress color="success" />}>
+        <Suspense fallback={<CircularProgress color="primary" />}>
           <Switch>{extractRoutes}</Switch>
         </Suspense>
       </BrowserRouter>

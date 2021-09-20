@@ -1,17 +1,24 @@
 import request from "../utils/request";
 
-const registerUser = async (params) => {
+const registerUser = (params) => {
   return request("/auth/register", {
     method: "POST",
     data: params,
   });
 };
 
-const loginWithSocialNetwork = async (params) => {
+const loginWithSocialNetwork = (params) => {
   return request("/auth/login-gg", {
     method: "POST",
     data: params,
   });
 };
 
-export { registerUser, loginWithSocialNetwork };
+const loginWithEmail = (params) => {
+  return request("login", {
+    method: "POST",
+    data: params,
+  });
+};
+
+export { registerUser, loginWithSocialNetwork, loginWithEmail };
