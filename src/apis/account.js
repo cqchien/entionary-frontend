@@ -15,7 +15,7 @@ const loginWithSocialNetwork = (params) => {
 };
 
 const loginWithEmail = (params) => {
-  return request("login", {
+  return request("/auth/login", {
     method: "POST",
     data: params,
   });

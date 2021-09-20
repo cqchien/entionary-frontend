@@ -5,6 +5,8 @@ import RegisterForm from "../../components/Register";
 import { useDispatch } from "react-redux";
 import { setMessage } from "../../redux/reducers/message.reducer";
 import SocialNetworkLogin from "../../components/SocialNetwork";
+import { useHistory } from "react-router";
+import { ROUTES } from "../../constant/routePath";
 
 const schema = yup.object().shape({
   email: yup.string().trim().required("Input Email").email("Email is invalid"),
@@ -25,21 +27,25 @@ function Register() {
   // state to set loading when call api
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const handleRegister = async (account) => {
     setLoading(true);
     try {
       const apiResponse = await registerUser(account);
-      const { data, success } = apiResponse;
+      const { success } = apiResponse;
       // create new user so status code = 201
       if (success) {
         const payloadSuccess = {
           message: "Register Successfully",
           type: "success",
         };
-
         dispatch(setMessage(payloadSuccess));
-        setLoading(false);
+        // Because 3000s for show message
+        setTimeout(() => {
+          setLoading(false);
+          history.push(ROUTES.LOGIN);
+        }, 3000);
       }
     } catch (error) {
       const payloadFail = {
