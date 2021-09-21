@@ -14,7 +14,7 @@ function SocialNetworkLogin() {
       const apiResponse = await loginWithSocialNetwork({
         access_token: accessToken,
       });
-      const { data, success } = apiResponse;
+      const { success } = apiResponse;
       if (success) {
         const payloadSuccess = {
           message: "Register Successfully",
