@@ -44,8 +44,8 @@ function Register() {
         // Because 3000s for show message
         setTimeout(() => {
           setLoading(false);
-          history.push(ROUTES.LOGIN);
-        }, 3000);
+          history.push(ROUTES.HOME);
+        },1000);
       }
     } catch (error) {
       const payloadFail = {

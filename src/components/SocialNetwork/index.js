@@ -1,12 +1,15 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router";
 import { loginWithSocialNetwork } from "../../apis/account";
+import { ROUTES } from "../../constant/routePath";
 import { setMessage } from "../../redux/reducers/message.reducer";
 import Facebook from "./Facebook";
 import Google from "./Google";
 
 function SocialNetworkLogin() {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const loginGoogle = async (response) => {
     const { accessToken } = response;
@@ -21,6 +24,10 @@ function SocialNetworkLogin() {
           type: "success",
         };
         dispatch(setMessage(payloadSuccess));
+        // Because 3000s for show message
+        setTimeout(() => {
+          history.push(ROUTES.HOME);
+        }, 1000);
       }
     } catch (error) {
       const payloadFail = {
