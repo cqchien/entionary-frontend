@@ -31,10 +31,14 @@ function SocialNetworkLogin() {
     }
   };
 
+  const loginFacebook = (response) => {
+    console.log("res", response);
+  };
+
   return (
     <div className="d-flex" style={{ margin: "0 -0.8rem" }}>
       <Google loginGoogle={loginGoogle} />
-      <Facebook />
+      <Facebook loginFacebook={loginFacebook} />
     </div>
   );
 }

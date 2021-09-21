@@ -5,12 +5,16 @@ import socialNetworkStyle from "./style";
 import facebookIcon from "../../assets/icons/fb-icon.png";
 
 const useStyle = makeStyles(socialNetworkStyle);
-function Facebook() {
+
+function Facebook({ loginFacebook }) {
   const classes = useStyle();
   return (
     <FacebookLogin
-      render={() => (
-        <div className={classes.socialBtn}>
+      appId={process.env.REACT_APP_FB_APP_ID}
+      autoLoad={false}
+      callback={loginFacebook}
+      render={(props) => (
+        <div className={classes.socialBtn} onClick={props.onClick}>
           <img
             className={classes.socialImg}
             src={facebookIcon}
