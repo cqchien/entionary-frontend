@@ -11,7 +11,7 @@ function SocialNetworkLogin() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const loginGoogle = async (response) => {
+  const handleLoginSocialNetwork = async (response) => {
     const { accessToken } = response;
     try {
       const apiResponse = await loginWithSocialNetwork({
@@ -19,15 +19,7 @@ function SocialNetworkLogin() {
       });
       const { success } = apiResponse;
       if (success) {
-        const payloadSuccess = {
-          message: "Register Successfully",
-          type: "success",
-        };
-        dispatch(setMessage(payloadSuccess));
-        // Because 3000s for show message
-        setTimeout(() => {
-          history.push(ROUTES.HOME);
-        }, 1000);
+        history.push(ROUTES.HOME);
       }
     } catch (error) {
       const payloadFail = {
@@ -38,14 +30,10 @@ function SocialNetworkLogin() {
     }
   };
 
-  const loginFacebook = (response) => {
-    console.log("res", response);
-  };
-
   return (
     <div className="d-flex" style={{ margin: "0 -0.8rem" }}>
-      <Google loginGoogle={loginGoogle} />
-      <Facebook loginFacebook={loginFacebook} />
+      <Google loginGoogle={handleLoginSocialNetwork} />
+      <Facebook loginFacebook={handleLoginSocialNetwork} />
     </div>
   );
 }
