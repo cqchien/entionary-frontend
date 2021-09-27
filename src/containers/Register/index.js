@@ -31,30 +31,22 @@ function Register() {
 
   const handleRegister = async (account) => {
     setLoading(true);
-    try {
-      const apiResponse = await registerUser(account);
-      const { success } = apiResponse;
-      // create new user so status code = 201
-      if (success) {
-        const payloadSuccess = {
-          message: "Register Successfully",
-          type: "success",
-        };
-        dispatch(setMessage(payloadSuccess));
-        // Because 3000s for show message
-        setTimeout(() => {
-          setLoading(false);
-          history.push(ROUTES.HOME);
-        },1000);
-      }
-    } catch (error) {
-      const payloadFail = {
-        message: error.response?.data?.message || " Error, Please try again!",
-        type: "error",
+    const apiResponse = await registerUser(account);
+    const success = apiResponse?.success;
+    // create new user so status code = 201
+    if (success) {
+      const payloadSuccess = {
+        message: "Register Successfully",
+        type: "success",
       };
-      setLoading(false);
-      dispatch(setMessage(payloadFail));
+      dispatch(setMessage(payloadSuccess));
+      // Because 3000s for show message
+      setTimeout(() => {
+        setLoading(false);
+        history.push(ROUTES.HOME);
+      }, 1000);
     }
+    setLoading(false);
   };
   return (
     <RegisterForm
