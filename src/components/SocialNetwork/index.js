@@ -9,6 +9,7 @@ function SocialNetworkLogin() {
   const history = useHistory();
 
   const handleLoginSocialNetwork = async (response) => {
+    console.log(response);
     const { accessToken } = response;
     const apiResponse = await loginWithSocialNetwork({
       access_token: accessToken,
