@@ -61,6 +61,7 @@ function RegisterForm({ validationSchema, handleRegister, loading, children }) {
           size="small"
           error={Boolean(errors.name)}
           placeholder="Input Name"
+          disabled={loading}
           inputProps={{
             ...register("name"),
             autoFocus: true,
@@ -74,6 +75,7 @@ function RegisterForm({ validationSchema, handleRegister, loading, children }) {
           size="small"
           placeholder="Input email"
           error={Boolean(errors.email)}
+          disabled={loading}
           inputProps={{
             ...register("email"),
           }}
@@ -87,6 +89,7 @@ function RegisterForm({ validationSchema, handleRegister, loading, children }) {
           placeholder="Input Password"
           error={Boolean(errors.password)}
           helperText={errors.password?.message}
+          disabled={loading}
           inputProps={{
             ...register("password"),
             type: isVisiblePass ? "text" : "password",

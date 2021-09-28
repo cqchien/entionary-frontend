@@ -1,9 +1,8 @@
 import * as yup from "yup";
-import { useState } from "react";
 import { registerUser } from "../../apis/account";
 import RegisterForm from "../../components/Register";
-import { useDispatch } from "react-redux";
-import { setMessage } from "../../redux/reducers/message.reducer";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoading, setMessage } from "../../redux/reducers/message.reducer";
 import SocialNetworkLogin from "../../components/SocialNetwork";
 import { useHistory } from "react-router";
 import { ROUTES } from "../../constant/routePath";
@@ -25,12 +24,13 @@ const schema = yup.object().shape({
 
 function Register() {
   // state to set loading when call api
-  const [loading, setLoading] = useState(false);
+  const { loading } = useSelector((state) => state.message);
+
   const dispatch = useDispatch();
   const history = useHistory();
 
   const handleRegister = async (account) => {
-    setLoading(true);
+    dispatch(setLoading(true));
     const apiResponse = await registerUser(account);
     const success = apiResponse?.success;
     // create new user so status code = 201
@@ -46,7 +46,7 @@ function Register() {
         history.push(ROUTES.HOME);
       }, 1000);
     }
-    setLoading(false);
+    dispatch(setLoading(false));
   };
   return (
     <RegisterForm
@@ -54,7 +54,7 @@ function Register() {
       handleRegister={handleRegister}
       loading={loading}
     >
-      <SocialNetworkLogin />
+      <SocialNetworkLogin loading={loading} />
     </RegisterForm>
   );
 }

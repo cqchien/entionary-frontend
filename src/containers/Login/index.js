@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import LoginForm from "../../components/Login";
 import SocialNetworkLogin from "../../components/SocialNetwork";
 import * as yup from "yup";
 import { loginWithEmail } from "../../apis/account";
-import { useDispatch } from "react-redux";
-import { setMessage } from "../../redux/reducers/message.reducer";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoading, setMessage } from "../../redux/reducers/message.reducer";
 import { ROUTES } from "../../constant/routePath";
 import { useHistory } from "react-router";
 
@@ -18,18 +18,18 @@ const schema = yup.object().shape({
 });
 
 const Login = () => {
-  const [loading, setLoading] = useState(false);
+  const { loading } = useSelector((state) => state.message);
   const dispatch = useDispatch();
   const history = useHistory();
 
   const handleLogin = async (account) => {
     const { email, password } = account;
-    setLoading(true);
+    dispatch(setLoading(true));
     const apiResponse = await loginWithEmail({ email, password });
     const success = apiResponse?.success;
     if (success) {
       const payloadSuccess = {
-        message: "Register Successfully",
+        message: "Login Successfully",
         type: "success",
       };
 
@@ -40,7 +40,7 @@ const Login = () => {
         history.push(ROUTES.HOME);
       }, 1000);
     }
-    setLoading(false);
+    dispatch(setLoading(false));
   };
 
   return (
@@ -49,7 +49,7 @@ const Login = () => {
       loading={loading}
       handleLogin={handleLogin}
     >
-      <SocialNetworkLogin />
+      <SocialNetworkLogin loading={loading} />
     </LoginForm>
   );
 };

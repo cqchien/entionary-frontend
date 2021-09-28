@@ -6,33 +6,34 @@ import socialNetworkStyle from "./style";
 
 const useStyle = makeStyles(socialNetworkStyle);
 
-function Google({ loginGoogle }) {
+function Google({ loginGoogle, loading }) {
   const classes = useStyle();
-
+  console.log(loading);
   return (
-    <GoogleLogin
-      clientId={process.env.REACT_APP_GG_CLIENT_ID}
-      autoLoad={false}
-      // Render prop to use a custom element, use renderProps.onClick
-      render={(props) => (
-        <div
-          onClick={props.onClick}
-          disabled={props.disabled}
-          className={classes.socialBtn}
-        >
-          <img
-            className={classes.socialImg}
-            src={googleIcon}
-            alt="Google Icon"
-          />
-          <span className={classes.socialName}>Google</span>
-        </div>
-      )}
-      onSuccess={loginGoogle}
-      onFailure={loginGoogle}
-      // isSignedIn={true} attribute will call onSuccess callback on load to keep the user signed in.
-      cookiePolicy={"single_host_origin"}
-    />
+    <>
+      <GoogleLogin
+        clientId={process.env.REACT_APP_GG_CLIENT_ID}
+        autoLoad={false}
+        // Render prop to use a custom element, use renderProps.onClick
+        render={(props) => (
+          <div
+            onClick={!loading ? props.onClick : undefined}
+            className={classes.socialBtn}
+          >
+            <img
+              className={classes.socialImg}
+              src={googleIcon}
+              alt="Google Icon"
+            />
+            <span className={classes.socialName}>Google</span>
+          </div>
+        )}
+        onSuccess={loginGoogle}
+        onFailure={loginGoogle}
+        // isSignedIn={true} attribute will call onSuccess callback on load to keep the user signed in.
+        cookiePolicy={"single_host_origin"}
+      />
+    </>
   );
 }
 

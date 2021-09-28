@@ -6,7 +6,7 @@ import facebookIcon from "../../assets/icons/fb-icon.png";
 
 const useStyle = makeStyles(socialNetworkStyle);
 
-function Facebook({ loginFacebook }) {
+function Facebook({ loginFacebook, loading }) {
   const classes = useStyle();
   return (
     <FacebookLogin
@@ -14,7 +14,10 @@ function Facebook({ loginFacebook }) {
       autoLoad={false}
       callback={loginFacebook}
       render={(props) => (
-        <div className={classes.socialBtn} onClick={props.onClick}>
+        <div
+          className={classes.socialBtn}
+          onClick={!loading ? props.onClick : undefined}
+        >
           <img
             className={classes.socialImg}
             src={facebookIcon}
