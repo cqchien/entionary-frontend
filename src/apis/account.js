@@ -7,8 +7,15 @@ const registerUser = (params) => {
   });
 };
 
-const loginWithSocialNetwork = (params) => {
+const loginWithGoogle = (params) => {
   return request("/auth/login-gg", {
+    method: "POST",
+    data: params,
+  });
+};
+
+const loginWithFacebook = (params) => {
+  return request("/auth/login-fb", {
     method: "POST",
     data: params,
   });
@@ -21,4 +28,4 @@ const loginWithEmail = (params) => {
   });
 };
 
-export { registerUser, loginWithSocialNetwork, loginWithEmail };
+export { registerUser, loginWithFacebook, loginWithGoogle, loginWithEmail };
