@@ -1,5 +1,7 @@
 import axios from "axios";
 import queryString from "query-string";
+import { setMessage } from "../redux/reducers/message.reducer";
+import { store } from "../redux/store";
 import { getAccessToken } from "./authority";
 
 const request = axios.create({
@@ -29,10 +31,13 @@ request.interceptors.response.use(
     return response.data;
   },
   function (error) {
-    console.log("err:", error);
+    const payloadFail = {
+      message: error.response?.data?.message || " Error, Please try again!",
+      type: "error",
+    };
+    store.dispatch(setMessage(payloadFail));
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
-    return Promise.reject(error);
   }
 );
 

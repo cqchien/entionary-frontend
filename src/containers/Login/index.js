@@ -24,32 +24,25 @@ const Login = () => {
 
   const handleLogin = async (account) => {
     const { email, password } = account;
-    try {
-      setLoading(true);
-      const apiResponse = await loginWithEmail({ email, password });
-      const { success } = apiResponse;
-      if (success) {
-        const payloadSuccess = {
-          message: "Register Successfully",
-          type: "success",
-        };
-
-        dispatch(setMessage(payloadSuccess));
-        // Because 3000s for show message
-        setTimeout(() => {
-          setLoading(false);
-          history.push(ROUTES.HOME);
-        }, 3000);
-      }
-    } catch (error) {
-      const payloadFail = {
-        message: error.response?.data?.message || " Error, Please try again!",
-        type: "error",
+    setLoading(true);
+    const apiResponse = await loginWithEmail({ email, password });
+    const success = apiResponse?.success;
+    if (success) {
+      const payloadSuccess = {
+        message: "Register Successfully",
+        type: "success",
       };
-      setLoading(false);
-      dispatch(setMessage(payloadFail));
+
+      dispatch(setMessage(payloadSuccess));
+      // Because 3000s for show message
+      setTimeout(() => {
+        setLoading(false);
+        history.push(ROUTES.HOME);
+      }, 1000);
     }
+    setLoading(false);
   };
+
   return (
     <LoginForm
       validationSchema={schema}

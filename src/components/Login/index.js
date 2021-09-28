@@ -8,7 +8,7 @@ import {
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import TextFieldCustom from "../Custom/textField";
+import TextFieldCustom from "../Custom/TextField";
 import formStyle from "../globalStyle";
 import LoopIcon from "@material-ui/icons/Loop";
 
