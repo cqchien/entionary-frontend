@@ -11,7 +11,7 @@ function SocialNetworkLogin() {
   const handleLoginSocialNetwork = async (response) => {
     const { accessToken } = response;
 
-    const apiUrl = response.googleId ? loginWithFacebook : loginWithGoogle;
+    const apiUrl = response.googleId ? loginWithGoogle : loginWithFacebook;
 
     const apiResponse = await apiUrl({
       access_token: accessToken,
