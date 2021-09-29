@@ -1,8 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useTitle } from "../Hook/useTitle";
 import "./styles/not-found.scss";
 
 const NotFoundPage = () => {
+  useTitle("Not Found");
+
   return (
     <div className="not-found">
       <div className="not-found-main">

@@ -2,8 +2,11 @@ import React from "react";
 import Login from "../containers/Login";
 import { ROUTES } from "../constant/routePath";
 import { Link } from "react-router-dom";
+import { useTitle } from "../Hook/useTitle";
 
 const LoginPage = () => {
+  useTitle("Login");
+
   return (
     <div className="w-100vw h-100vh">
       <div className="transform-center">
