@@ -118,7 +118,8 @@ function RegisterForm({ validationSchema, handleRegister, loading, children }) {
         Sign Up
       </Button>
 
-      <div className="or_option w-100 t-center">{children}</div>
+      <div className="or-option w-100 t-center">OR</div>
+      {children}
     </form>
   );
 }

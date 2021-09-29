@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+import { ROUTES } from "../constant/routePath";
 import Register from "../containers/Register";
 import "./styles/login-signup.scss";
 
@@ -14,7 +16,12 @@ function RegisterPage() {
     <div className="w-100vw h-100vh">
       <div className="transform-center">
         <Register />
-        <div className="has-account">Do you have an account?&nbsp;</div>
+        <div className="has-account">
+          You Have Account?&nbsp;
+          <Link to={ROUTES.LOGIN} className="account-link">
+            Login
+          </Link>
+        </div>
       </div>
     </div>
   );
