@@ -31,8 +31,27 @@ request.interceptors.response.use(
     return response.data;
   },
   function (error) {
+    // handle error
+    let message;
+    switch (error.response.data.statusCode) {
+      case 401:
+        message = "Login Fail";
+        break;
+      case 403:
+        message = "You Do Not Permission";
+        break;
+      case 404:
+        message = "Not Found";
+        break;
+      case 500: 
+        message = "Server Error";
+        break;
+      default:
+        message = " Error, Please try again!";
+        break;
+    }
     const payloadFail = {
-      message: error.response?.data?.message || " Error, Please try again!",
+      message,
       type: "error",
     };
     store.dispatch(setMessage(payloadFail));
