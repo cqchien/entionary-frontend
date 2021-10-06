@@ -1,6 +1,5 @@
 ## PropTypes
   - Check the data types of the props that the component (or container) receives.
-  - You can easily check the data types of the props that the component receives.
   - When reusing components with PropTypes, it's easy to know the data types of the props passed to pass correctly.
   - Default values for props can be set via defaultProp
 
