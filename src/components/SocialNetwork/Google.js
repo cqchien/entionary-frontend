@@ -8,7 +8,6 @@ const useStyle = makeStyles(socialNetworkStyle);
 
 function Google({ loginGoogle, loading }) {
   const classes = useStyle();
-  console.log(loading);
   return (
     <>
       <GoogleLogin

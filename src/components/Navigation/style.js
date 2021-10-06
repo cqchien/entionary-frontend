@@ -1,4 +1,4 @@
-const imgSize = "10rem";
+const imgSize = "4.8rem";
 const iconSize = "2.4rem";
 
 export const navStyle = (theme) => ({

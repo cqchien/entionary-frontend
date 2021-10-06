@@ -1,4 +1,4 @@
-import { makeStyles, useMediaQuery, useTheme } from "@material-ui/core";
+import { Avatar, makeStyles, useMediaQuery, useTheme } from "@material-ui/core";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { navStyle } from "./style";
@@ -8,9 +8,9 @@ const useStyle = makeStyles(navStyle);
 
 const Navigation = () => {
   const classes = useStyle();
-  
+
   return (
-    <div className={`${classes.navWrapper} w-100w`}>
+    <div className={`${classes.navWrapper} w-100vw`}>
       <div className={`${classes.nav} w-100`}>
         <div className="container h-100 flex-center--ver">
           {/* Logo */}
@@ -23,7 +23,13 @@ const Navigation = () => {
           </Link>
 
           <div className={`${classes.control} flex-center--ver`}>
-            
+            {/* Search */}
+
+            {/* Avatar */}
+            <Avatar
+              className={`${classes.imgSize} ${classes.avt} cur-pointer`}
+              alt="Username"
+            />
           </div>
         </div>
       </div>
