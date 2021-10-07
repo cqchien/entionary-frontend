@@ -4,6 +4,7 @@ import { useHistory } from "react-router";
 import { loginWithFacebook, loginWithGoogle } from "../../apis/account";
 import { ROUTES } from "../../constant/routePath";
 import { setLoading } from "../../redux/reducers/message.reducer";
+import { setToken } from "../../utils/authority";
 import Facebook from "./Facebook";
 import Google from "./Google";
 
@@ -21,7 +22,9 @@ function SocialNetworkLogin({ loading }) {
     });
 
     const success = apiResponse?.success;
+    const data = apiResponse?.data;
     if (success) {
+      setToken(data.token);
       history.push(ROUTES.HOME);
     }
     dispatch(setLoading(false));

@@ -9,9 +9,8 @@ const getRefreshToken = () => {
 };
 
 const updateAccessToken = (token) => {
-  const localToken = localStorage.getItem(
-    "entionaryToken",
-    JSON.stringify(token)
+  const localToken = JSON.parse(
+    localStorage.getItem("entionaryToken", JSON.stringify(token))
   );
   localToken.access = token;
   return localStorage.setItem("entionaryToken", JSON.stringify(localToken));
@@ -25,5 +24,5 @@ module.exports = {
   getAccessToken,
   setToken,
   getRefreshToken,
-  updateAccessToken
+  updateAccessToken,
 };
