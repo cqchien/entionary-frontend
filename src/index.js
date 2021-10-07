@@ -4,7 +4,7 @@ import App from "./App";
 import "./utils/index.scss";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
-import { store } from "./redux/store";
+import store from "./redux/store";
 
 ReactDOM.render(
   // makes the Redux store available to any nested components that need to access the Redux store.
