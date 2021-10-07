@@ -1,8 +1,13 @@
 import axios from "axios";
 import queryString from "query-string";
+import { refreshToken } from "../apis/account";
 import { setMessage } from "../redux/reducers/message.reducer";
-import { store } from "../redux/store";
-import { getAccessToken } from "./authority";
+import store from "../redux/store";
+import {
+  getAccessToken,
+  getRefreshToken,
+  updateAccessToken,
+} from "./authority";
 
 const request = axios.create({
   baseURL: process.env.REACT_APP_BASE_API_URL,
@@ -30,7 +35,33 @@ request.interceptors.response.use(
     // Any status code that lie within the range of 2xx cause this function to trigger
     return response.data;
   },
-  function (error) {
+  async function (error) {
+    const { config, response } = error;
+
+    if (
+      config.url !== "/auth/login" &&
+      response.status === 401 &&
+      !config.__isRetryRequest
+    ) {
+      try {
+        const localRefreshToken = getRefreshToken();
+
+        const apiRes = await refreshToken({ refreshToken: localRefreshToken });
+        console.log(apiRes);
+        const { access } = apiRes.data.token;
+        updateAccessToken(access);
+        config.__isRetryRequest = true;
+
+        return request(config);
+      } catch (error) {
+        const payloadFail = {
+          message: response?.data?.message,
+          type: "error",
+        };
+        store.dispatch(setMessage(payloadFail));
+        return;
+      }
+    }
     // handle error
     let message;
     switch (error.response.data.statusCode) {
@@ -43,7 +74,7 @@ request.interceptors.response.use(
       case 404:
         message = "Not Found";
         break;
-      case 500: 
+      case 500:
         message = "Server Error";
         break;
       default:
@@ -55,6 +86,7 @@ request.interceptors.response.use(
       type: "error",
     };
     store.dispatch(setMessage(payloadFail));
+    return;
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
   }

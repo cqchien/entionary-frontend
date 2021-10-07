@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setLoading, setMessage } from "../../redux/reducers/message.reducer";
 import { ROUTES } from "../../constant/routePath";
 import { useHistory } from "react-router";
+import { setToken } from "../../utils/authority";
 
 const schema = yup.object().shape({
   email: yup.string().trim().required("Input Email").email("Email is invalid"),
@@ -27,12 +28,13 @@ const Login = () => {
     dispatch(setLoading(true));
     const apiResponse = await loginWithEmail({ email, password });
     const success = apiResponse?.success;
+    const data = apiResponse?.data;
     if (success) {
       const payloadSuccess = {
         message: "Login Successfully",
         type: "success",
       };
-
+      setToken(data.token);
       dispatch(setMessage(payloadSuccess));
       // Because 3000s for show message
       setTimeout(() => {

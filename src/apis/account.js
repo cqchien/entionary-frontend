@@ -28,4 +28,17 @@ const loginWithEmail = (params) => {
   });
 };
 
-export { registerUser, loginWithFacebook, loginWithGoogle, loginWithEmail };
+const refreshToken = (refreshToken) => {
+  return request("/auth/refresh-token", {
+    method: "POST",
+    data: refreshToken,
+  });
+};
+
+export {
+  registerUser,
+  loginWithFacebook,
+  loginWithGoogle,
+  loginWithEmail,
+  refreshToken,
+};
