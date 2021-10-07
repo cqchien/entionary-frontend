@@ -36,12 +36,12 @@ request.interceptors.response.use(
     return response.data;
   },
   async function (error) {
-    const { config, response } = error;
-
+    const originalRequest = error.config;
+    console.log(error.config._retry);
     if (
-      config.url !== "/auth/login" &&
-      response.status === 401 &&
-      !config.__isRetryRequest
+      originalRequest.url !== "/auth/login" &&
+      error.response.status === 401 &&
+      !originalRequest._retry
     ) {
       try {
         const localRefreshToken = getRefreshToken();
@@ -50,12 +50,12 @@ request.interceptors.response.use(
         console.log(apiRes);
         const { access } = apiRes.data.token;
         updateAccessToken(access);
-        config.__isRetryRequest = true;
+        originalRequest._retry = true;
 
-        return request(config);
+        return request(originalRequest);
       } catch (error) {
         const payloadFail = {
-          message: response?.data?.message,
+          message: error.response?.data?.message,
           type: "error",
         };
         store.dispatch(setMessage(payloadFail));

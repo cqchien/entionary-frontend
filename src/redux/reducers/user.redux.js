@@ -1,19 +1,13 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getUserInfo } from "../../apis/user";
-// type: (user/getUser): A string that will be used to generate additional Redux action type constants, representing the lifecycle of an async request:
-// a type argument of 'users/getUser' will generate these action types:
-// pending: 'users/requestStatus/pending'
-// fulfilled: 'users/requestStatus/fulfilled'
-// rejected: 'users/requestStatus/rejected'
-export const getUser = createAsyncThunk("user/getUser", async () => {
-  const userInfo = await getUserInfo();
-  if (userInfo) {
-    return userInfo.data.user;
-  }
+
+export const getUser = createAsyncThunk("user/getUserInfo", async () => {
+  const user = await getUserInfo();
+  console.log(user);
   return {};
 });
 
-const user = createSlice({
+const userReducer = createSlice({
   name: "user",
 
   initialState: {
@@ -27,13 +21,13 @@ const user = createSlice({
     // standard reducer logic, with auto-generated action types per reduce
   },
 
-  extraReducers: {
-    [getUser.fulfilled]: (state, action) => {
-      console.log(action);
-      return;
-    },
-  },
+  // extraReducers: (builder) => {
+  //   builder.addCase(getUser.fulfilled, (state, action) => {
+  //     console.log(action);
+  //     return;
+  //   });
+  // },
 });
 
-const { reducer } = user;
+const { reducer } = userReducer;
 export default reducer;
