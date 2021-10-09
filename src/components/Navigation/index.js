@@ -10,7 +10,8 @@ const Navigation = () => {
   const classes = useStyle();
 
   return (
-    <div className={`${classes.navWrapper} w-100vw`}>
+    // id is used to close nav
+    <div className={`${classes.navWrapper} w-100vw`} id="entionaryNav">
       <div className={`${classes.nav} w-100`}>
         <div className="container h-100 flex-center--ver">
           {/* Logo */}

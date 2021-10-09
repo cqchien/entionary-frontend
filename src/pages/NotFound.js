@@ -1,10 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useCloseNav } from "../Hook/useCloseNav";
 import { useTitle } from "../Hook/useTitle";
 import "./styles/not-found.scss";
 
 const NotFoundPage = () => {
   useTitle("Not Found");
+  useCloseNav();
 
   return (
     <div className="not-found">
