@@ -69,13 +69,13 @@ request.interceptors.response.use(
     let message;
     switch (error.response.data.statusCode) {
       case 401:
-        message = "Login Fail";
+        message = "Email Or Password Incorrect";
         break;
       case 403:
-        message = "You Need Permission To Use All Feature!";
+        message = "You Need Permission To Use Features!";
         break;
       case 404:
-        message = "Not Found";
+        message = "Service Not Found";
         break;
       case 500:
         message = "Server Error";

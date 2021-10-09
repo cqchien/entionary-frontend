@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { loginWithFacebook, loginWithGoogle } from "../../apis/account";
 import { ROUTES } from "../../constant/routePath";
-import { setLoading } from "../../redux/reducers/message.reducer";
+import { setLoading, setMessage } from "../../redux/reducers/message.reducer";
 import { setToken } from "../../utils/authority";
 import Facebook from "./Facebook";
 import Google from "./Google";
@@ -26,6 +26,8 @@ function SocialNetworkLogin({ loading }) {
     if (success) {
       setToken(data.token);
       history.push(ROUTES.HOME);
+    } else {
+      dispatch(setMessage(apiResponse));
     }
     dispatch(setLoading(false));
   };

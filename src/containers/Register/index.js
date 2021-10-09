@@ -46,6 +46,9 @@ function Register() {
         history.push(ROUTES.HOME);
       }, 1000);
     }
+    else {
+      dispatch(setMessage(apiResponse));
+    }
     dispatch(setLoading(false));
   };
   return (

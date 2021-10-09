@@ -42,6 +42,9 @@ const Login = () => {
         history.push(ROUTES.HOME);
       }, 1000);
     }
+    else {
+      dispatch(setMessage(apiResponse));
+    }
     dispatch(setLoading(false));
   };
 
