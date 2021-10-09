@@ -22,6 +22,7 @@ request.interceptors.request.use(
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     };
+
     return config;
   },
   (error) => {
@@ -36,32 +37,33 @@ request.interceptors.response.use(
     return response.data;
   },
   async function (error) {
-    const originalRequest = error.config;
-    console.log(error.config._retry);
-    if (
-      originalRequest.url !== "/auth/login" &&
-      error.response.status === 401 &&
-      !originalRequest._retry
-    ) {
-      try {
-        const localRefreshToken = getRefreshToken();
+    const { config, response } = error;
+    config.retry = false;
+    if (config.url !== "/auth/login") {
+      if (response.status === 401 && !config.retry) {
+        config.retry = true;
 
-        const apiRes = await refreshToken({ refreshToken: localRefreshToken });
-        console.log(apiRes);
-        const { access } = apiRes.data.token;
-        updateAccessToken(access);
-        originalRequest._retry = true;
+        try {
+          const localRefreshToken = getRefreshToken();
 
-        return request(originalRequest);
-      } catch (error) {
-        const payloadFail = {
-          message: error.response?.data?.message,
-          type: "error",
-        };
-        store.dispatch(setMessage(payloadFail));
-        return;
+          const apiRes = await refreshToken({
+            refreshToken: localRefreshToken,
+          });
+
+          const { access } = apiRes.data.accessToken;
+          updateAccessToken(access);
+
+          return request(config);
+        } catch (error) {
+          const payloadFail = {
+            message: response?.data?.message,
+            type: "error",
+          };
+          return store.dispatch(setMessage(payloadFail));
+        }
       }
     }
+
     // handle error
     let message;
     switch (error.response.data.statusCode) {
@@ -69,7 +71,7 @@ request.interceptors.response.use(
         message = "Login Fail";
         break;
       case 403:
-        message = "You Do Not Permission";
+        message = "You Need Permission To Use All Feature!";
         break;
       case 404:
         message = "Not Found";
@@ -85,8 +87,8 @@ request.interceptors.response.use(
       message,
       type: "error",
     };
-    store.dispatch(setMessage(payloadFail));
-    return;
+    return store.dispatch(setMessage(payloadFail));
+
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
   }

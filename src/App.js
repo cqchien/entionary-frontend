@@ -8,7 +8,7 @@ import Loading from "./components/Custom/Loading";
 import NotFoundPage from "./pages/NotFound";
 import Navigation from "./components/Navigation";
 import { useDispatch } from "react-redux";
-import { getUser } from "./redux/reducers/user.redux";
+import { getUser } from "./redux/reducers/user.reducer";
 
 const extractRoutes = routes.map((route, index) => {
   const { path, exact, component } = route;

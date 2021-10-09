@@ -4,13 +4,14 @@ import { getUserInfo } from "../../apis/user";
 export const getUser = createAsyncThunk("user/getUserInfo", async () => {
   const user = await getUserInfo();
   console.log(user);
-  return {};
+  return user.data.user;
 });
 
 const userReducer = createSlice({
   name: "user",
 
   initialState: {
+    loading: false,
     isLogin: false,
     name: "",
     avatar: "",
@@ -21,12 +22,14 @@ const userReducer = createSlice({
     // standard reducer logic, with auto-generated action types per reduce
   },
 
-  // extraReducers: (builder) => {
-  //   builder.addCase(getUser.fulfilled, (state, action) => {
-  //     console.log(action);
-  //     return;
-  //   });
-  // },
+  extraReducers: {
+    [getUser.pending]: (state) => {
+      return {...state, loading: true}
+    },
+    [getUser.fulfilled]: (state, action) => {
+      console.log(action);
+    },
+  },
 });
 
 const { reducer } = userReducer;
