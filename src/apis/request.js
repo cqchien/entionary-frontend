@@ -1,13 +1,14 @@
 import axios from "axios";
 import queryString from "query-string";
-import { refreshToken } from "../apis/account";
-import { setMessage } from "../redux/reducers/message.reducer";
-import store from "../redux/store";
+import { refreshToken } from "./account";
+
+// Khong nen dispatch action o day vi khi call api trong createAsyncThunk thi data tra ve khong duoc store nhan vi reducer ma slice tra ve la undefined
+
 import {
   getAccessToken,
   getRefreshToken,
   updateAccessToken,
-} from "./authority";
+} from "../utils/authority";
 
 const request = axios.create({
   baseURL: process.env.REACT_APP_BASE_API_URL,
@@ -38,18 +39,16 @@ request.interceptors.response.use(
   },
   async function (error) {
     const { config, response } = error;
-    config.retry = false;
     if (config.url !== "/auth/login") {
       if (response.status === 401 && !config.retry) {
         config.retry = true;
 
         try {
           const localRefreshToken = getRefreshToken();
-
           const apiRes = await refreshToken({
             refreshToken: localRefreshToken,
           });
-
+          console.log(apiRes);
           const { access } = apiRes.data.accessToken;
           updateAccessToken(access);
 
@@ -59,7 +58,9 @@ request.interceptors.response.use(
             message: response?.data?.message,
             type: "error",
           };
-          return store.dispatch(setMessage(payloadFail));
+          // return store.dispatch(setMessage(payloadFail));
+          return payloadFail;
+
         }
       }
     }
@@ -87,8 +88,9 @@ request.interceptors.response.use(
       message,
       type: "error",
     };
-    return store.dispatch(setMessage(payloadFail));
-
+    // neu dispatch action trong nay se gay reducer call api trong createAsyncThunk tra ve undefined khi goi rong store
+    // return store.dispatch(setMessage(payloadFail));
+    return payloadFail;
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
   }
