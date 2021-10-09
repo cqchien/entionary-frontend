@@ -1,10 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getUserInfo } from "../../apis/user";
 
-export const getUser = createAsyncThunk("user/getUserInfo", async () => {
-  const user = await getUserInfo();
-  console.log(user);
-  return user.data.user;
+export const getUser = createAsyncThunk("user/getUser", async () => {
+  const apiRes = await getUserInfo();
+  if (apiRes.data) {
+    return apiRes.data.user;
+  }
+  return {};
 });
 
 const userReducer = createSlice({
@@ -24,7 +26,7 @@ const userReducer = createSlice({
 
   extraReducers: {
     [getUser.pending]: (state) => {
-      return {...state, loading: true}
+      return { ...state, loading: true };
     },
     [getUser.fulfilled]: (state, action) => {
       console.log(action);
