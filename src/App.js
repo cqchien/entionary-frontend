@@ -7,7 +7,7 @@ import { routes } from "./configs/router";
 import Loading from "./components/Custom/Loading";
 import NotFoundPage from "./pages/NotFound";
 import Navigation from "./components/Navigation";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "./redux/reducers/user.reducer";
 
 const extractRoutes = routes.map((route, index) => {
@@ -17,12 +17,10 @@ const extractRoutes = routes.map((route, index) => {
 
 function App() {
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(true);
-
+  const { loading } = useSelector((state) => state.user);
   // dispatch to get user before get page
   useEffect(() => {
     dispatch(getUser());
-    setLoading(false);
     return () => {};
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

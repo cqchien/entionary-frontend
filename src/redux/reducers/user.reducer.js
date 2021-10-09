@@ -17,6 +17,8 @@ const userReducer = createSlice({
     isLogin: false,
     name: "",
     avatar: "",
+    coin: 0,
+    numberOfStars: 0,
     email: "",
   },
 
@@ -29,7 +31,19 @@ const userReducer = createSlice({
       return { ...state, loading: true };
     },
     [getUser.fulfilled]: (state, action) => {
-      console.log(action);
+      const { name, email, avatar, coin, numberOfStars } = action.payload;
+      if (!email) {
+        return { ...state, loading: false, isLogin: false };
+      }
+      return {
+        loading: false,
+        isLogin: true,
+        name,
+        email,
+        avatar,
+        coin,
+        numberOfStars,
+      };
     },
   },
 });
