@@ -43,10 +43,9 @@ function Register() {
       // Because 3000s for show message
       setTimeout(() => {
         setLoading(false);
-        history.push(ROUTES.HOME);
+        history.push(ROUTES.LOGIN);
       }, 1000);
-    }
-    else {
+    } else {
       dispatch(setMessage(apiResponse));
     }
     dispatch(setLoading(false));

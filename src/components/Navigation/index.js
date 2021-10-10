@@ -1,12 +1,23 @@
-import { Avatar, makeStyles, useMediaQuery, useTheme } from "@material-ui/core";
+import {
+  Avatar,
+  Button,
+  makeStyles,
+  useMediaQuery,
+  useTheme,
+} from "@material-ui/core";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { navStyle } from "./style";
 import logoUrl from "../../assets/images/logo.png";
+import { useSelector } from "react-redux";
+import { ROUTES } from "../../constant/routePath";
 
 const useStyle = makeStyles(navStyle);
 
 const Navigation = () => {
+  const { isLogin, avatar } = useSelector((state) => state.user);
+  console.log(isLogin);
+
   const classes = useStyle();
 
   return (
@@ -27,10 +38,27 @@ const Navigation = () => {
             {/* Search */}
 
             {/* Avatar */}
-            <Avatar
-              className={`${classes.imgSize} ${classes.avt} cur-pointer`}
-              alt="Username"
-            />
+            {isLogin ? (
+              <Avatar
+                className={`${classes.imgSize} ${classes.avt} cur-pointer`}
+                alt="Username"
+                src={avatar}
+              />
+            ) : (
+              <Link to={ROUTES.LOGIN}>
+                <Button
+                  className="_btn _btn-primary"
+                  classes={{
+                    root: classes.loginBtn,
+                    label: classes.loginLabel,
+                  }}
+                  variant="contained"
+                  size="small"
+                >
+                  Log In
+                </Button>
+              </Link>
+            )}
           </div>
         </div>
       </div>

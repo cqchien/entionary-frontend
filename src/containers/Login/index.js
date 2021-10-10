@@ -39,7 +39,9 @@ const Login = () => {
       // Because 3000s for show message
       setTimeout(() => {
         setLoading(false);
-        history.push(ROUTES.HOME);
+        // Neu dung history.push thi useEffect o file App.js se khong chay lai. De useEffect do chay lai thi can load lai trang.
+        // history.push(ROUTES.HOME);
+        window.location.href = '/';
       }, 1000);
     }
     else {
