@@ -1,5 +1,5 @@
 import ThemeProvider from "@material-ui/styles/ThemeProvider";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import theme from "./configs/theme";
 import MessageAlert from "./containers/Message";

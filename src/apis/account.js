@@ -28,10 +28,10 @@ const loginWithEmail = (params) => {
   });
 };
 
-const refreshToken = (refreshToken) => {
+const refreshToken = (params) => {
   return request("/auth/refresh-token", {
     method: "POST",
-    data: refreshToken,
+    data: params,
   });
 };
 

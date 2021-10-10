@@ -38,30 +38,29 @@ request.interceptors.response.use(
     return response.data;
   },
   async function (error) {
-    const { config, response } = error;
-    if (config.url !== "/auth/login") {
-      if (response.status === 401 && !config.retry) {
-        config.retry = true;
+    const originalConfig = error.config;
 
-        try {
-          const localRefreshToken = getRefreshToken();
-          const apiRes = await refreshToken({
-            refreshToken: localRefreshToken,
-          });
-          console.log(apiRes);
-          const { access } = apiRes.data.accessToken;
-          updateAccessToken(access);
-
-          return request(config);
-        } catch (error) {
-          const payloadFail = {
-            message: response?.data?.message,
-            type: "error",
-          };
-          // return store.dispatch(setMessage(payloadFail));
-          return payloadFail;
-
+    if (originalConfig.url !== "/auth/login" && error.response.status === 401) {
+      try {
+        const localRefreshToken = getRefreshToken();
+        if (!localRefreshToken) {
+          throw error;
         }
+        const apiRes = await refreshToken({
+          refreshToken: localRefreshToken,
+        });
+
+        const { access } = apiRes.data.accessToken;
+        updateAccessToken(access);
+
+        return request(originalConfig);
+      } catch (error) {
+        // return store.dispatch(setMessage(payloadFail));
+        const payloadFail = {
+          message: error?.response?.data.message,
+          type: "error",
+        };
+        return payloadFail;
       }
     }
 
