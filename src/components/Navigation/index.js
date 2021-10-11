@@ -11,6 +11,8 @@ import { navStyle } from "./style";
 import logoUrl from "../../assets/images/logo.png";
 import { useSelector } from "react-redux";
 import { ROUTES } from "../../constant/routePath";
+import SearchInputCustom from "../Custom/SearchInput";
+import { Search } from "@material-ui/icons";
 
 const useStyle = makeStyles(navStyle);
 
@@ -36,7 +38,12 @@ const Navigation = () => {
 
           <div className={`${classes.control} flex-center--ver`}>
             {/* Search */}
-
+            <div className="mr-5">
+              <SearchInputCustom
+                placeholder="Input keyword..."
+                prefixIcon={<Search className={classes.searchIcon} />}
+              />
+            </div>
             {/* Avatar */}
             {isLogin ? (
               <Avatar
