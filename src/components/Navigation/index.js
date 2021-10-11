@@ -13,14 +13,19 @@ import { useSelector } from "react-redux";
 import { ROUTES } from "../../constant/routePath";
 import SearchInputCustom from "../Custom/SearchInput";
 import { Search } from "@material-ui/icons";
+import MenuSettingUser from "../MenuSettingUser";
 
 const useStyle = makeStyles(navStyle);
 
 const Navigation = () => {
-  const { isLogin, avatar } = useSelector((state) => state.user);
-  console.log(isLogin);
-
   const classes = useStyle();
+
+  const { isLogin, avatar } = useSelector((state) => state.user);
+
+  const [anchorMenu, setAnchorMenu] = useState(null);
+
+  const onOpenMenu = (e) => setAnchorMenu(e.currentTarget);
+  const onCloseMenu = () => setAnchorMenu(null);
 
   return (
     // id is used to close nav
@@ -50,6 +55,8 @@ const Navigation = () => {
                 className={`${classes.imgSize} ${classes.avt} cur-pointer`}
                 alt="Username"
                 src={avatar}
+                onClick={onOpenMenu}
+                onMouseEnter={onOpenMenu}
               />
             ) : (
               <Link to={ROUTES.LOGIN}>
@@ -66,6 +73,9 @@ const Navigation = () => {
                 </Button>
               </Link>
             )}
+
+            {/* Setting Menu */}
+            <MenuSettingUser anchorEl={anchorMenu} onClose={onCloseMenu} />
           </div>
         </div>
       </div>
