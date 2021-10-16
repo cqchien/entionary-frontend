@@ -4,6 +4,7 @@ import { ROUTES } from "../constant/routePath";
 import { Link } from "react-router-dom";
 import { useTitle } from "../Hook/useTitle";
 import { useCloseNav } from "../Hook/useCloseNav";
+import "./styles/login-signup.scss";
 
 const LoginPage = () => {
   useTitle("Login");
