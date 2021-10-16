@@ -4,6 +4,7 @@ export const ROUTES = {
   REGISTER: "/register",
   LOGOUT: "/logout",
   PROFILE: "/profile",
+  FLASHCARD: "/flashcard"
 };
 
 export const LINKS = {
