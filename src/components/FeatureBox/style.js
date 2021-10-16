@@ -24,8 +24,8 @@ const featureBoxStyle = (theme) => ({
   },
 
   icon: {
-    width: "4.2rem",
-    height: "4.2rem",
+    width: "6rem",
+    height: "6rem",
     marginRight: "1.4rem",
   },
 
@@ -40,7 +40,7 @@ const featureBoxStyle = (theme) => ({
     display: "none",
     marginTop: "0.6rem",
     color: "var(--label-color)",
-    fontSize: "1.4rem",
+    fontSize: "1.5rem",
     fontWeight: 500,
     letterSpacing: "0.5px",
 
