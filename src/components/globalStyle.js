@@ -25,12 +25,13 @@ const formStyle = {
     color: "var(--text-color)",
   },
 
-  forgotPw: {
+  forgetPassword: {
     color: "var(--title-color)",
     opacity: 0.65,
     fontWeight: 500,
     fontSize: "1.4rem",
     textAlign: "right",
+    marginBottom: "0px",
 
     "&:hover": {
       opacity: 1,

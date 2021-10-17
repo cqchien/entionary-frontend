@@ -8,9 +8,8 @@ import { useForm } from "react-hook-form";
 import formStyle from "../globalStyle";
 import TextFieldCustom from "../Custom/TextField";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Visibility, VisibilityOff } from "@material-ui/icons";
+import { Loop, Visibility, VisibilityOff } from "@material-ui/icons";
 import { useEffect, useState } from "react";
-import LoopIcon from "@material-ui/icons/Loop";
 import PropTypes from "prop-types";
 
 // style with hook api.
@@ -113,7 +112,7 @@ function RegisterForm({ validationSchema, handleRegister, loading, children }) {
         size="large"
         disabled={loading}
         //Element placed after the children.
-        endIcon={loading && <LoopIcon className="ani-spin" />}
+        endIcon={loading && <Loop className="ani-spin" />}
       >
         Sign Up
       </Button>

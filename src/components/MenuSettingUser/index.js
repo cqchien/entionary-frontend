@@ -4,7 +4,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { LINKS, ROUTES } from "../../constant/routePath";
 import menuSettingStyle from "./style";
-import PropTypes, { func } from "prop-types";
 
 const useStyle = makeStyles(menuSettingStyle);
 

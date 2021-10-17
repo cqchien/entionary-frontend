@@ -40,7 +40,7 @@ function Register() {
         type: "success",
       };
       dispatch(setMessage(payloadSuccess));
-      // Because 3000s for show message
+      // Because 1000s for show message
       setTimeout(() => {
         setLoading(false);
         history.push(ROUTES.LOGIN);

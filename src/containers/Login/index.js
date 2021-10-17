@@ -5,8 +5,6 @@ import * as yup from "yup";
 import { loginWithEmail } from "../../apis/account";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading, setMessage } from "../../redux/reducers/message.reducer";
-import { ROUTES } from "../../constant/routePath";
-import { useHistory } from "react-router";
 import { setToken } from "../../utils/authority";
 
 const schema = yup.object().shape({
@@ -21,7 +19,6 @@ const schema = yup.object().shape({
 const Login = () => {
   const { loading } = useSelector((state) => state.message);
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const handleLogin = async (account) => {
     const { email, password } = account;

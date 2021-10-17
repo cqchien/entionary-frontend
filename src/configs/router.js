@@ -1,8 +1,11 @@
 import React from "react";
 import { ROUTES } from "../constant/routePath";
+
 const LoginPage = React.lazy(() => import("../pages/Login"));
 const RegisterPage = React.lazy(() => import("../pages/Register"));
-const HomePage = React.lazy(() => import("../pages/Home.js"));
+const HomePage = React.lazy(() => import("../pages/Home"));
+const ForgetPasswordPage = React.lazy(() => import("../pages/ForgetPassword"));
+
 export const routes = [
   {
     path: ROUTES.HOME,
@@ -18,5 +21,10 @@ export const routes = [
     path: ROUTES.REGISTER,
     exact: true,
     component: () => <RegisterPage />,
+  },
+  {
+    path: ROUTES.FORGET_PASSWORD,
+    exact: true,
+    component: () => <ForgetPasswordPage />,
   },
 ];
