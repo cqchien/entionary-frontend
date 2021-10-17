@@ -5,12 +5,13 @@ import {
   InputAdornment,
   makeStyles,
 } from "@material-ui/core";
-import { Visibility, VisibilityOff } from "@material-ui/icons";
+import { Visibility, VisibilityOff, Loop } from "@material-ui/icons";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
+import { ROUTES } from "../../constant/routePath";
 import TextFieldCustom from "../Custom/TextField";
 import formStyle from "../globalStyle";
-import LoopIcon from "@material-ui/icons/Loop";
 
 const useStyle = makeStyles(formStyle);
 
@@ -85,13 +86,18 @@ const LoginForm = ({ handleLogin, validationSchema, loading, children }) => {
           }
         />
       </div>
+
+      <Link className={classes.forgetPassword} to={ROUTES.FORGET_PASSWORD}>
+        Forget Password ?
+      </Link>
+
       <Button
         className="_btn _btn-primary"
         type="submit"
         size="large"
         disabled={loading}
         //Element placed after the children.
-        endIcon={loading && <LoopIcon className="ani-spin" />}
+        endIcon={loading && <Loop className="ani-spin" />}
       >
         Sign In
       </Button>

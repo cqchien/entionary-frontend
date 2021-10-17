@@ -1,10 +1,4 @@
-import {
-  Avatar,
-  Button,
-  makeStyles,
-  useMediaQuery,
-  useTheme,
-} from "@material-ui/core";
+import { Avatar, Button, makeStyles } from "@material-ui/core";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { navStyle } from "./style";
