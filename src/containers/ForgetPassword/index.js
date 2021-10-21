@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import ForgetPasswordForm from "../../components/ForgetPassword";
 import * as yup from "yup";
-import { useDispatch } from "react-redux";
 
 const validationSchema = yup.object().shape({
   email: yup.string().trim().required("Input Email").email("Email is invalid"),
@@ -25,10 +24,8 @@ const validationSchema = yup.object().shape({
 });
 
 const ForgetPassword = () => {
-  const [loading, setLoading] = useState(false);
-  const [loadingSendCode, setLoadingSendCodeloadingSendCode] = useState(false);
-
-  const dispatch = useDispatch();
+  const [loading] = useState(false);
+  const [loadingSendCode] = useState(false);
 
   const handleForgetPassword = (data) => {
     console.log(data);
