@@ -5,7 +5,7 @@ import * as yup from "yup";
 import { loginWithEmail } from "../../apis/account";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading, setMessage } from "../../redux/reducers/message.reducer";
-import { setToken } from "../../utils/authority";
+import { setToken } from "../../apis/authority";
 
 const schema = yup.object().shape({
   email: yup.string().trim().required("Input Email").email("Email is invalid"),

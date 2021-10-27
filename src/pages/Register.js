@@ -10,7 +10,7 @@ function RegisterPage() {
   useCloseNav();
 
   return (
-    // transform-center is style in /utils/index.scss'.
+    // transform-center is style in /style/index.scss'.
     // TODO: center the component 'Register'
     // .transform-center {
     // position: absolute;

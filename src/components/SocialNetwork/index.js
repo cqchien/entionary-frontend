@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { loginWithFacebook, loginWithGoogle } from "../../apis/account";
 import { setLoading, setMessage } from "../../redux/reducers/message.reducer";
-import { setToken } from "../../utils/authority";
+import { setToken } from "../../apis/authority";
 import Facebook from "./Facebook";
 import Google from "./Google";
 
