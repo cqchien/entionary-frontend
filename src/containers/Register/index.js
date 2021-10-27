@@ -25,9 +25,15 @@ const schema = yup.object().shape({
 function Register() {
   // state to set loading when call api
   const { loading } = useSelector((state) => state.message);
+  const { email } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
   const history = useHistory();
+
+  // Check if user logged in, user cannot access register page
+  if (email) {
+    history.push("/");
+  }
 
   const handleRegister = async (account) => {
     dispatch(setLoading(true));
