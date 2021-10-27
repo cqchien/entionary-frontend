@@ -15,8 +15,8 @@ const useStyle = makeStyles(formStyle);
 
 const ForgetPasswordForm = ({
   validationSchema,
-  handleForgetPassword,
   loading,
+  handleForgetPassword,
   loadingSendCode,
   handleSendCode,
 }) => {
@@ -25,6 +25,7 @@ const ForgetPasswordForm = ({
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(validationSchema),
@@ -36,7 +37,6 @@ const ForgetPasswordForm = ({
     <form
       className={`${classes.root} flex-col`}
       onSubmit={handleSubmit(handleForgetPassword)}
-      autoComplete="off"
     >
       <h1 className={`${classes.title} t-center`}>Forget Password</h1>
 
@@ -61,19 +61,21 @@ const ForgetPasswordForm = ({
             label="Verify Code"
             size="small"
             placeholder="Input Verify Code"
-            error={Boolean(errors.verifyCode)}
+            error={Boolean(errors.codeToVerify)}
             disabled={loading}
             inputProps={{
-              ...register("verifyCode"),
-              autoFocus: true,
+              ...register("codeToVerify"),
             }}
-            helperText={errors.verifyCode?.message}
+            helperText={errors.codeToVerify?.message}
           />
           <Button
             className="_btn _btn-stand ml-10"
             disabled={loadingSendCode}
             endIcon={loadingSendCode && <Loop className="ani-spin" />}
-            onClick={handleSendCode}
+            onClick={() => {
+              const email = getValues("email");
+              handleSendCode({ email });
+            }}
           >
             Send Code
           </Button>

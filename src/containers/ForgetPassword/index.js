@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import ForgetPasswordForm from "../../components/ForgetPassword";
 import * as yup from "yup";
+import { sendVerifyCode } from "../../apis/user";
+import { useDispatch } from "react-redux";
+import { setMessage } from "../../redux/reducers/message.reducer";
+import { useHistory } from "react-router";
 
 const validationSchema = yup.object().shape({
   email: yup.string().trim().required("Input Email").email("Email is invalid"),
-  verifyCode: yup
+  codeToVerify: yup
     .string()
     .required("Input Verify Code")
     .length(6, "Verify Code must have 6 characters"),
@@ -24,15 +28,33 @@ const validationSchema = yup.object().shape({
 });
 
 const ForgetPassword = () => {
-  const [loading] = useState(false);
-  const [loadingSendCode] = useState(false);
+  const history = useHistory();
+  const dispatch = useDispatch();
 
-  const handleForgetPassword = (data) => {
-    console.log(data);
+  const [loading, setLoading] = useState(false);
+  const [loadingSendCode, setLoadingSendCode] = useState(false);
+
+  const handleForgetPassword = async ({ email, password, codeToVerify }) => {
+    console.log(email);
+
   };
 
-  const handleSendCode = ({ email }) => {
-    console.log(email);
+  const handleSendCode = async ({ email }) => {
+    setLoadingSendCode(true);
+    const apiResponse = await sendVerifyCode({ email });
+    const success = apiResponse?.success;
+
+    setLoadingSendCode(false);
+
+    if (success) {
+      const payloadSuccess = {
+        message: "Send Verify Code Successfully. Check mail, pls",
+        type: "success",
+      };
+      dispatch(setMessage(payloadSuccess));
+    } else {
+      dispatch(setMessage(apiResponse));
+    }
   };
 
   return (

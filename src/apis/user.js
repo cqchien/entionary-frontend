@@ -6,4 +6,12 @@ const getUserInfo = () => {
   });
 };
 
-export { getUserInfo };
+const sendVerifyCode = (params) => {
+  console.log(params)
+  return request("/user/send-code", {
+    method: "PATCH",
+    data: params,
+  });
+};
+
+export { getUserInfo, sendVerifyCode };
