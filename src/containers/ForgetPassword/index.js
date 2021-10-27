@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ForgetPasswordForm from "../../components/ForgetPassword";
 import * as yup from "yup";
-import { sendVerifyCode } from "../../apis/user";
+import { resetPassword, sendVerifyCode } from "../../apis/user";
 import { useDispatch } from "react-redux";
 import { setMessage } from "../../redux/reducers/message.reducer";
 import { useHistory } from "react-router";
@@ -35,8 +35,24 @@ const ForgetPassword = () => {
   const [loadingSendCode, setLoadingSendCode] = useState(false);
 
   const handleForgetPassword = async ({ email, password, codeToVerify }) => {
-    console.log(email);
+    setLoading(true);
+    const apiResponse = await resetPassword({ email, password, codeToVerify });
+    const success = apiResponse?.success;
 
+    setLoading(false);
+
+    if (success) {
+      const payloadSuccess = {
+        message: "You have reset password successfully. Try login again.",
+        type: "success",
+      };
+      dispatch(setMessage(payloadSuccess));
+      setTimeout(() => {
+        history.push("/login");
+      }, 2000)
+    } else {
+      dispatch(setMessage(apiResponse));
+    }
   };
 
   const handleSendCode = async ({ email }) => {
