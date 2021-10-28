@@ -5,6 +5,8 @@ const galleryStyle = {
     gridTemplateRows: "repeat(5,1fr)",
     height: "calc(100vh - 18rem)",
     gap: "0.8rem",
+    
+    marginTop: "0.8rem",
 
     position: "relative",
 
