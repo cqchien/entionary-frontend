@@ -5,6 +5,7 @@ const LoginPage = React.lazy(() => import("../pages/Login"));
 const RegisterPage = React.lazy(() => import("../pages/Register"));
 const HomePage = React.lazy(() => import("../pages/Home"));
 const ForgetPasswordPage = React.lazy(() => import("../pages/ForgetPassword"));
+const FlashcardPage = React.lazy(() => import("../pages/Flashcard.js"));
 
 export const routes = [
   {
@@ -26,5 +27,11 @@ export const routes = [
     path: ROUTES.FORGET_PASSWORD,
     exact: true,
     component: () => <ForgetPasswordPage />,
+  },
+
+  {
+    path: ROUTES.FLASHCARD,
+    exact: true,
+    component: () => <FlashcardPage />,
   },
 ];
