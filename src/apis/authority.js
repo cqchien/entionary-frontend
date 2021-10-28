@@ -12,7 +12,7 @@ const updateAccessToken = (token) => {
   const localToken = JSON.parse(
     localStorage.getItem("entionaryToken", JSON.stringify(token))
   );
-  localToken.access = token;
+  localToken.access.token = token;
   return localStorage.setItem("entionaryToken", JSON.stringify(localToken));
 };
 

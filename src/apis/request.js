@@ -50,8 +50,8 @@ request.interceptors.response.use(
           refreshToken: localRefreshToken,
         });
 
-        const { access } = apiRes.data.accessToken;
-        updateAccessToken(access);
+        const { accessToken } = apiRes.data;
+        updateAccessToken(accessToken);
 
         return request(originalConfig);
       } catch (error) {
