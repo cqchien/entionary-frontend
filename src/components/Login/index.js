@@ -11,7 +11,7 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../constant/routePath";
 import TextFieldCustom from "../Custom/TextField";
-import formStyle from "../globalStyle";
+import { formStyle } from "../globalStyle";
 
 const useStyle = makeStyles(formStyle);
 

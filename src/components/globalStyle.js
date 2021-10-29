@@ -1,4 +1,4 @@
-const formStyle = {
+export const formStyle = {
   root: {
     padding: "2.4rem 3.6rem",
     boxShadow: "var(--box-shadow)",
@@ -45,4 +45,24 @@ const formStyle = {
   },
 };
 
-export default formStyle;
+export const dialogMUIRoot = () => ({
+  dialogPaper: {
+    backgroundColor: "var(--bg-color-sec)",
+  },
+
+  title: {
+    "& > *": {
+      color: "var(--title-color)",
+    },
+  },
+
+  content: {
+    "& *": {
+      color: "var(--text-color)",
+    },
+  },
+
+  breakLine: {
+    borderColor: "var(--border-color)",
+  },
+});

@@ -9,7 +9,7 @@ import { Loop, Visibility, VisibilityOff } from "@material-ui/icons";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import TextFieldCustom from "../Custom/TextField";
-import formStyle from "../globalStyle";
+import { formStyle } from "../globalStyle";
 
 const useStyle = makeStyles(formStyle);
 

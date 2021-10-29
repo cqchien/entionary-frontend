@@ -5,7 +5,7 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import { useForm } from "react-hook-form";
-import formStyle from "../globalStyle";
+import { formStyle } from "../globalStyle";
 import TextFieldCustom from "../Custom/TextField";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Loop, Visibility, VisibilityOff } from "@material-ui/icons";
