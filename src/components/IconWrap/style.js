@@ -1,4 +1,4 @@
-const flashCardStyle = {
+const iconWrapStyle = {
   iconWrap: {
     margin: "0 -0.8rem",
     display: "flex",
@@ -16,4 +16,4 @@ const flashCardStyle = {
   },
 };
 
-export default flashCardStyle;
+export default iconWrapStyle;

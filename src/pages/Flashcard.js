@@ -1,10 +1,13 @@
 import React from "react";
-import FlashCard from "../components/Flashcard";
+import IconWrapFlashCard from "../containers/IconWrapFlashCard";
 
 const FlashcardPage = () => {
   return (
     <div className="container my-10">
-      <FlashCard />
+      <div className="flex-center-between">
+        <h1 className="entionary-title">Flashcards</h1>
+        <IconWrapFlashCard />
+      </div>
     </div>
   );
 };
