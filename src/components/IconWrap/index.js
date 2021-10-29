@@ -1,5 +1,4 @@
 import { makeStyles, Tooltip } from "@material-ui/core";
-import { AddBox } from "@material-ui/icons";
 import React from "react";
 import iconWrapStyle from "./style";
 
@@ -11,7 +10,7 @@ const IconWrap = ({ toolTips }) => {
     <div className={classes.iconWrap}>
       {toolTips.map((toolTip, index) => (
         <Tooltip title={toolTip.title} placement="bottom" key={index}>
-          <AddBox className={classes.icon} onClick={toolTip.openToolTip} />
+          <div className={classes.icon}>{toolTip.icon}</div>
         </Tooltip>
       ))}
     </div>
