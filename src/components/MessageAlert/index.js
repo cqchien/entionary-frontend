@@ -3,7 +3,7 @@ import { Alert } from "@material-ui/lab";
 import React from "react";
 import PropTypes from "prop-types";
 
-const Message = ({ open, type, message, handleClose }) => {
+const MessageAlert = ({ open, type, message, handleClose }) => {
   return (
     <Snackbar
       anchorOrigin={{ vertical: "top", horizontal: "right" }}
@@ -18,18 +18,18 @@ const Message = ({ open, type, message, handleClose }) => {
   );
 };
 
-Message.propType = {
+MessageAlert.propType = {
   open: PropTypes.bool,
   type: PropTypes.string,
   message: PropTypes.string,
   handleClose: PropTypes.func,
 };
 
-Message.defaultProps = {
+MessageAlert.defaultProps = {
   open: false,
   type: "success",
   message: "",
   handleClose: () => {},
 };
 
-export default Message;
+export default MessageAlert;

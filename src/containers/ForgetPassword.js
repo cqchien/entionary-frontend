@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import ForgetPasswordForm from "../../components/ForgetPassword";
+import ForgetPasswordForm from "../components/ForgetPassword";
 import * as yup from "yup";
-import { resetPassword, sendVerifyCode } from "../../apis/user";
+import { resetPassword, sendVerifyCode } from "../apis/user";
 import { useDispatch } from "react-redux";
-import { setMessage } from "../../redux/reducers/message.reducer";
+import { setMessage } from "../redux/reducers/message.reducer";
 import { useHistory } from "react-router";
 
 const validationSchema = yup.object().shape({

@@ -1,15 +1,20 @@
-import React from "react";
-import LoginForm from "../../components/Login";
-import SocialNetworkLogin from "../../components/SocialNetwork";
 import * as yup from "yup";
-import { loginWithEmail } from "../../apis/account";
+import { registerUser } from "../apis/account";
+import RegisterForm from "../components/Register";
 import { useDispatch, useSelector } from "react-redux";
-import { setLoading, setMessage } from "../../redux/reducers/message.reducer";
-import { setToken } from "../../apis/authority";
+import { setLoading, setMessage } from "../redux/reducers/message.reducer";
+import SocialNetworkLogin from "../components/SocialNetwork";
 import { useHistory } from "react-router";
+import { ROUTES } from "../constant/routePath";
 
 const schema = yup.object().shape({
   email: yup.string().trim().required("Input Email").email("Email is invalid"),
+  name: yup
+    .string()
+    .trim()
+    .min(2, "Too Short!")
+    .max(50, "Too Long!")
+    .required("Input Name"),
   password: yup
     .string()
     .trim()
@@ -17,53 +22,49 @@ const schema = yup.object().shape({
     .min(8, "Password has at least 8 characteristic"),
 });
 
-const Login = () => {
+function Register() {
+  // state to set loading when call api
   const { loading } = useSelector((state) => state.message);
   const { email } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
   const history = useHistory();
 
-  // Check if user logged in, user cannot access login page
+  // Check if user logged in, user cannot access register page
   if (email) {
     history.push("/");
   }
 
-  const handleLogin = async (account) => {
-    const { email, password } = account;
+  const handleRegister = async (account) => {
     dispatch(setLoading(true));
-    const apiResponse = await loginWithEmail({ email, password });
+    const apiResponse = await registerUser(account);
     const success = apiResponse?.success;
-    const data = apiResponse?.data;
+    // create new user so status code = 201
     if (success) {
       const payloadSuccess = {
-        message: "Login Successfully",
+        message: "Register Successfully",
         type: "success",
       };
-      setToken(data.token);
       dispatch(setMessage(payloadSuccess));
-      // Because 3000s for show message
+      // Because 1000s for show message
       setTimeout(() => {
         setLoading(false);
-        // Neu dung history.push thi useEffect o file App.js se khong chay lai. De useEffect do chay lai thi can load lai trang.
-        // history.push(ROUTES.HOME);
-        window.location.href = "/";
+        history.push(ROUTES.LOGIN);
       }, 1000);
     } else {
       dispatch(setMessage(apiResponse));
     }
     dispatch(setLoading(false));
   };
-
   return (
-    <LoginForm
+    <RegisterForm
       validationSchema={schema}
+      handleRegister={handleRegister}
       loading={loading}
-      handleLogin={handleLogin}
     >
       <SocialNetworkLogin loading={loading} />
-    </LoginForm>
+    </RegisterForm>
   );
-};
+}
 
-export default Login;
+export default Register;

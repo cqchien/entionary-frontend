@@ -1,9 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Message from "../../components/Message";
-import { closeMessage } from "../../redux/reducers/message.reducer";
+import MessageAlert from "../components/MessageAlert";
+import { closeMessage } from "../redux/reducers/message.reducer";
 
-const MessageAlert = () => {
+const Message = () => {
   // Allows you to extract data from the Redux store state, using a selector function.
   const { open, type, message } = useSelector(
     (state) => state.message
@@ -14,7 +14,7 @@ const MessageAlert = () => {
     dispatch(closeMessage());
   };
   return (
-    <Message
+    <MessageAlert
       open={open}
       type={type}
       message={message}
@@ -23,4 +23,4 @@ const MessageAlert = () => {
   );
 };
 
-export default MessageAlert;
+export default Message;
