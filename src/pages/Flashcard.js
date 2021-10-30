@@ -19,6 +19,10 @@ const FlashcardPage = () => {
         <IconWrap toolTips={toolTips} />
       </div>
       <div className="entionary-break" />
+
+      {isOpenWordPack && (
+        <p>a</p>
+      )}
     </div>
   );
 };
