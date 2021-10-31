@@ -15,7 +15,6 @@ const SearchInputCustom = ({ placeholder, prefixIcon }) => {
       <Grow in={true}>
         <InputBase
           onChange={(event) => console.log(event.target?.value)}
-          autoFocus
           placeholder={placeholder}
           classes={{ root: classes.inputRoot, input: classes.inputInput }}
           inputProps={{ "aria-label": "search" }}

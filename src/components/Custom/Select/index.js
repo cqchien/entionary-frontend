@@ -10,7 +10,13 @@ import selectStyle from "./style";
 
 const useStyle = makeStyles(selectStyle);
 
-const SelectCustom = ({ labelName }) => {
+const SelectCustom = ({
+  formId,
+  menuItems,
+  labelName,
+  inputProps,
+  ...otherProps
+}) => {
   const classes = useStyle();
 
   const [value, setValue] = useState("");
@@ -23,7 +29,7 @@ const SelectCustom = ({ labelName }) => {
     <FormControl className={`${classes.root}`} fullWidth variant="filled">
       <InputLabel
         classes={{ root: classes.label, focused: classes.labelFocus }}
-        id="wordType"
+        id={formId}
       >
         {labelName}
       </InputLabel>
@@ -35,14 +41,19 @@ const SelectCustom = ({ labelName }) => {
         }}
         MenuProps={{ classes: { paper: classes.selectMenu } }}
         disableUnderline
-        labelId="wordType"
+        labelId={formId}
         value={value}
         label={labelName}
         onChange={handleChange}
+        inputProps={inputProps}
+        {...otherProps}
       >
-        <MenuItem value="n">Noun(n)</MenuItem>
-        <MenuItem value="adj">Adjective(adj)</MenuItem>
-        <MenuItem value="v">Verb(v)</MenuItem>
+        {menuItems &&
+          menuItems.map((item, index) => (
+            <MenuItem key={index} value={item.acronym}>
+              {item.name}
+            </MenuItem>
+          ))}
       </Select>
     </FormControl>
   );

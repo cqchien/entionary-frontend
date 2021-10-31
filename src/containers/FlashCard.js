@@ -5,7 +5,7 @@ const FlashCard = ({ onCancel }) => {
   const handleCreateFlashCard = (event) => {
     event.preventDefault();
     const { target } = event;
-    console.log(target.type);
+    console.log(target.mode?.value);
   };
 
   return (
