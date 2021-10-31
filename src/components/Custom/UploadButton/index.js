@@ -1,8 +1,7 @@
 import { Button, makeStyles } from "@material-ui/core";
-import { CloudUploadRounded, DeleteForeverRounded } from "@material-ui/icons";
+import { CloudUploadRounded } from "@material-ui/icons";
 import React from "react";
 import uploadButtonStyle from "./style";
-import logoUrl from "../../../assets/images/logo.png";
 
 const useStyle = makeStyles(uploadButtonStyle);
 

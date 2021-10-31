@@ -2,7 +2,7 @@ import { Avatar, Button, makeStyles } from "@material-ui/core";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { navStyle } from "./style";
-import logoUrl from "../../assets/images/logo.png";
+import logoUrl from "../../assets/images/logo-entionary.png";
 import { useSelector } from "react-redux";
 import { ROUTES } from "../../constant/routePath";
 import SearchInputCustom from "../Custom/SearchInput";
