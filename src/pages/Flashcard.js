@@ -1,7 +1,7 @@
 import { AddCircleOutlineOutlined } from "@material-ui/icons";
 import React, { useState } from "react";
 import IconWrap from "../components/IconWrap";
-import WordPack from "../containers/WordPack";
+import FlashCard from "../containers/FlashCard";
 
 const FlashcardPage = () => {
   const [isOpenWordPack, setOpenWordPack] = useState(false);
@@ -21,7 +21,7 @@ const FlashcardPage = () => {
       </div>
       <div className="entionary-break" />
 
-      {isOpenWordPack && <WordPack onCancel={() => setOpenWordPack(false)} />}
+      {isOpenWordPack && <FlashCard onCancel={() => setOpenWordPack(false)} />}
     </div>
   );
 };

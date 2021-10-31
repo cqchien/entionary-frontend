@@ -1,7 +1,7 @@
 import React from "react";
-import WordPackDialog from "../components/WordPack";
+import DialogCreateFlashCard from "../components/DialogCreateFlashCard";
 
-const WordPack = ({ onCancel }) => {
+const FlashCard = ({ onCancel }) => {
   const handleCreateFlashCard = (event) => {
     event.preventDefault();
     const { target } = event;
@@ -9,11 +9,11 @@ const WordPack = ({ onCancel }) => {
   };
 
   return (
-    <WordPackDialog
+    <DialogCreateFlashCard
       onCancel={onCancel}
       handleCreateFlashCard={handleCreateFlashCard}
     />
   );
 };
 
-export default WordPack;
+export default FlashCard;

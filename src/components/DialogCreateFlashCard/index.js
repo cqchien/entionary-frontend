@@ -13,7 +13,7 @@ import { dialogMUIRoot } from "../globalStyle";
 
 const useStyle = makeStyles(dialogMUIRoot);
 
-const WordPackDialog = ({ onCancel, handleCreateFlashCard }) => {
+const DialogCreateFlashCard = ({ onCancel, handleCreateFlashCard }) => {
   const classes = useStyle();
 
   return (
@@ -29,7 +29,20 @@ const WordPackDialog = ({ onCancel, handleCreateFlashCard }) => {
       {/* Dialog Content */}
       <DialogContent dividers classes={{ dividers: classes.breakLine }}>
         <form id="wordPackForm" onSubmit={handleCreateFlashCard}>
-
+          <Grid container spacing={3}>
+            <Grid item xs={12} md={6}>
+              <SelectCustom labelName="Word Type" />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <SelectCustom labelName="Word Type" />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <SelectCustom labelName="Word Type" />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <SelectCustom labelName="Word Type" />
+            </Grid>
+          </Grid>
         </form>
       </DialogContent>
 
@@ -57,4 +70,4 @@ const WordPackDialog = ({ onCancel, handleCreateFlashCard }) => {
   );
 };
 
-export default WordPackDialog;
+export default DialogCreateFlashCard;
