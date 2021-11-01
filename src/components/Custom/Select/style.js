@@ -7,6 +7,10 @@ const selectStyle = {
     "& .Mui-error .MuiSelect-root": {
       borderColor: "var(--error-color) !important",
     },
+
+    "& .MuiFormLabel-root.Mui-error": {
+      color: "var(--error-color) !important",
+    },
   },
 
   label: {
@@ -29,6 +33,10 @@ const selectStyle = {
 
   selectIcon: {
     color: "var(--label-color)",
+  },
+
+  selectIconError: {
+    color: "var(--error-color)",
   },
 
   selectMenu: {

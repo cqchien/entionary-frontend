@@ -1,5 +1,6 @@
 import {
   FormControl,
+  FormHelperText,
   InputLabel,
   makeStyles,
   MenuItem,
@@ -15,6 +16,8 @@ const SelectCustom = ({
   menuItems,
   labelName,
   inputProps,
+  error,
+  errorText,
   ...otherProps
 }) => {
   const classes = useStyle();
@@ -26,36 +29,46 @@ const SelectCustom = ({
   };
 
   return (
-    <FormControl className={`${classes.root}`} fullWidth variant="filled">
-      <InputLabel
-        classes={{ root: classes.label, focused: classes.labelFocus }}
-        id={formId}
+    <>
+      <FormControl
+        className={`${classes.root}`}
+        fullWidth
+        variant="filled"
+        error={error}
       >
-        {labelName}
-      </InputLabel>
+        <InputLabel
+          classes={{ root: classes.label, focused: classes.labelFocus }}
+          id={formId}
+        >
+          {labelName}
+        </InputLabel>
 
-      <Select
-        classes={{
-          root: classes.selectRoot,
-          icon: classes.selectIcon,
-        }}
-        MenuProps={{ classes: { paper: classes.selectMenu } }}
-        disableUnderline
-        labelId={formId}
-        value={value}
-        label={labelName}
-        onChange={handleChange}
-        inputProps={inputProps}
-        {...otherProps}
-      >
-        {menuItems &&
-          menuItems.map((item, index) => (
-            <MenuItem key={index} value={item.acronym}>
-              {item.name}
-            </MenuItem>
-          ))}
-      </Select>
-    </FormControl>
+        <Select
+          classes={{
+            root: classes.selectRoot,
+            icon: `${error ? classes.selectIconError : classes.selectIcon}`,
+          }}
+          MenuProps={{ classes: { paper: classes.selectMenu } }}
+          disableUnderline
+          labelId={formId}
+          value={value}
+          label={labelName}
+          onChange={handleChange}
+          inputProps={inputProps}
+          {...otherProps}
+        >
+          {menuItems &&
+            menuItems.map((item, index) => (
+              <MenuItem key={index} value={item.name}>
+                {item.name}
+              </MenuItem>
+            ))}
+        </Select>
+      </FormControl>
+      <FormHelperText className="MuiFormHelperText-contained Mui-error">
+        {errorText}
+      </FormHelperText>
+    </>
   );
 };
 

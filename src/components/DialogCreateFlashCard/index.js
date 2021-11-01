@@ -1,3 +1,4 @@
+import { yupResolver } from "@hookform/resolvers/yup";
 import {
   Button,
   Dialog,
@@ -8,15 +9,26 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import React from "react";
+import { useForm } from "react-hook-form";
 import SelectCustom from "../Custom/Select";
 import TextFieldCustom from "../Custom/TextField";
-import UploadButton from "../Custom/UploadButton";
+import UploadButton from "../UploadButton";
 import { dialogMUIRoot } from "../globalStyle";
 
 const useStyle = makeStyles(dialogMUIRoot);
 
-const DialogCreateFlashCard = ({ onCancel, handleCreateFlashCard }) => {
+const DialogCreateFlashCard = ({
+  validationSchema,
+  onCancel,
+  handleCreateFlashCard,
+}) => {
   const classes = useStyle();
+
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(validationSchema) });
 
   return (
     <Dialog
@@ -30,48 +42,51 @@ const DialogCreateFlashCard = ({ onCancel, handleCreateFlashCard }) => {
 
       {/* Dialog Content */}
       <DialogContent dividers classes={{ dividers: classes.breakLine }}>
-        <form id="formCreateFlashcard" onSubmit={handleCreateFlashCard}>
+        <form
+          id="formCreateFlashcard"
+          onSubmit={handleSubmit(handleCreateFlashCard)}
+        >
           <Grid container spacing={3}>
             <Grid item xs={12} md={6}>
               <TextFieldCustom
-                label="Flashcard Name"
+                label="Flashcard Name*"
                 size="medium"
                 fullWidth
                 inputProps={{
-                  name: "flashcardName",
+                  ...register("name"),
                   autoFocus: true,
                 }}
+                error={Boolean(errors.name)}
+                helperText={errors.name?.message}
               />
             </Grid>
 
             <Grid item xs={12} md={6}>
-              <UploadButton title="Flashcard Picture" />
+              <UploadButton title="Flashcard Picture" name="picture" />
             </Grid>
 
             <Grid item xs={12} md={6}>
               <SelectCustom
                 formId="topic"
-                labelName="Topic"
+                labelName="Topic*"
                 inputProps={{
-                  name: "topic",
+                  ...register("topic"),
                 }}
-                menuItems={[
-                  { name: "TOEIC", acronym: "toeic" },
-                  { name: "IELTS", acronym: "ielts" },
-                ]}
+                menuItems={[{ name: "TOEIC" }, { name: "IELTS" }]}
+                error={Boolean(errors.topic)}
+                errorText={errors.topic?.message}
               />
             </Grid>
             <Grid item xs={12} md={6}>
               <SelectCustom
                 formId="mode"
-                labelName="Display Mode"
+                labelName="Display Mode*"
                 inputProps={{
-                  name: "mode",
+                  ...register("mode"),
                 }}
-                menuItems={[
-                  { name: "Private", acronym: "private" },
-                  { name: "Public", acronym: "public" },
-                ]}
+                menuItems={[{ name: "Private" }, { name: "Public" }]}
+                error={Boolean(errors.mode)}
+                errorText={errors.mode?.message}
               />
             </Grid>
           </Grid>

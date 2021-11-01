@@ -9,7 +9,7 @@ const onFileChange = (file) => {
   console.log(file);
 };
 
-const UploadButton = ({ title }) => {
+const UploadButton = ({ title, name, ...otherProps }) => {
   const classes = useStyle();
 
   return (
@@ -20,7 +20,9 @@ const UploadButton = ({ title }) => {
         id="button-file"
         htmlFor="contained-button-file"
         type="file"
+        name={name}
         onChange={(e) => onFileChange(e.target.files)}
+        {...otherProps}
       />
       <label htmlFor="button-file">
         <Button
