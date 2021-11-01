@@ -5,23 +5,23 @@ import uploadButtonStyle from "./style";
 
 const useStyle = makeStyles(uploadButtonStyle);
 
-const onFileChange = (file) => {
-  console.log(file);
-};
-
-const UploadButton = ({ title, name, ...otherProps }) => {
+const UploadButton = ({
+  type,
+  title,
+  handleUploadFile,
+  ...otherProps
+}) => {
   const classes = useStyle();
 
   return (
     <div className="w-100 h-100">
       <input
         className={classes.input}
-        accept="image/*"
+        accept={`${type}/*`}
         id="button-file"
         htmlFor="contained-button-file"
         type="file"
-        name={name}
-        onChange={(e) => onFileChange(e.target.files)}
+        onChange={handleUploadFile}
         {...otherProps}
       />
       <label htmlFor="button-file">
