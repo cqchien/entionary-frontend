@@ -5,36 +5,34 @@ import { setMessage } from "../redux/reducers/message.reducer";
 import { checkFileType } from "../helper/checkFileType";
 import { checkFileSize } from "../helper/checkFileSize";
 
-const FileUpload = ({ title, name, handleFile }) => {
+const FileUpload = ({ title, name, onChangeFile }) => {
   const dispatch = useDispatch();
 
   const handleUploadFile = (event, fileType) => {
     const file = event.target.files[0];
+
+    let message;
+
     if (!file) {
-      const fileNotFound = {
-        message: "File is invalid",
-        type: "error",
-      };
-      dispatch(setMessage(fileNotFound));
+      message = "File is invalid";
     } else {
       if (!checkFileType(file, fileType)) {
-        const fileTypeError = {
-          message: `File is not ${fileType}`,
-          type: "error",
-        };
-        dispatch(setMessage(fileTypeError));
+        message = `File is not ${fileType}`;
       }
-
       if (!checkFileSize(file, fileType)) {
-        const fileSizeError = {
-          message: "The maximum image size is 10 MB",
-          type: "error",
-        };
-        dispatch(setMessage(fileSizeError));
+        message = "The maximum image size is 10 MB";
       }
 
-      handleFile(file);
+      // transmit data to handle form
+      onChangeFile(file);
+      return;
     }
+
+    const failPayload = {
+      message,
+      type: "error",
+    };
+    dispatch(setMessage(failPayload));
   };
 
   return (

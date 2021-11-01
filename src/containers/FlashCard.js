@@ -12,11 +12,6 @@ const validationSchema = yup.object().shape({
 const FlashCard = ({ onCancel }) => {
   const [picture, setPicture] = useState("");
 
-  const handleFile = (file) => {
-    setPicture(file.name);
-    console.log("file", file);
-  };
-
   const handleCreateFlashCard = ({ name, mode, topic }) => {
     console.log(picture);
   };
@@ -27,7 +22,11 @@ const FlashCard = ({ onCancel }) => {
       onCancel={onCancel}
       handleCreateFlashCard={handleCreateFlashCard}
     >
-      <FileUpload title="Flashcard Picture" handleFile={handleFile} />
+      <FileUpload
+        title="Flashcard Picture"
+        name="picture"
+        onChangeFile={(file) => setPicture(file)}
+      />
     </DialogCreateFlashCard>
   );
 };
