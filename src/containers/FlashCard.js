@@ -1,6 +1,7 @@
 import React from "react";
 import DialogCreateFlashCard from "../components/DialogCreateFlashCard";
 import * as yup from "yup";
+import FileUpload from "./FileUpload";
 
 const validationSchema = yup.object().shape({
   name: yup.string().trim().required("Input Flashcard Name"),
@@ -9,10 +10,8 @@ const validationSchema = yup.object().shape({
 });
 
 const FlashCard = ({ onCancel }) => {
-  const handleCreateFlashCard = (event) => {
-    event.preventDefault();
-    const { target } = event;
-    console.log(target.mode?.value);
+  const handleCreateFlashCard = ({ name, mode, topic, picture = "" }) => {
+    console.log({ name, mode, topic, picture });
   };
 
   return (
@@ -20,7 +19,9 @@ const FlashCard = ({ onCancel }) => {
       validationSchema={validationSchema}
       onCancel={onCancel}
       handleCreateFlashCard={handleCreateFlashCard}
-    />
+    >
+      <FileUpload title="Flashcard Picture" name="picture" />
+    </DialogCreateFlashCard>
   );
 };
 

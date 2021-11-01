@@ -12,7 +12,6 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import SelectCustom from "../Custom/Select";
 import TextFieldCustom from "../Custom/TextField";
-import UploadButton from "../UploadButton";
 import { dialogMUIRoot } from "../globalStyle";
 
 const useStyle = makeStyles(dialogMUIRoot);
@@ -21,6 +20,7 @@ const DialogCreateFlashCard = ({
   validationSchema,
   onCancel,
   handleCreateFlashCard,
+  children,
 }) => {
   const classes = useStyle();
 
@@ -62,7 +62,7 @@ const DialogCreateFlashCard = ({
             </Grid>
 
             <Grid item xs={12} md={6}>
-              <UploadButton title="Flashcard Picture" name="picture" />
+              {children}
             </Grid>
 
             <Grid item xs={12} md={6}>
