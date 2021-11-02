@@ -9,7 +9,7 @@ const useStyle = makeStyles(uploadButtonStyle);
 const UploadButton = ({
   fileType,
   loading,
-  showImage,
+  imageAfterUpload,
   title,
   handleUploadFile,
   ...otherProps
@@ -17,28 +17,30 @@ const UploadButton = ({
   const classes = useStyle();
   return (
     <div className="w-100 h-100">
-      <>
-        <input
-          className={classes.input}
-          accept={`${fileType}/*`}
-          id="button-file"
-          htmlFor="contained-button-file"
-          type="file"
-          onChange={(event) => handleUploadFile(event, fileType)}
-          {...otherProps}
-        />
-        <label htmlFor="button-file">
-          <Button
-            className={`${classes.btn} w-100 h-100`}
-            variant="contained"
-            color="primary"
-            component="span"
-            endIcon={<CloudUploadRounded />}
-          >
-            {title}
-          </Button>
-        </label>
-      </>
+      {!loading && !imageAfterUpload && (
+        <>
+          <input
+            className={classes.input}
+            accept={`${fileType}/*`}
+            id="button-file"
+            htmlFor="contained-button-file"
+            type="file"
+            onChange={(event) => handleUploadFile(event, fileType)}
+            {...otherProps}
+          />
+          <label htmlFor="button-file">
+            <Button
+              className={`${classes.btn} w-100 h-100`}
+              variant="contained"
+              color="primary"
+              component="span"
+              endIcon={<CloudUploadRounded />}
+            >
+              {title}
+            </Button>
+          </label>
+        </>
+      )}
 
       {loading && (
         <Skeleton variant="rect" classes={{ root: classes.skeleton }} />
