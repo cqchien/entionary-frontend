@@ -48,8 +48,8 @@ const UploadButton = ({
 
       {image && (
         <div className={`${classes.review} w-100 h-100 flex-center-between`}>
-          <img src={image.imageUrl} alt="Flashcard" />
-          <p>{`${image.file.name} (${image.file.size} KB)`} </p>
+          <img src={image.source} alt="Flashcard" />
+          <p>{`${image.name} (${image.size} KB)`} </p>
           <DeleteForeverRounded className="icon cur-pointer" />
         </div>
       )}

@@ -5,7 +5,7 @@ import { setMessage } from "../redux/reducers/message.reducer";
 import { checkFileType } from "../helper/checkFileType";
 import { checkFileSize } from "../helper/checkFileSize";
 import Compressor from "compressorjs";
-import { uploadImageToFirebase } from "../helper/uploadImageToFirebase";
+import { readFile } from "../helper/readFile";
 
 const validateFile = (file, fileType) => {
   let status = true;
@@ -60,17 +60,23 @@ const FileUpload = ({ title, name, onChangeFile }) => {
       quality: 0.6,
 
       async success(fileCompress) {
-        // upload to firebase
-        const { error, data } = await uploadImageToFirebase(fileCompress);
+        // Transmit data to handle in form.
+        onChangeFile(fileCompress);
 
-        if (error) {
-          handleUploadFileError();
-        } else {
-          setLoading(false);
+        // Read File
+        try {
+          const contentOfImage = await readFile(fileCompress);
           // update data to display image
-          setImage({ file, imageUrl: data });
-          // Transmit data to handle in form.
-          onChangeFile(data);
+          const image = {
+            name: fileCompress.name,
+            size: fileCompress.size,
+            source: contentOfImage,
+          };
+          setImage(image);
+
+          setLoading(false);
+        } catch (error) {
+          handleUploadFileError();
         }
       },
 

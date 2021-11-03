@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import DialogCreateFlashCard from "../components/DialogCreateFlashCard";
 import * as yup from "yup";
 import FileUpload from "./FileUpload";
+import { uploadImageToFirebase } from "../helper/uploadImageToFirebase";
+import { useDispatch } from "react-redux";
+import { setMessage } from "../redux/reducers/message.reducer";
 
 const validationSchema = yup.object().shape({
   name: yup.string().trim().required("Input Flashcard Name"),
@@ -10,10 +13,21 @@ const validationSchema = yup.object().shape({
 });
 
 const FlashCard = ({ onCancel }) => {
-  const [picture, setPicture] = useState("");
+  const [image, setImage] = useState("");
+  const dispatch = useDispatch();
 
-  const handleCreateFlashCard = ({ name, mode, topic }) => {
-    console.log(picture);
+  const handleCreateFlashCard = async ({ name, mode, topic }) => {
+    // upload to firebase
+    const { error, data } = await uploadImageToFirebase(image);
+
+    if (error) {
+      const errorUploadPayload = {
+        message: "Upload image was fail",
+        type: "error",
+      };
+      return dispatch(setMessage(errorUploadPayload));
+    }
+
   };
 
   return (
@@ -25,7 +39,7 @@ const FlashCard = ({ onCancel }) => {
       <FileUpload
         title="Flashcard Picture"
         name="picture"
-        onChangeFile={(file) => setPicture(file)}
+        onChangeFile={(image) => setImage(image)}
       />
     </DialogCreateFlashCard>
   );
