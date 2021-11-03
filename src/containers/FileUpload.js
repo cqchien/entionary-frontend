@@ -24,6 +24,7 @@ const validateFile = (file, fileType) => {
 const FileUpload = ({ title, name, onChangeFile }) => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
+  const [image, setImage] = useState(null);
 
   const handleUploadFileError = () => {
     onChangeFile("");
@@ -53,18 +54,23 @@ const FileUpload = ({ title, name, onChangeFile }) => {
 
     setLoading(true);
 
+    // Compress file
+    // Transmit file with base64 format to handle file
     new Compressor(file, {
       quality: 0.6,
 
       async success(fileCompress) {
-        // upload to firebasse
+        // upload to firebase
         const { error, data } = await uploadImageToFirebase(fileCompress);
 
         if (error) {
           handleUploadFileError();
         } else {
-          onChangeFile(data);
           setLoading(false);
+          // update data to display image
+          setImage({ file, imageUrl: data });
+          // Transmit data to handle in form.
+          onChangeFile(data);
         }
       },
 
@@ -72,14 +78,13 @@ const FileUpload = ({ title, name, onChangeFile }) => {
         handleUploadFileError();
       },
     });
-    // Compress file
-    // Transmit file with base64 format to handle file
   };
 
   return (
     <UploadButton
       fileType={"image"}
       title={title}
+      image={image}
       loading={loading}
       handleUploadFile={handleUploadFile}
     />

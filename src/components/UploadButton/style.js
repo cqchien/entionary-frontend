@@ -28,8 +28,8 @@ const uploadButtonStyle = {
     borderRadius: "var(--sm-border-radius)",
 
     "& img": {
-      height: "5.4rem",
-      width: "5.4rem",
+      height: "4.5rem",
+      width: "4.5rem",
     },
 
     "& p": {

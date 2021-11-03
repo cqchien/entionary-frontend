@@ -1,5 +1,5 @@
 import { Button, makeStyles } from "@material-ui/core";
-import { CloudUploadRounded } from "@material-ui/icons";
+import { CloudUploadRounded, DeleteForeverRounded } from "@material-ui/icons";
 import React from "react";
 import uploadButtonStyle from "./style";
 import Skeleton from "@material-ui/lab/Skeleton";
@@ -9,7 +9,7 @@ const useStyle = makeStyles(uploadButtonStyle);
 const UploadButton = ({
   fileType,
   loading,
-  imageAfterUpload,
+  image,
   title,
   handleUploadFile,
   ...otherProps
@@ -17,7 +17,7 @@ const UploadButton = ({
   const classes = useStyle();
   return (
     <div className="w-100 h-100">
-      {!loading && !imageAfterUpload && (
+      {!loading && !image && (
         <>
           <input
             className={classes.input}
@@ -46,13 +46,13 @@ const UploadButton = ({
         <Skeleton variant="rect" classes={{ root: classes.skeleton }} />
       )}
 
-      {/* {showImage && (
+      {image && (
         <div className={`${classes.review} w-100 h-100 flex-center-between`}>
-          <img src={mgSrc} alt="photo" />
-          <p>{`${fileName} (${fileSize} MB)`} </p>
+          <img src={image.imageUrl} alt="Flashcard" />
+          <p>{`${image.file.name} (${image.file.size} KB)`} </p>
           <DeleteForeverRounded className="icon cur-pointer" />
         </div>
-      )} */}
+      )}
     </div>
   );
 };
