@@ -86,6 +86,10 @@ const FileUpload = ({ title, name, onChangeFile, loadingOfForm }) => {
     });
   };
 
+  const removeFile = () => {
+    setImage(null);
+  };
+
   return (
     <UploadButton
       fileType={"image"}
@@ -94,6 +98,7 @@ const FileUpload = ({ title, name, onChangeFile, loadingOfForm }) => {
       loading={loading}
       loadingOfForm={loadingOfForm}
       handleUploadFile={handleUploadFile}
+      removeFile={removeFile}
     />
   );
 };

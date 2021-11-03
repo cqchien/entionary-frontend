@@ -49,6 +49,8 @@ const FlashCard = ({ onCancel }) => {
         type: "success",
       };
       dispatch(setMessage(payloadSuccess));
+      
+      onCancel();
     } else {
       dispatch(setMessage(apiResponse));
     }

@@ -16,6 +16,7 @@ const UploadButton = ({
   title,
   handleUploadFile,
   loadingOfForm,
+  removeFile,
   ...otherProps
 }) => {
   const classes = useStyle();
@@ -53,7 +54,10 @@ const UploadButton = ({
         <div className={`${classes.review} w-100 h-100 flex-center-between`}>
           <img src={image.source} alt="Flashcard" />
           <p>{`${image.name} (${image.size} KB)`} </p>
-          <DeleteForeverRounded className="icon cur-pointer" />
+          <DeleteForeverRounded
+            className="icon cur-pointer"
+            onClick={removeFile}
+          />
         </div>
       )}
     </div>
