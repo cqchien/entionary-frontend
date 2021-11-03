@@ -5,6 +5,7 @@ import FileUpload from "./FileUpload";
 import { uploadImageToFirebase } from "../helper/uploadImageToFirebase";
 import { useDispatch } from "react-redux";
 import { setMessage } from "../redux/reducers/message.reducer";
+import { createFlashcard } from "../apis/flashcard";
 
 const validationSchema = yup.object().shape({
   name: yup.string().trim().required("Input Flashcard Name"),
@@ -14,9 +15,12 @@ const validationSchema = yup.object().shape({
 
 const FlashCard = ({ onCancel }) => {
   const [image, setImage] = useState("");
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
   const handleCreateFlashCard = async ({ name, mode, topic }) => {
+    setLoading(true);
+
     // upload to firebase
     const { error, data } = await uploadImageToFirebase(image);
 
@@ -27,7 +31,27 @@ const FlashCard = ({ onCancel }) => {
       };
       return dispatch(setMessage(errorUploadPayload));
     }
+    const paramsApi = {
+      name,
+      picture: data,
+      topicTitle: topic,
+      isPublic: mode === "PUBLIC" ? true : false,
+    };
 
+    const apiResponse = await createFlashcard(paramsApi);
+    const success = apiResponse?.success;
+
+    setLoading(false);
+
+    if (success) {
+      const payloadSuccess = {
+        message: "Create flashcard successfully",
+        type: "success",
+      };
+      dispatch(setMessage(payloadSuccess));
+    } else {
+      dispatch(setMessage(apiResponse));
+    }
   };
 
   return (
@@ -35,10 +59,12 @@ const FlashCard = ({ onCancel }) => {
       validationSchema={validationSchema}
       onCancel={onCancel}
       handleCreateFlashCard={handleCreateFlashCard}
+      loading={loading}
     >
       <FileUpload
         title="Flashcard Picture"
         name="picture"
+        loadingOfForm={loading}
         onChangeFile={(image) => setImage(image)}
       />
     </DialogCreateFlashCard>
