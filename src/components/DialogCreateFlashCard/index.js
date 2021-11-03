@@ -8,6 +8,7 @@ import {
   Grid,
   makeStyles,
 } from "@material-ui/core";
+import { Loop } from "@material-ui/icons";
 import React from "react";
 import { useForm } from "react-hook-form";
 import SelectCustom from "../Custom/Select";
@@ -21,6 +22,7 @@ const DialogCreateFlashCard = ({
   onCancel,
   handleCreateFlashCard,
   children,
+  loading,
 }) => {
   const classes = useStyle();
 
@@ -52,6 +54,7 @@ const DialogCreateFlashCard = ({
                 label="Flashcard Name*"
                 size="medium"
                 fullWidth
+                disabled={loading}
                 inputProps={{
                   ...register("name"),
                   autoFocus: true,
@@ -72,6 +75,7 @@ const DialogCreateFlashCard = ({
                 inputProps={{
                   ...register("topic"),
                 }}
+                disabled={loading}
                 menuItems={[{ name: "TOEIC" }, { name: "IELTS" }]}
                 error={Boolean(errors.topic)}
                 errorText={errors.topic?.message}
@@ -81,6 +85,7 @@ const DialogCreateFlashCard = ({
               <SelectCustom
                 formId="mode"
                 labelName="Display Mode*"
+                disabled={loading}
                 inputProps={{
                   ...register("mode"),
                 }}
@@ -106,9 +111,12 @@ const DialogCreateFlashCard = ({
           disableFocusRipple
           component="button"
           type="submit"
+          disabled={loading}
           form="formCreateFlashcard"
           className="_btn _btn-primary"
           variant="contained"
+          //Element placed after the children.
+          endIcon={loading && <Loop className="ani-spin" />}
         >
           Submit
         </Button>

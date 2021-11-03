@@ -1,8 +1,11 @@
 import { Button, makeStyles } from "@material-ui/core";
-import { CloudUploadRounded, DeleteForeverRounded } from "@material-ui/icons";
+import {
+  CloudUploadRounded,
+  DeleteForeverRounded,
+  Loop,
+} from "@material-ui/icons";
 import React from "react";
 import uploadButtonStyle from "./style";
-import Skeleton from "@material-ui/lab/Skeleton";
 
 const useStyle = makeStyles(uploadButtonStyle);
 
@@ -12,6 +15,7 @@ const UploadButton = ({
   image,
   title,
   handleUploadFile,
+  loadingOfForm,
   ...otherProps
 }) => {
   const classes = useStyle();
@@ -25,6 +29,7 @@ const UploadButton = ({
             id="button-file"
             htmlFor="contained-button-file"
             type="file"
+            disabled={loadingOfForm}
             onChange={(event) => handleUploadFile(event, fileType)}
             {...otherProps}
           />
@@ -34,16 +39,14 @@ const UploadButton = ({
               variant="contained"
               color="primary"
               component="span"
-              endIcon={<CloudUploadRounded />}
+              endIcon={
+                loading ? <Loop className="ani-spin" /> : <CloudUploadRounded />
+              }
             >
               {title}
             </Button>
           </label>
         </>
-      )}
-
-      {loading && (
-        <Skeleton variant="rect" classes={{ root: classes.skeleton }} />
       )}
 
       {image && (

@@ -21,7 +21,7 @@ const validateFile = (file, fileType) => {
   return { status };
 };
 
-const FileUpload = ({ title, name, onChangeFile }) => {
+const FileUpload = ({ title, name, onChangeFile, loadingOfForm }) => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [image, setImage] = useState(null);
@@ -92,6 +92,7 @@ const FileUpload = ({ title, name, onChangeFile }) => {
       title={title}
       image={image}
       loading={loading}
+      loadingOfForm={loadingOfForm}
       handleUploadFile={handleUploadFile}
     />
   );
