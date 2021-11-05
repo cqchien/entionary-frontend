@@ -29,7 +29,7 @@ const galleryItemStyle = (theme) => ({
     },
 
     "&:hover .background": {
-      transform: "scale(1.1)",
+      transform: "scale(1.3)",
     },
   },
 
@@ -42,35 +42,35 @@ const galleryItemStyle = (theme) => ({
     },
   },
 
-  mean: {
-    fontSize: "1.8rem",
+  title: {
+    fontSize: "2rem",
     fontWeight: "bold",
     textTransform: "capitalize",
 
     [theme.breakpoints.up("md")]: {
-      fontSize: "2.2rem",
+      fontSize: "2.5rem",
     },
   },
 
-  word: {
-    fontSize: "1.7rem",
+  name: {
+    fontSize: "1rem",
     fontWeight: 500,
     letterSpacing: "1px",
     margin: "0.2rem 0",
     textTransform: "capitalize",
 
     [theme.breakpoints.up("md")]: {
-      fontSize: "2rem",
+      fontSize: "1.5rem",
     },
   },
 
-  phonetic: {
-    fontSize: "1.4rem",
+  option: {
+    fontSize: "1rem",
     letterSpacing: "1px",
     fontStyle: "italic",
 
     [theme.breakpoints.up("md")]: {
-      fontSize: "1.5rem",
+      fontSize: "1rem",
     },
   },
 });
