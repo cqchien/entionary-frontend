@@ -13,7 +13,7 @@ const validationSchema = yup.object().shape({
   mode: yup.string().required("Input Mode"),
 });
 
-const FlashCard = ({ onCancel }) => {
+const FlashCardDialog = ({ onCancel }) => {
   const [image, setImage] = useState("");
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
@@ -73,4 +73,4 @@ const FlashCard = ({ onCancel }) => {
   );
 };
 
-export default FlashCard;
+export default FlashCardDialog;
