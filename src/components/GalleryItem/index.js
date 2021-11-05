@@ -6,7 +6,6 @@ const useStyle = makeStyles(flashcardItemStyle);
 
 const GalleryItem = ({ name, picture, topic, mode }) => {
   const classes = useStyle({ picture });
-  console.log(picture);
   return (
     <div
       className={`${classes.root} flex-center cur-pointer position-rel`}

@@ -1,4 +1,5 @@
 import React from "react";
+import { Route } from "react-router";
 import { ROUTES } from "../constant/routePath";
 
 const LoginPage = React.lazy(() => import("../pages/Login"));
@@ -7,7 +8,7 @@ const HomePage = React.lazy(() => import("../pages/Home"));
 const ForgetPasswordPage = React.lazy(() => import("../pages/ForgetPassword"));
 const FlashcardPage = React.lazy(() => import("../pages/Flashcard.js"));
 
-export const routes = [
+const routes = [
   {
     path: ROUTES.HOME,
     exact: true,
@@ -32,6 +33,28 @@ export const routes = [
   {
     path: ROUTES.FLASHCARD,
     exact: true,
+    protect: true,
     component: () => <FlashcardPage />,
   },
 ];
+
+const extractRoutes = (routes, isLogin = false) => {
+  return routes.map((route, index) => {
+    const { path, exact, component, protect } = route;
+    let renderComponent = component;
+
+    if (protect && !isLogin) {
+      renderComponent = () => <LoginPage />;
+    }
+    return (
+      <Route
+        path={path}
+        exact={exact}
+        key={index}
+        component={renderComponent}
+      />
+    );
+  });
+};
+
+export { routes, extractRoutes };
