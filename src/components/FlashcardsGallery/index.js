@@ -1,5 +1,6 @@
 import { makeStyles } from "@material-ui/core";
 import React from "react";
+import Loading from "../Custom/Loading";
 import GalleryItem from "../GalleryItem";
 import galleryStyle from "./style";
 
@@ -18,18 +19,27 @@ const groupFlashcard = (flashcardArr, numberFlashcardInGroup) => {
   return groups;
 };
 
-const FlashcardsGallery = ({ flashcardArr }) => {
+const FlashcardsGallery = ({ loading, flashcardArr, pagination }) => {
   const classes = useStyle();
   const groups = groupFlashcard(flashcardArr, 7);
   return (
     <>
-      {groups.map((groupFlashcard, indexGroup) => (
-        <div className={`${classes.root} entionary-container`} key={indexGroup}>
-          {groupFlashcard.map((flashcard, index) => (
-            <GalleryItem key={index} {...flashcard} />
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          {groups.map((groupFlashcard, indexGroup) => (
+            <div
+              className={`${classes.root} entionary-container`}
+              key={indexGroup}
+            >
+              {groupFlashcard.map((flashcard, index) => (
+                <GalleryItem key={index} {...flashcard} />
+              ))}
+            </div>
           ))}
-        </div>
-      ))}
+        </>
+      )}
     </>
   );
 };

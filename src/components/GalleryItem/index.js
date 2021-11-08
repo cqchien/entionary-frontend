@@ -4,7 +4,7 @@ import flashcardItemStyle from "./style";
 
 const useStyle = makeStyles(flashcardItemStyle);
 
-const GalleryItem = ({ name, picture, topic, mode }) => {
+const GalleryItem = ({ name, picture, topic, isPublic }) => {
   const classes = useStyle({ picture });
   return (
     <div
@@ -14,8 +14,8 @@ const GalleryItem = ({ name, picture, topic, mode }) => {
       <div className="background" />
       <div className={classes.content}>
         <h2 className={classes.title}>{name}</h2>
-        <h2 className={classes.name}>{topic}</h2>
-        <p className={classes.option}>/{mode}/</p>
+        <h2 className={classes.name}>{topic.title}</h2>
+        <p className={classes.option}>/{isPublic ? "Public" : "Private"}/</p>
       </div>
     </div>
   );
