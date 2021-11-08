@@ -1,6 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 import messageReducer from "./reducers/message.reducer";
 import userReducer from "./reducers/user.reducer";
+import flashcardReducer from "./reducers/flashcard.reducer";
+
 // Về cú pháp thì không khác voi createStore() trong redux?
 // Tuy nhiên thay vì chỉ khởi tạo một store đơn thuần, configureStore sẽ mặc định thiết lập cho phép sử dụng redux devtool để debug và theo dõi quá trình cập nhật state cũng như thiết lập sẵn một số middleware.
 
@@ -10,6 +12,7 @@ const store = configureStore({
   reducer: {
     message: messageReducer,
     user: userReducer,
+    flashcard: flashcardReducer,
   },
 });
 

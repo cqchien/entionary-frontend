@@ -7,4 +7,13 @@ const createFlashcard = (params) => {
   });
 };
 
-export { createFlashcard };
+const getAllFlashcards = (params) => {
+  return request(
+    `/flashcard?page=${params.page}&take=${params.take}&sortBy=${params.sortBy}`,
+    {
+      method: "GET",
+    }
+  );
+};
+
+export { createFlashcard, getAllFlashcards };
