@@ -70,7 +70,7 @@ const galleryItemStyle = (theme) => ({
     fontStyle: "italic",
 
     [theme.breakpoints.up("md")]: {
-      fontSize: "1rem",
+      fontSize: "1.3rem",
     },
   },
 });

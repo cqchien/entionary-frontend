@@ -1,4 +1,4 @@
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, Tooltip } from "@material-ui/core";
 import React from "react";
 import Loading from "../Custom/Loading";
 import GalleryItem from "../GalleryItem";
@@ -38,6 +38,22 @@ const FlashcardsGallery = ({ loading, flashcardArr, pagination }) => {
               ))}
             </div>
           ))}
+          {pagination.hasPreviousPage && (
+            <Tooltip title="Back">
+              <span
+                className="nav-arrow prev"
+                onClick={() => console.log("back")}
+              />
+            </Tooltip>
+          )}
+          {pagination.hasNextPage && (
+            <Tooltip title="Next">
+              <span
+                className="nav-arrow next"
+                onClick={() => console.log("next")}
+              />
+            </Tooltip>
+          )}
         </>
       )}
     </>

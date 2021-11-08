@@ -59,7 +59,7 @@
 
   &::before {
     position: absolute;
-    content: '';
+    content: "";
     width: 35%;
     left: 0;
     top: 50%;
@@ -69,7 +69,7 @@
 
   &::after {
     position: absolute;
-    content: '';
+    content: "";
     width: 35%;
     right: 0;
     top: 50%;
@@ -216,7 +216,7 @@
   border-radius: 25px;
 
   &::before {
-    content: '';
+    content: "";
     height: 3rem;
     width: 3rem;
     background-color: var(--secondary-color);
@@ -275,12 +275,12 @@
   }
 
   &.prev {
-    left: 0;
+    left: 50px;
     border-right: 1.8rem solid var(--primary-color);
   }
 
   &.next {
-    right: 0;
+    right: 50px;
     border-left: 1.8rem solid var(--primary-color);
   }
 }
