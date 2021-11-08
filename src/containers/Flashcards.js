@@ -3,7 +3,7 @@ import FlashcardsGallery from "../components/FlashcardsGallery";
 import { useDispatch, useSelector } from "react-redux";
 import { getFlashcards } from "../redux/reducers/flashcard.reducer";
 
-const Flashcards = () => {
+const Flashcards = ({ isRerender }) => {
   const dispatch = useDispatch();
   const { loading, flashcards, pagination } = useSelector(
     (state) => state.flashcard
@@ -18,7 +18,7 @@ const Flashcards = () => {
   useEffect(() => {
     dispatch(getFlashcards(paginateOptions));
     return () => {};
-  }, [dispatch, paginateOptions]);
+  }, [dispatch, paginateOptions, isRerender]);
 
   return (
     <FlashcardsGallery

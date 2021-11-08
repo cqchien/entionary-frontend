@@ -6,7 +6,7 @@ import Flashcards from "../containers/Flashcards";
 
 const FlashcardPage = () => {
   const [isOpenWordPack, setOpenWordPack] = useState(false);
-
+  const [isRerender, setRerender] = useState(false);
   const toolTips = [
     {
       title: "Create FlashCard",
@@ -22,11 +22,14 @@ const FlashcardPage = () => {
       </div>
       <div className="entionary-break" />
 
-      <Flashcards />
+      <Flashcards isRerender={isRerender} />
 
       {/* Dialog to create new flashcard */}
       {isOpenWordPack && (
-        <FlashCardDialog onCancel={() => setOpenWordPack(false)} />
+        <FlashCardDialog
+          onCancel={() => setOpenWordPack(false)}
+          isRerender={() => setRerender(true)}
+        />
       )}
     </div>
   );

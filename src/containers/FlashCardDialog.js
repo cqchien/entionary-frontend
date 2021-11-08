@@ -13,7 +13,7 @@ const validationSchema = yup.object().shape({
   mode: yup.string().required("Input Mode"),
 });
 
-const FlashCardDialog = ({ onCancel }) => {
+const FlashCardDialog = ({ onCancel, isRerender }) => {
   const [image, setImage] = useState("");
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
@@ -49,8 +49,9 @@ const FlashCardDialog = ({ onCancel }) => {
         type: "success",
       };
       dispatch(setMessage(payloadSuccess));
-      
+
       onCancel();
+      isRerender();
     } else {
       dispatch(setMessage(apiResponse));
     }
