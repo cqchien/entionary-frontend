@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import FlashcardsGallery from "../components/FlashcardsGallery";
 import { useDispatch, useSelector } from "react-redux";
 import { getFlashcards } from "../redux/reducers/flashcard.reducer";
+import FlashcardDetail from "./FlashcardDetail";
 
 const Flashcards = ({ isRerender }) => {
   const dispatch = useDispatch();
@@ -36,10 +37,13 @@ const Flashcards = ({ isRerender }) => {
     <FlashcardsGallery
       loading={loading}
       pagination={pagination}
-      flashcardArr={flashcards}
       handleNextPage={handleNextPage}
       handlePrevPage={handlePrevPage}
-    />
+    >
+      {flashcards?.map((flashcard, index) => (
+        <FlashcardDetail key={index} {...flashcard} />
+      ))}
+    </FlashcardsGallery>
   );
 };
 

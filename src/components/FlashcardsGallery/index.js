@@ -1,17 +1,16 @@
 import { makeStyles, Tooltip } from "@material-ui/core";
 import React from "react";
 import Loading from "../Custom/Loading";
-import GalleryItem from "../GalleryItem";
 import galleryStyle from "./style";
 
 const useStyle = makeStyles(galleryStyle);
 
 const FlashcardsGallery = ({
   loading,
-  flashcardArr,
   pagination,
   handleNextPage,
   handlePrevPage,
+  children,
 }) => {
   const classes = useStyle();
   return (
@@ -21,9 +20,7 @@ const FlashcardsGallery = ({
       ) : (
         <>
           <div className={`${classes.root} entionary-container`}>
-            {flashcardArr.map((flashcard, index) => (
-              <GalleryItem key={index} {...flashcard} />
-            ))}
+            {children}
           </div>
           ))
           {pagination.hasPreviousPage && (

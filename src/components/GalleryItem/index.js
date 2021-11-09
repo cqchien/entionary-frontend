@@ -4,12 +4,20 @@ import flashcardItemStyle from "./style";
 
 const useStyle = makeStyles(flashcardItemStyle);
 
-const GalleryItem = ({ name, picture, topic, isPublic, stars }) => {
+const GalleryItem = ({
+  name,
+  picture,
+  topic,
+  isPublic,
+  stars,
+  _id,
+  handleGetDetail,
+}) => {
   const classes = useStyle({ picture });
   return (
     <div
       className={`${classes.root} flex-center cur-pointer position-rel`}
-      onClick={() => console.log("speak")}
+      onClick={() => handleGetDetail(_id)}
     >
       <div className="background" />
       <div className={classes.content}>
