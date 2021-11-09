@@ -10,7 +10,7 @@ const WordsSlide = ({ words }) => {
   return (
     <div className={`${classes.wrapper} flex-center--ver position-rel`}>
       {words.map((word) => (
-        <SlideItem {...word} key={word.id} />
+        <SlideItem {...word} key={word._id} />
       ))}
     </div>
   );
