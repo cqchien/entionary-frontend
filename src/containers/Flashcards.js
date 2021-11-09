@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 import FlashcardsGallery from "../components/FlashcardsGallery";
-import { useDispatch, useSelector } from "react-redux";
-import { getFlashcards } from "../redux/reducers/flashcard.reducer";
+import { useDispatch } from "react-redux";
 import FlashcardItem from "./FlashcardItem";
+import { getAllFlashcards } from "../apis/flashcard";
+import { setMessage } from "../redux/reducers/message.reducer";
 
 const Flashcards = ({ isRerender }) => {
   const dispatch = useDispatch();
-  const { loading, flashcards, pagination } = useSelector(
-    (state) => state.flashcard
-  );
+  const [loading, setLoading] = useState(false);
+  const [data, updateData] = useState({
+    flashcards: [],
+    pagination: {},
+  });
 
   const [paginateOptions, setPaginateOption] = useState({
     page: 1,
@@ -17,7 +20,24 @@ const Flashcards = ({ isRerender }) => {
   });
 
   useEffect(() => {
-    dispatch(getFlashcards(paginateOptions));
+    setLoading(true);
+
+    const getFlashcards = async (paginateOptions) => {
+      const apiResponse = await getAllFlashcards(paginateOptions);
+      const success = apiResponse?.success;
+      if (success) {
+        updateData({
+          flashcards: apiResponse.data.flashcards,
+          pagination: apiResponse.pagination,
+        });
+      } else {
+        dispatch(setMessage(apiResponse));
+      }
+    };
+
+    getFlashcards(paginateOptions);
+
+    setLoading(false);
     return () => {};
   }, [dispatch, paginateOptions, isRerender]);
 
@@ -36,11 +56,11 @@ const Flashcards = ({ isRerender }) => {
   return (
     <FlashcardsGallery
       loading={loading}
-      pagination={pagination}
+      pagination={data.pagination}
       handleNextPage={handleNextPage}
       handlePrevPage={handlePrevPage}
     >
-      {flashcards?.map((flashcard, index) => (
+      {data.flashcards?.map((flashcard, index) => (
         <FlashcardItem key={index} {...flashcard} />
       ))}
     </FlashcardsGallery>
