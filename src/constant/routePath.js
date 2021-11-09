@@ -6,6 +6,7 @@ export const ROUTES = {
   LOGOUT: "/logout",
   PROFILE: "/profile",
   FLASHCARD: "/flashcard",
+  FLASHCARD_DETAIL: "/flashcard/:id"
 };
 
 export const LINKS = {

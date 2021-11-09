@@ -7,6 +7,9 @@ const RegisterPage = React.lazy(() => import("../pages/Register"));
 const HomePage = React.lazy(() => import("../pages/Home"));
 const ForgetPasswordPage = React.lazy(() => import("../pages/ForgetPassword"));
 const FlashcardPage = React.lazy(() => import("../pages/Flashcard.js"));
+const FlashcardDetailPage = React.lazy(() =>
+  import("../pages/FlashcardDetail")
+);
 
 const routes = [
   {
@@ -29,12 +32,17 @@ const routes = [
     exact: true,
     component: () => <ForgetPasswordPage />,
   },
-
   {
     path: ROUTES.FLASHCARD,
     exact: true,
     protect: true,
     component: () => <FlashcardPage />,
+  },
+  {
+    path: ROUTES.FLASHCARD_DETAIL,
+    exact: true,
+    protect: true,
+    component: () => <FlashcardDetailPage />,
   },
 ];
 
