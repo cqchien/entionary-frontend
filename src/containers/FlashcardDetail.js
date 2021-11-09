@@ -16,18 +16,17 @@ const FlashcardDetail = () => {
     setLoading(true);
     const getDetailFlashcard = async () => {
       const apiResponse = await getOneFlashcards(id);
-      console.log(apiResponse);
       const success = apiResponse?.success;
       const flashcard = apiResponse?.data?.flashcard;
       if (success) {
         updateWords(flashcard.words);
+        setLoading(false);
       } else {
         dispatch(setMessage(apiResponse));
       }
     };
 
     getDetailFlashcard();
-    setLoading(false);
 
     return () => {};
   }, [dispatch, id]);

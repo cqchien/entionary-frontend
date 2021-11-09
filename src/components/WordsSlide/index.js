@@ -11,7 +11,11 @@ const WordsSlide = ({ words, loading }) => {
   return (
     <div className={`${classes.wrapper} flex-center--ver position-rel`}>
       {!loading ? (
-        words?.map((word) => <SlideItem {...word} key={word._id} />)
+        words.length === 0 ? (
+          <p className="entionary-title m-auto">No Data</p>
+        ) : (
+          words.map((word) => <SlideItem {...word} key={word._id} />)
+        )
       ) : (
         <Skeleton
           variant="rect"

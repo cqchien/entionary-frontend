@@ -30,6 +30,7 @@ const Flashcards = ({ isRerender }) => {
           flashcards: apiResponse.data.flashcards,
           pagination: apiResponse.pagination,
         });
+        setLoading(false);
       } else {
         dispatch(setMessage(apiResponse));
       }
@@ -37,7 +38,6 @@ const Flashcards = ({ isRerender }) => {
 
     getFlashcards(paginateOptions);
 
-    setLoading(false);
     return () => {};
   }, [dispatch, paginateOptions, isRerender]);
 
