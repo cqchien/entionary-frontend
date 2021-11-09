@@ -16,4 +16,10 @@ const getAllFlashcards = (params) => {
   );
 };
 
-export { createFlashcard, getAllFlashcards };
+const getOneFlashcards = (params) => {
+  return request(`/flashcard/${params}`, {
+    method: "GET",
+  });
+};
+
+export { createFlashcard, getAllFlashcards, getOneFlashcards };
