@@ -20,11 +20,25 @@ const Flashcards = ({ isRerender }) => {
     return () => {};
   }, [dispatch, paginateOptions, isRerender]);
 
+  const handleNextPage = () => {
+    return setPaginateOption((prevState) => {
+      return { ...prevState, page: prevState.page + 1 };
+    });
+  };
+
+  const handlePrevPage = () => {
+    return setPaginateOption((prevState) => {
+      return { ...prevState, page: prevState.page - 1 };
+    });
+  };
+
   return (
     <FlashcardsGallery
       loading={loading}
       pagination={pagination}
       flashcardArr={flashcards}
+      handleNextPage={handleNextPage}
+      handlePrevPage={handlePrevPage}
     />
   );
 };
