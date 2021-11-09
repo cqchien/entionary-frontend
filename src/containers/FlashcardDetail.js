@@ -1,19 +1,21 @@
-import { useHistory } from "react-router";
-import GalleryItem from "../components/GalleryItem";
-import { ROUTES } from "../constant/routePath";
+import { useParams } from "react-router";
+import WordsSlide from "../components/WordsSlide";
 
-const FlashcardDetail = (flashcardInfo) => {
-  const history = useHistory();
-  const handleGetDetailFlashcard = (id) => {
-    history.push(`${ROUTES.FLASHCARD}/${id}`);
-  };
-
-  return (
-    <GalleryItem
-      {...flashcardInfo}
-      handleGetDetail={handleGetDetailFlashcard}
-    />
-  );
+const FlashcardDetail = () => {
+  const { id } = useParams();
+  console.log(id);
+  const words = [
+    {
+      _id: "213",
+      word: "House",
+      mean: "Nha",
+      type: "Noun",
+      phonetic: "asd",
+      example: "das",
+      picture: " ",
+    },
+  ];
+  return <WordsSlide words={words} />;
 };
 
 export default FlashcardDetail;

@@ -1,10 +1,10 @@
 import React from "react";
-import WordsInFlashcard from "../containers/WordsInFlashcard";
+import FlashcardDetail from "../containers/FlashcardDetail";
 
 const FlashcardDetailPage = () => {
   return (
     <div className="container my-10">
-      <WordsInFlashcard />
+      <FlashcardDetail />
     </div>
   );
 };
