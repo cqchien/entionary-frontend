@@ -1,5 +1,6 @@
 import { makeStyles } from "@material-ui/core";
 import React from "react";
+import SpeakerIcon from "../Speaker";
 import slideItemStyle from "./style";
 
 const useStyle = makeStyles(slideItemStyle);
@@ -13,6 +14,7 @@ const SlideItem = ({ mean, word, type, phonetic, example, picture }) => {
       <div className={`${classes.content} flex-center-col`}>
         <h3 className={`${classes.word} flex-center--ver`}>
           <span>{word}</span>
+          <SpeakerIcon text={word} />
         </h3>
         <h2 className={classes.mean}>Mean: {mean}</h2>
         {type && <p className={classes.type}>({type})</p>}
