@@ -15,7 +15,7 @@ const FlashcardPage = () => {
   ];
 
   return (
-    <div className="container my-10">
+    <div className="container my-5">
       <div className="flex-center-between">
         <h1 className="entionary-title">Flashcards</h1>
         <IconWrap toolTips={toolTips} />

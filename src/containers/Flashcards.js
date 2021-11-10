@@ -25,15 +25,16 @@ const Flashcards = ({ isRerender }) => {
     const getFlashcards = async (paginateOptions) => {
       const apiResponse = await getAllFlashcards(paginateOptions);
       const success = apiResponse?.success;
+      
       if (success) {
         updateData({
           flashcards: apiResponse.data.flashcards,
           pagination: apiResponse.pagination,
         });
-        setLoading(false);
       } else {
         dispatch(setMessage(apiResponse));
       }
+      setLoading(false);
     };
 
     getFlashcards(paginateOptions);
