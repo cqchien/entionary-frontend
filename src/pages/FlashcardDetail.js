@@ -5,7 +5,7 @@ import FlashcardDetail from "../containers/FlashcardDetail";
 
 const toolTips = [
   {
-    title: "Create FlashCard",
+    title: "Add New Word",
     icon: <AddCircleOutlineOutlined />,
   },
 ];

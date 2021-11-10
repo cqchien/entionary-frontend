@@ -66,7 +66,7 @@ const slideItemStyle = (theme) => ({
     textTransform: "capitalize",
 
     [theme.breakpoints.up("md")]: {
-      fontSize: "3rem",
+      fontSize: "2.5rem",
     },
   },
 
@@ -76,7 +76,7 @@ const slideItemStyle = (theme) => ({
     color: "var(--text-color)",
     textTransform: "capitalize",
     [theme.breakpoints.up("md")]: {
-      fontSize: "2.8rem",
+      fontSize: "3rem",
     },
   },
 
