@@ -6,7 +6,7 @@ import { loginWithEmail } from "../apis/account";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading, setMessage } from "../redux/reducers/message.reducer";
 import { setToken } from "../apis/authority";
-import { useHistory } from "react-router";
+import { Redirect, useHistory } from "react-router";
 
 const schema = yup.object().shape({
   email: yup.string().trim().required("Input Email").email("Email is invalid"),
@@ -26,7 +26,10 @@ const Login = () => {
 
   // Check if user logged in, user cannot access login page
   if (email) {
-    history.push("/");
+    // dont use history.push because it will move when component is rendering. 
+    // dont change state when rendering
+    return <Redirect to={ROUTES.HOME} />;
+
   }
 
   const handleLogin = async (account) => {
@@ -44,7 +47,6 @@ const Login = () => {
       dispatch(setMessage(payloadSuccess));
       // Because 3000s for show message
       setTimeout(() => {
-        setLoading(false);
         // Neu dung history.push thi useEffect o file App.js se khong chay lai. De useEffect do chay lai thi can load lai trang.
         // history.push(ROUTES.HOME);
         window.location.href = "/";

@@ -4,7 +4,7 @@ import RegisterForm from "../components/Register";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading, setMessage } from "../redux/reducers/message.reducer";
 import SocialNetworkLogin from "../components/SocialNetwork";
-import { useHistory } from "react-router";
+import { Redirect, useHistory } from "react-router";
 import { ROUTES } from "../constant/routePath";
 
 const schema = yup.object().shape({
@@ -32,7 +32,7 @@ function Register() {
 
   // Check if user logged in, user cannot access register page
   if (email) {
-    history.push("/");
+    return <Redirect to={ROUTES.HOME} />;
   }
 
   const handleRegister = async (account) => {
@@ -48,7 +48,6 @@ function Register() {
       dispatch(setMessage(payloadSuccess));
       // Because 1000s for show message
       setTimeout(() => {
-        setLoading(false);
         history.push(ROUTES.LOGIN);
       }, 1000);
     } else {
