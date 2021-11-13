@@ -28,6 +28,7 @@ const Login = () => {
   if (email) {
     // dont use history.push because it will move when component is rendering. 
     // dont change state when rendering
+    // if you want to use history.push -> put condition to useEffect();
     return <Redirect to={ROUTES.HOME} />;
 
   }
