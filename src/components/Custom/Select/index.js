@@ -17,6 +17,7 @@ const SelectCustom = ({
   labelName,
   inputProps,
   error,
+  onChange,
   errorText,
   ...otherProps
 }) => {
@@ -53,7 +54,10 @@ const SelectCustom = ({
           labelId={formId}
           value={value}
           label={labelName}
-          onChange={handleChange}
+          onChange={(e) => {
+            handleChange(e);
+            onChange(e);
+          }}
           inputProps={inputProps}
           {...otherProps}
         >
