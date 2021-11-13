@@ -20,9 +20,15 @@ const useStyle = makeStyles(dialogMUIRoot);
 const DialogAddWordFlashCard = ({
   validationSchema,
   onCancel,
-  handleCreateFlashCard,
-  children,
+  handleAddWord,
+  handleQueryWord,
+  handleQueryType,
+  handleQueryCategory,
+  categories,
+  types,
+  definition,
   loading,
+  children,
 }) => {
   const classes = useStyle();
 
@@ -40,27 +46,28 @@ const DialogAddWordFlashCard = ({
       open={true}
     >
       {/* Dialog Title */}
-      <DialogTitle classes={{ root: classes.title }}>Flashcard</DialogTitle>
+      <DialogTitle classes={{ root: classes.title }}>Word</DialogTitle>
 
       {/* Dialog Content */}
       <DialogContent dividers classes={{ dividers: classes.breakLine }}>
         <form
-          id="formCreateFlashcard"
-          onSubmit={handleSubmit(handleCreateFlashCard)}
+          id="formAddWordToFlashcard"
+          onSubmit={handleSubmit(handleAddWord)}
         >
           <Grid container spacing={3}>
             <Grid item xs={12} md={6}>
               <TextFieldCustom
-                label="Flashcard Name*"
+                label="Word*"
                 size="medium"
                 fullWidth
                 disabled={loading}
                 inputProps={{
-                  ...register("name"),
+                  ...register("word"),
                   autoFocus: true,
                 }}
-                error={Boolean(errors.name)}
-                helperText={errors.name?.message}
+                onChange={handleQueryWord}
+                error={Boolean(errors.word)}
+                helperText={errors.word?.message}
               />
             </Grid>
 
@@ -70,29 +77,34 @@ const DialogAddWordFlashCard = ({
 
             <Grid item xs={12} md={6}>
               <SelectCustom
-                formId="topic"
-                labelName="Topic*"
+                formId="type"
+                labelName="Word Type*"
                 inputProps={{
-                  ...register("topic"),
+                  ...register("type"),
                 }}
                 disabled={loading}
-                menuItems={[{ name: "TOEIC" }, { name: "IELTS" }]}
-                error={Boolean(errors.topic)}
-                errorText={errors.topic?.message}
+                menuItems={types}
+                onChange={handleQueryType}
+                error={Boolean(errors.type)}
+                errorText={errors.type?.message}
               />
             </Grid>
             <Grid item xs={12} md={6}>
               <SelectCustom
-                formId="mode"
-                labelName="Display Mode*"
+                formId="category"
+                labelName="Category*"
                 disabled={loading}
                 inputProps={{
-                  ...register("mode"),
+                  ...register("category"),
                 }}
-                menuItems={[{ name: "Private" }, { name: "Public" }]}
-                error={Boolean(errors.mode)}
-                errorText={errors.mode?.message}
+                onChange={handleQueryCategory}
+                menuItems={categories}
+                error={Boolean(errors.category)}
+                errorText={errors.category?.message}
               />
+            </Grid>
+            <Grid item xs={12} md={12}>
+              <p className="entionary-title" style={{fontSize: "17px"}} >Definition: {definition}</p>
             </Grid>
           </Grid>
         </form>
@@ -112,7 +124,7 @@ const DialogAddWordFlashCard = ({
           component="button"
           type="submit"
           disabled={loading}
-          form="formCreateFlashcard"
+          form="formAddWordToFlashcard"
           className="_btn _btn-primary"
           variant="contained"
           //Element placed after the children.
