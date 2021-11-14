@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setLoading, setMessage } from "../redux/reducers/message.reducer";
 import { setToken } from "../apis/authority";
 import { Redirect, useHistory } from "react-router";
+import { ROUTES } from "../constant/routePath";
 
 const schema = yup.object().shape({
   email: yup.string().trim().required("Input Email").email("Email is invalid"),
@@ -22,7 +23,6 @@ const Login = () => {
   const { email } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
-  const history = useHistory();
 
   // Check if user logged in, user cannot access login page
   if (email) {

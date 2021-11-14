@@ -6,6 +6,7 @@ import DialogAddWordFlashCard from "../components/DialogAddWordToFlashcard";
 import { searchWord } from "../apis/wordsApi";
 import { setMessage } from "../redux/reducers/message.reducer";
 import searchOnChange from "../helper/searchOnChange";
+import { uploadImageToFirebase } from "../helper/uploadImageToFirebase";
 
 const validationSchema = yup.object().shape({
   // name: yup.string().trim().required("Input Flashcard Name"),
@@ -22,6 +23,15 @@ const WordDialog = ({ onCancel, isRerender }) => {
   const [types, updateTypes] = useState([]);
   const [categories, setCategories] = useState([]);
   const [definition, updateDefinition] = useState([]);
+  const [wordChoice, updateWord] = useState({
+    word: "",
+    pronunciation: "",
+    antonyms: [],
+    synonyms: [],
+    definition: "",
+    partOfSpeech: "",
+    examples: [],
+  });
   let timer = null;
 
   const querySearchWord = async (word) => {
@@ -31,8 +41,13 @@ const WordDialog = ({ onCancel, isRerender }) => {
     setLoading(true);
     try {
       const apiResponse = await searchWord(word);
-      const { results } = apiResponse.data;
+      const { results, pronunciation } = apiResponse.data;
 
+      updateWord((state) => ({
+        ...state,
+        word,
+        pronunciation: pronunciation.all,
+      }));
       updateWordQueryResults(results);
       let wordType = [];
       results.forEach((word) => {
@@ -87,27 +102,46 @@ const WordDialog = ({ onCancel, isRerender }) => {
         word.typeOf.every((value, index) => value === categoryArr[index])
       );
     });
+    const { antonyms, definition, partOfSpeech, examples, synonyms } =
+      wordWithSpecificCategory[0];
 
+    updateWord((state) => ({
+      ...state,
+      antonyms,
+      definition,
+      partOfSpeech,
+      examples,
+      synonyms,
+    }));
     updateDefinition(wordWithSpecificCategory[0].definition);
   };
 
-  const handleAddWord = async (data) => {
-    console.log(data);
-    setLoading(true);
-    const apiResponse = await searchWord("house");
-    console.log(apiResponse);
-    setLoading(false);
-
-    if (apiResponse === 200) {
-      const wordsResult = apiResponse.data;
-      const pronunciation = wordsResult.pronunciation;
-    } else {
-      const failPayload = {
-        message: "Server has problem. Try again.",
+  const handleAddWord = async () => {
+    // upload to firebase
+    const { error, data } = await uploadImageToFirebase(image);
+    if (error) {
+      const errorUploadPayload = {
+        message: "Upload image was fail",
         type: "error",
       };
-      dispatch(setMessage(failPayload));
+      return dispatch(setMessage(errorUploadPayload));
     }
+    console.log(wordChoice);
+    // setLoading(true);
+    // const apiResponse = await searchWord("house");
+    // console.log(apiResponse);
+    // setLoading(false);
+
+    // if (apiResponse === 200) {
+    //   const wordsResult = apiResponse.data;
+    //   const pronunciation = wordsResult.pronunciation;
+    // } else {
+    //   const failPayload = {
+    //     message: "Server has problem. Try again.",
+    //     type: "error",
+    //   };
+    //   dispatch(setMessage(failPayload));
+    // }
   };
 
   return (
