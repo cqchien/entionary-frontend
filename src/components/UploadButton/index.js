@@ -4,6 +4,7 @@ import {
   DeleteForeverRounded,
   Loop,
 } from "@material-ui/icons";
+import { Skeleton } from "@material-ui/lab";
 import React from "react";
 import uploadButtonStyle from "./style";
 
@@ -48,6 +49,10 @@ const UploadButton = ({
             </Button>
           </label>
         </>
+      )}
+
+      {loading && !image && (
+        <Skeleton variant="rect" classes={{ root: classes.skeleton }} />
       )}
 
       {image && (
