@@ -69,16 +69,16 @@ const DialogCreateFlashCard = ({
             </Grid>
 
             <Grid item xs={12} md={6}>
-              <SelectCustom
-                formId="topic"
-                labelName="Topic*"
+              <TextFieldCustom
+                label="Topic Title*"
+                size="medium"
+                fullWidth
+                disabled={loading}
                 inputProps={{
                   ...register("topic"),
                 }}
-                disabled={loading}
-                menuItems={[{ name: "TOEIC" }, { name: "IELTS" }]}
                 error={Boolean(errors.topic)}
-                errorText={errors.topic?.message}
+                helperText={errors.topic?.message}
               />
             </Grid>
             <Grid item xs={12} md={6}>

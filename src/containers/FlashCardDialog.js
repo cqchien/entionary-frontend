@@ -34,7 +34,7 @@ const FlashCardDialog = ({ onCancel, isRerender }) => {
     const paramsApi = {
       name,
       picture: data,
-      topicTitle: topic,
+      topicTitle: topic.toLowerCase(),
       isPublic: mode === "PUBLIC" ? true : false,
     };
 
