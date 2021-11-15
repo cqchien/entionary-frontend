@@ -6,7 +6,7 @@ const turnOnSpeaker = (text) => {
   const voices = window.speechSynthesis.getVoices();
   window.speechSynthesis.cancel();
 
-  speech.lang = "en";
+  speech.lang = "en-US";
   speech.text = text;
   speech.volume = 1;
   speech.rate = 1;

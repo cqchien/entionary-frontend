@@ -5,7 +5,14 @@ import slideItemStyle from "./style";
 
 const useStyle = makeStyles(slideItemStyle);
 
-const SlideItem = ({ mean, word, type, phonetic, example, picture }) => {
+const SlideItem = ({
+  definition,
+  word,
+  type,
+  pronunciation,
+  example,
+  picture,
+}) => {
   const classes = useStyle({ picture });
 
   return (
@@ -16,9 +23,9 @@ const SlideItem = ({ mean, word, type, phonetic, example, picture }) => {
           <span>{word}</span>
           <SpeakerIcon text={word} />
         </h3>
-        <h2 className={classes.mean}>Mean: {mean}</h2>
+        <h2 className={classes.mean}>Definition: {definition}</h2>
         {type && <p className={classes.type}>({type})</p>}
-        {phonetic && <p className={classes.phonetic}>/{phonetic}/</p>}
+        {pronunciation && <p className={classes.phonetic}>/{pronunciation}/</p>}
         {example && <p className={classes.example}>Example: {example}</p>}
       </div>
     </div>

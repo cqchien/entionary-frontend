@@ -60,13 +60,11 @@ const slideItemStyle = (theme) => ({
   },
 
   mean: {
-    fontSize: "2.4rem",
+    fontSize: "2rem",
     color: "var(--primary-color)",
-    fontWeight: "bold",
-    textTransform: "capitalize",
 
     [theme.breakpoints.up("md")]: {
-      fontSize: "2.5rem",
+      fontSize: "2rem",
     },
   },
 
