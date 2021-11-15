@@ -42,11 +42,11 @@ const Flashcards = ({ isRerender }) => {
   }, [dispatch, currentPage, isRerender]);
 
   const handleNextPage = () => {
-    return setCurrentPage((prevPage) => prevPage++);
+    return setCurrentPage((prevPage) => (prevPage = prevPage + 1));
   };
 
   const handlePrevPage = () => {
-    return setCurrentPage((prevPage) => prevPage--);
+    return setCurrentPage((prevPage) => (prevPage = prevPage - 1));
   };
 
   return (

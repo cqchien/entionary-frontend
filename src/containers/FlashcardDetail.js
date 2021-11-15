@@ -19,7 +19,7 @@ const FlashcardDetail = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [currentPage, updateCurrentPage] = useState(1);
-  
+
   const numberWordPerPage = 1;
   const currentWords = getWordsAtSpecificPage(
     currentPage,
@@ -55,11 +55,11 @@ const FlashcardDetail = () => {
   }, [dispatch, id]);
 
   const handleNextPage = () => {
-    updateCurrentPage((prevPage) => prevPage++);
+    return updateCurrentPage((prevPage) => (prevPage = prevPage + 1));
   };
 
   const handlePrevPage = () => {
-    updateCurrentPage((prevPage) => prevPage--);
+    return updateCurrentPage((prevPage) => (prevPage = prevPage - 1));
   };
 
   return (
