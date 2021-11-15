@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router";
@@ -7,7 +7,7 @@ import WordsSlide from "../components/WordsSlide";
 import { setMessage } from "../redux/reducers/message.reducer";
 
 const getWordsAtSpecificPage = (currentPage, listWords, numberWordPerPage) => {
-  const words = listWords.current;
+  const words = listWords;
   const startPoint = currentPage - 1;
   const endPoint = startPoint + numberWordPerPage;
   return words.slice(startPoint, endPoint);
@@ -15,7 +15,7 @@ const getWordsAtSpecificPage = (currentPage, listWords, numberWordPerPage) => {
 
 const FlashcardDetail = ({ isRerender }) => {
   const { id } = useParams();
-  const listWords = useRef([]);
+  const [listWords, updateListWords] = useState([]);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [currentPage, updateCurrentPage] = useState(1);
@@ -29,7 +29,7 @@ const FlashcardDetail = ({ isRerender }) => {
 
   const pagination = {
     hasPreviousPage: currentPage > 1,
-    hasNextPage: currentPage < listWords.current.length / numberWordPerPage,
+    hasNextPage: currentPage < listWords.length / numberWordPerPage,
   };
 
   useEffect(() => {
@@ -42,7 +42,7 @@ const FlashcardDetail = ({ isRerender }) => {
       const flashcard = apiResponse?.data?.flashcard;
 
       if (success) {
-        listWords.current = flashcard.words;
+        updateListWords(flashcard.words);
       } else {
         dispatch(setMessage(apiResponse));
       }
