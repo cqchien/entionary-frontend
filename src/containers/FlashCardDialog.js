@@ -21,19 +21,23 @@ const FlashCardDialog = ({ onCancel, isRerender }) => {
   const handleCreateFlashCard = async ({ name, mode, topic }) => {
     setLoading(true);
 
-    // upload to firebase
-    const { error, data } = await uploadImageToFirebase(image);
-
-    if (error) {
-      const errorUploadPayload = {
-        message: "Upload image was fail",
-        type: "error",
-      };
-      return dispatch(setMessage(errorUploadPayload));
+    let picture = "";
+    if (image) {
+      // upload to firebase
+      const { error, data } = await uploadImageToFirebase(image);
+      if (error) {
+        const errorUploadPayload = {
+          message: "Upload image was fail",
+          type: "error",
+        };
+        return dispatch(setMessage(errorUploadPayload));
+      }
+      picture = data;
     }
+
     const paramsApi = {
       name,
-      picture: data,
+      picture,
       topicTitle: topic.toLowerCase(),
       isPublic: mode === "PUBLIC" ? true : false,
     };
