@@ -13,7 +13,7 @@ const getWordsAtSpecificPage = (currentPage, listWords, numberWordPerPage) => {
   return words.slice(startPoint, endPoint);
 };
 
-const FlashcardDetail = () => {
+const FlashcardDetail = ({ isRerender }) => {
   const { id } = useParams();
   const listWords = useRef([]);
   const dispatch = useDispatch();
@@ -52,7 +52,7 @@ const FlashcardDetail = () => {
     getDetailFlashcard();
 
     return () => {};
-  }, [dispatch, id]);
+  }, [dispatch, id, isRerender]);
 
   const handleNextPage = () => {
     return updateCurrentPage((prevPage) => (prevPage = prevPage + 1));

@@ -22,7 +22,7 @@ const FlashcardDetailPage = () => {
       </div>
       <div className="entionary-break" />
 
-      <FlashcardDetail />
+      <FlashcardDetail isRerender={isRerender} />
 
       {isOpenWordPack && (
         <WordDialog
