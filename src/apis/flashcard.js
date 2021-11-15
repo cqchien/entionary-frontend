@@ -22,4 +22,16 @@ const getOneFlashcards = (params) => {
   });
 };
 
-export { createFlashcard, getAllFlashcards, getOneFlashcards };
+const addWordToFlashcard = (params) => {
+  return request(`/flashcard/${params.id}/word`, {
+    method: "PATCH",
+    data: params.word,
+  });
+};
+
+export {
+  createFlashcard,
+  getAllFlashcards,
+  getOneFlashcards,
+  addWordToFlashcard,
+};

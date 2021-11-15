@@ -7,14 +7,17 @@ import { searchWord } from "../apis/wordsApi";
 import { setMessage } from "../redux/reducers/message.reducer";
 import searchOnChange from "../helper/searchOnChange";
 import { uploadImageToFirebase } from "../helper/uploadImageToFirebase";
+import { useParams } from "react-router";
+import { addWordToFlashcard } from "../apis/flashcard";
 
 const validationSchema = yup.object().shape({
-  // name: yup.string().trim().required("Input Flashcard Name"),
-  // topic: yup.string().required("Input Topic"),
-  // mode: yup.string().required("Input Mode"),
+  word: yup.string().trim().required("Input Word"),
+  type: yup.string().required("Input Word Type"),
+  category: yup.string().required("Input Word Category"),
 });
 
 const WordDialog = ({ onCancel, isRerender }) => {
+  const { id } = useParams();
   const dispatch = useDispatch();
 
   const [image, setImage] = useState("");
@@ -22,15 +25,14 @@ const WordDialog = ({ onCancel, isRerender }) => {
   const [wordQueryResults, updateWordQueryResults] = useState([]);
   const [types, updateTypes] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [definition, updateDefinition] = useState([]);
   const [wordChoice, updateWord] = useState({
     word: "",
     pronunciation: "",
     antonyms: [],
     synonyms: [],
     definition: "",
-    partOfSpeech: "",
-    examples: [],
+    type: "",
+    example: "",
   });
   let timer = null;
 
@@ -101,47 +103,62 @@ const WordDialog = ({ onCancel, isRerender }) => {
         categoryArr.length &&
         word.typeOf.every((value, index) => value === categoryArr[index])
       );
-    });
-    const { antonyms, definition, partOfSpeech, examples, synonyms } =
-      wordWithSpecificCategory[0];
+    })[0];
+
+    let { antonyms, definition, partOfSpeech, examples, synonyms } =
+      wordWithSpecificCategory;
+    const example = examples ? examples[0] : "";
+    antonyms = antonyms ? antonyms : [];
+    synonyms = synonyms ? synonyms : [];
 
     updateWord((state) => ({
       ...state,
       antonyms,
       definition,
-      partOfSpeech,
-      examples,
+      type: partOfSpeech,
+      example,
       synonyms,
     }));
-    updateDefinition(wordWithSpecificCategory[0].definition);
   };
 
   const handleAddWord = async () => {
-    // upload to firebase
-    const { error, data } = await uploadImageToFirebase(image);
-    if (error) {
-      const errorUploadPayload = {
-        message: "Upload image was fail",
-        type: "error",
-      };
-      return dispatch(setMessage(errorUploadPayload));
+    setLoading(true);
+    let picture = "";
+    if (image) {
+      // upload to firebase
+      const { error, data } = await uploadImageToFirebase(image);
+      if (error) {
+        const errorUploadPayload = {
+          message: "Upload image was fail",
+          type: "error",
+        };
+        return dispatch(setMessage(errorUploadPayload));
+      }
+      picture = data;
     }
-    console.log(wordChoice);
-    // setLoading(true);
-    // const apiResponse = await searchWord("house");
-    // console.log(apiResponse);
-    // setLoading(false);
 
-    // if (apiResponse === 200) {
-    //   const wordsResult = apiResponse.data;
-    //   const pronunciation = wordsResult.pronunciation;
-    // } else {
-    //   const failPayload = {
-    //     message: "Server has problem. Try again.",
-    //     type: "error",
-    //   };
-    //   dispatch(setMessage(failPayload));
-    // }
+    const word = {
+      ...wordChoice,
+      picture,
+    };
+
+    const apiResponse = await addWordToFlashcard({ id, word });
+    const success = apiResponse?.success;
+
+    setLoading(false);
+
+    if (success) {
+      const payloadSuccess = {
+        message: "Add word to flashcard successfully",
+        type: "success",
+      };
+      dispatch(setMessage(payloadSuccess));
+
+      onCancel();
+      isRerender();
+    } else {
+      dispatch(setMessage(apiResponse));
+    }
   };
 
   return (
@@ -155,7 +172,7 @@ const WordDialog = ({ onCancel, isRerender }) => {
       loading={loading}
       types={types}
       categories={categories}
-      definition={definition}
+      definition={wordChoice.definition}
     >
       <FileUpload
         title="Word Picture"
