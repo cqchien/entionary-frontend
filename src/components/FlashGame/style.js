@@ -1,21 +1,4 @@
 const gameStyle = (theme) => ({
-  wrapper: {
-    width: "100vw",
-    minHeight: "100vh",
-    overflow: "hidden",
-  },
-
-  bg: {
-    zIndex: -1,
-    position: "absolute",
-    backgroundImage:
-      "url(https://res.cloudinary.com/dynonary/image/upload/v1628497463/dynonary/games/fast-game-bg_huk7ii.jpg)",
-    backgroundSize: "cover",
-    backgroundPosition: "center center",
-    backgroundRepeat: "no-repeat",
-    opacity: 0.8,
-  },
-
   root: {
     height: "90vh",
     width: "100%",
