@@ -10,6 +10,7 @@ const FlashcardPage = React.lazy(() => import("../pages/Flashcard.js"));
 const FlashcardDetailPage = React.lazy(() =>
   import("../pages/FlashcardDetail")
 );
+const GamePage = React.lazy(() => import("../pages/Game.js"));
 
 const routes = [
   {
@@ -43,6 +44,12 @@ const routes = [
     exact: true,
     protect: true,
     component: () => <FlashcardDetailPage />,
+  },
+  {
+    path: ROUTES.GAME,
+    exact: true,
+    protect: true,
+    component: () => <GamePage />,
   },
 ];
 
