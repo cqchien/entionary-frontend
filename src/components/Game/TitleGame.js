@@ -7,6 +7,14 @@ import gameStyle from "./style";
 
 const useStyle = makeStyles(gameStyle);
 
+const toolTips = [
+  {
+    title:
+      "Choose the correct picture with the meaning of the word. Wrong choice -5pt, correct +7d. Points will be added to your remaining time.",
+    icon: <Info />,
+  },
+];
+
 const TitleGame = () => {
   const classes = useStyle();
 
@@ -16,12 +24,7 @@ const TitleGame = () => {
         Question&nbsp;<span>1</span>&nbsp;/&nbsp;
         <span>6</span>
         <span>{` - Score: 15`}</span>
-        <IconWrap
-          className="ml-5 cur-pointer"
-          title={`Chọn hình ảnh đúng với nghĩa của từ. Chọn sai -5đ, đúng +6đ. Điểm sẽ được cộng thêm với thời gian còn lại của bạn.`}
-        >
-          <Info />
-        </IconWrap>
+        <IconWrap className="ml-5 cur-pointer" toolTips={toolTips} />
       </p>
       <h1 className="flex-center">
         <span className="mr-8">text</span> <SpeakerIcon text="text" />
