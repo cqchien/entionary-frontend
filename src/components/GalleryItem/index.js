@@ -9,7 +9,6 @@ const GalleryItem = ({
   picture,
   topic,
   isPublic,
-  stars,
   _id,
   handleGetDetail,
 }) => {
@@ -24,7 +23,6 @@ const GalleryItem = ({
         <h2 className={classes.title}>{name}</h2>
         <h2 className={classes.name}>{topic.title}</h2>
         <p className={classes.option}>/{isPublic ? "Public" : "Private"}/</p>
-        <p className={classes.option}>Stars: {stars.length} </p>
       </div>
     </div>
   );

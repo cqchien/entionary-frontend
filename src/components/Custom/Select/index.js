@@ -56,7 +56,7 @@ const SelectCustom = ({
           label={labelName}
           onChange={(e) => {
             handleChange(e);
-            onChange(e);
+            onChange && onChange(e);
           }}
           inputProps={inputProps}
           {...otherProps}

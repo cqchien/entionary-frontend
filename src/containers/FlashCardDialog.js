@@ -39,7 +39,7 @@ const FlashCardDialog = ({ onCancel, isRerender }) => {
       name,
       picture,
       topicTitle: topic.toLowerCase(),
-      isPublic: mode === "PUBLIC" ? true : false,
+      isPublic: mode === "Public" ? true : false,
     };
 
     const apiResponse = await createFlashcard(paramsApi);
