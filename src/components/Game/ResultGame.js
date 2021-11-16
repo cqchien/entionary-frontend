@@ -1,8 +1,8 @@
 import { Button, makeStyles } from "@material-ui/core";
 import React from "react";
-import resultGameStyle from "./style";
+import gameStyle from "./style";
 
-const useStyle = makeStyles(resultGameStyle);
+const useStyle = makeStyles(gameStyle);
 
 const ResultGame = () => {
   const classes = useStyle();

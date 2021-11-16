@@ -1,4 +1,4 @@
-const resultGameStyle = (theme) => ({
+const gameStyle = (theme) => ({
   wrapper: {
     width: "100vw",
     minHeight: "100vh",
@@ -153,4 +153,4 @@ const resultGameStyle = (theme) => ({
   },
 });
 
-export default resultGameStyle;
+export default gameStyle;
