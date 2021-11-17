@@ -13,13 +13,6 @@ const ResultGame = () => {
       <div className={classes.doneResult}>Score: 10</div>
       <div className="mt-10">
         <Button
-          className="_btn _btn-outlined-stand mr-5"
-          variant="outlined"
-          onClick={() => console.log("back")}
-        >
-          Back
-        </Button>
-        <Button
           className="_btn _btn-primary"
           onClick={() => console.log("play again")}
         >

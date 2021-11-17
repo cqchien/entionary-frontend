@@ -1,11 +1,12 @@
 import React from "react";
 import Game from "../containers/Game";
-import "./styles/game.scss";
+import { useTitle } from "../Hook/useTitle";
 
 const GamePage = () => {
+  useTitle("Game");
+
   return (
-    <div className={"flex-center wrapper"}>
-      <div className={"background w-100 h-100"}></div>
+    <div className={"flex-center"}>
       <Game />
     </div>
   );

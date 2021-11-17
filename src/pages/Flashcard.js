@@ -3,8 +3,11 @@ import React, { useState } from "react";
 import IconWrap from "../components/IconWrap";
 import FlashCardDialog from "../containers/FlashCardDialog";
 import Flashcards from "../containers/Flashcards";
+import { useTitle } from "../Hook/useTitle";
 
 const FlashcardPage = () => {
+  useTitle("Flashcard");
+
   const [isOpenWordPack, setOpenWordPack] = useState(false);
   const [isRerender, setRerender] = useState(false);
   const toolTips = [

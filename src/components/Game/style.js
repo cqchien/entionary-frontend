@@ -1,11 +1,12 @@
 const gameStyle = (theme) => ({
   root: {
     height: "90vh",
-    width: "100%",
-    margin: "auto",
+    width: "50%",
+    float: "right",
+    marginTop: "20px",
     backgroundColor: "var(--bg-color-sec)",
     borderRadius: "16px",
-    border: "solid 10px rgba(127,127,127,0.5)",
+    border: "solid 2px rgba(127,127,127,0.5)",
     overflow: "hidden",
   },
 
@@ -21,14 +22,14 @@ const gameStyle = (theme) => ({
     position: "relative",
 
     "& h1": {
-      border: "solid 5px rgba(127,127,127,0.5)",
+      border: "solid 2px rgba(127,127,127,0.5)",
       width: "max-content",
-      padding: "2.4rem",
+      padding: "1.4rem",
       margin: "auto",
       fontWeight: 500,
-      borderRadius: "16px",
+      borderRadius: "10px",
       color: "var(--title-color)",
-      fontSize: "2.4rem",
+      fontSize: "2rem",
     },
   },
 
