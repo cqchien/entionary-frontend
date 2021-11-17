@@ -134,6 +134,37 @@ const gameStyle = (theme) => ({
     fontSize: "2.4rem",
     color: "var(--text-color)",
   },
+
+  timerWrap: {
+    width: "80%",
+    flexBasis: "30px",
+    textAlign: "center",
+    border: "solid 2px var(--grey)",
+    margin: "0 auto 1.2rem",
+    borderRadius: "12px",
+    overflow: "hidden",
+    position: "relative",
+  },
+
+  timer: {
+    width: "100%",
+    height: "100%",
+    transition: "width 0.5s",
+    backgroundColor: "var(--secondary-color)",
+    background:
+      "linear-gradient(90deg, var(--secondary-color) 0%, var(--secondary-color) 100%)",
+  },
+
+  timeStr: {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%,-50%)",
+    fontSize: "1.6rem",
+    color: "#fff",
+    fontWeight: 500,
+    letterSpacing: "5px",
+  },
 });
 
 export default gameStyle;
