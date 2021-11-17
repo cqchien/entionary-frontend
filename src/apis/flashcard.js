@@ -8,12 +8,12 @@ const createFlashcard = (params) => {
 };
 
 const getAllFlashcards = (params) => {
-  return request(
-    `/flashcard?page=${params.page}&take=${params.take}&sortBy=${params.sortBy}`,
-    {
-      method: "GET",
-    }
-  );
+  const url = params
+    ? `/flashcard?page=${params?.page}&take=${params?.take}&sortBy=${params?.sortBy}`
+    : "/flashcard";
+  return request(`${url}`, {
+    method: "GET",
+  });
 };
 
 const getOneFlashcards = (params) => {

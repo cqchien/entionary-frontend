@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getAllFlashcards } from "../apis/flashcard";
 import BoxChooseTopic from "../components/BoxChooseTopic";
@@ -7,54 +7,39 @@ import { setMessage } from "../redux/reducers/message.reducer";
 const TopicChosenGame = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-  const listFlashcard = useRef({ flashcard: [], pagination: {} });
-
-  const [currentPage, setCurrentPage] = useState(1);
+  const [topics, updateTopics] = useState([]);
 
   useEffect(() => {
     setLoading(true);
 
-    const paginateOptions = {
-      page: currentPage,
-      take: 7,
-      sortBy: "",
-    };
-
-    const getFlashcards = async (paginateOptions) => {
-      const apiResponse = await getAllFlashcards(paginateOptions);
+    const getFlashcards = async () => {
+      const apiResponse = await getAllFlashcards();
       const success = apiResponse?.success;
       if (success) {
-        listFlashcard.current = {
-          flashcards: apiResponse.data.flashcards,
-        };
+        const flashcards = apiResponse.data?.flashcards;
+
+        let topicsInFLashcards = [];
+        flashcards.forEach((flashcard) => {
+          const isTopicExist = topicsInFLashcards.some(
+            (topic) => topic._id === flashcard.topic._id
+          );
+          if (!isTopicExist) {
+            topicsInFLashcards.push(flashcard.topic);
+          }
+        });
+        updateTopics(topicsInFLashcards);
       } else {
         dispatch(setMessage(apiResponse));
       }
       setLoading(false);
     };
 
-    getFlashcards(paginateOptions);
+    getFlashcards();
 
     return () => {};
-  }, [currentPage, dispatch]);
+  }, [dispatch]);
 
-  const handleNextPage = () => {
-    return setCurrentPage((prevPage) => (prevPage = prevPage + 1));
-  };
-
-  const handlePrevPage = () => {
-    return setCurrentPage((prevPage) => (prevPage = prevPage - 1));
-  };
-
-  return (
-    <BoxChooseTopic
-      flashcards={listFlashcard.current.flashcards}
-      loading={loading}
-      pagination={listFlashcard.current.pagination}
-      handleNextPage={handleNextPage}
-      handlePrevPage={handlePrevPage}
-    />
-  );
+  return <BoxChooseTopic loading={loading} topics={topics} />;
 };
 
 export default TopicChosenGame;

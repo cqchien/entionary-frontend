@@ -18,7 +18,6 @@ const Flashcards = ({ isRerender }) => {
     const paginateOptions = {
       page: currentPage,
       take: 7,
-      sortBy: "",
     };
 
     const getFlashcards = async (paginateOptions) => {
