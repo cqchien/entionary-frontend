@@ -4,7 +4,7 @@ import { getAllFlashcards } from "../apis/flashcard";
 import BoxChooseTopic from "../components/BoxChooseTopic";
 import { setMessage } from "../redux/reducers/message.reducer";
 
-const TopicChosenGame = () => {
+const TopicChosenGame = ({ playGameWithTopic }) => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [topics, updateTopics] = useState([]);
@@ -39,7 +39,13 @@ const TopicChosenGame = () => {
     return () => {};
   }, [dispatch]);
 
-  return <BoxChooseTopic loading={loading} topics={topics} />;
+  return (
+    <BoxChooseTopic
+      loading={loading}
+      topics={topics}
+      playGameWithTopic={playGameWithTopic}
+    />
+  );
 };
 
 export default TopicChosenGame;
