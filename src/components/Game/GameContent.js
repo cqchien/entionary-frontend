@@ -4,6 +4,7 @@ import ResultGame from "./ResultGame";
 import gameStyle from "./style";
 import TimeBar from "./TimeBar";
 import TitleGame from "./TitleGame";
+import logoUrl from "../../assets/images/logo-entionary.png";
 
 const useStyle = makeStyles(gameStyle);
 
@@ -17,9 +18,41 @@ const GameContent = () => {
           {/* Title */}
           <TitleGame />
 
-          {/* Content */}
+          {/* Time bar */}
           <TimeBar />
-          <ResultGame />
+
+          {/* Answer List */}
+          <div className={`flex-grow-1 ${classes.answerList}`}>
+            <div
+              className={classes.answerItem}
+              onClick={() => console.log("answer")}
+            >
+              <img src={logoUrl} alt={"answer"} />
+            </div>
+            <div
+              className={classes.answerItem}
+              onClick={() => console.log("answer")}
+            >
+              <img src={logoUrl} alt={"answer"} />
+            </div>
+            <div
+              className={classes.answerItem}
+              onClick={() => console.log("answer")}
+            >
+              <img src={logoUrl} alt={"answer"} />
+            </div>
+            <div
+              className={classes.answerItem}
+              onClick={() => console.log("answer")}
+            >
+              <img src={logoUrl} alt={"answer"} />
+            </div>
+
+            {/* <div className={classes.answerItem}></div>; */}
+          </div>
+
+          {/* Result */}
+          {/* <ResultGame /> */}
         </div>
       </div>
     </div>

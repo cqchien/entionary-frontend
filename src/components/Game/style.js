@@ -1,9 +1,8 @@
 const gameStyle = (theme) => ({
   root: {
-    height: "90vh",
-    width: "50%",
-    float: "right",
-    marginTop: "20px",
+    height: "80vh",
+    width: "100%",
+    marginTop: "80px",
     backgroundColor: "var(--bg-color-sec)",
     borderRadius: "16px",
     border: "solid 2px rgba(127,127,127,0.5)",
@@ -88,20 +87,16 @@ const gameStyle = (theme) => ({
     display: "flex",
     flexWrap: "wrap",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-around",
     padding: "3.2rem",
   },
 
   answerItem: {
-    borderRadius: "12px",
-    marginRight: "1.6rem",
+    borderRadius: "5px",
     overflow: "hidden",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: "1.2rem",
-    width: 80,
-    height: 80,
     cursor: "pointer",
 
     "& img": {
