@@ -1,4 +1,5 @@
 import React from "react";
+import FlashcardChosenGame from "../containers/FlashcardChosenGame";
 import Game from "../containers/Game";
 import { useTitle } from "../Hook/useTitle";
 
@@ -7,7 +8,7 @@ const GamePage = () => {
 
   return (
     <div className={"flex-center"}>
-      <Game />
+      <FlashcardChosenGame />
     </div>
   );
 };

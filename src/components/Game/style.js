@@ -31,58 +31,7 @@ const gameStyle = (theme) => ({
       fontSize: "2rem",
     },
   },
-
-  goBackIcon: {
-    position: "absolute",
-    left: "2.4rem",
-    top: "50%",
-    transform: "translateY(-50%)",
-    color: "var(--label-color)",
-    cursor: "pointer",
-  },
-
-  topics: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(130px,1fr))",
-    gap: "1.6rem",
-    padding: "2.4rem",
-    overflowY: "auto",
-    maxHeight: "calc(100% - 9rem)",
-
-    "&::-webkit-scrollbar": {
-      width: "0px !important",
-    },
-  },
-
-  topicItem: {
-    minHeight: "130px",
-    height: "100%",
-    backgroundColor: "var(--bg-color-accent)",
-    borderRadius: "8px",
-    cursor: "pointer",
-
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-
-    transition: "all 0.35s",
-    "&:hover, &:active": {
-      backgroundColor: "var(--hover-color)",
-    },
-  },
-
-  topicImg: {
-    width: "5rem",
-    height: "5rem",
-    marginBottom: "12px",
-  },
-
-  topicTitle: {
-    fontSize: "1.6rem",
-    fontWeight: 400,
-  },
-
+  
   answerList: {
     display: "flex",
     flexWrap: "wrap",
