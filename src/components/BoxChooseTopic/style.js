@@ -1,4 +1,4 @@
-const boxChooseFlashcardStyle = () => ({
+const boxChooseTopicStyle = () => ({
   title: {
     padding: "1.6rem",
     textAlign: "center",
@@ -16,7 +16,7 @@ const boxChooseFlashcardStyle = () => ({
     },
   },
 
-  flashcards: {
+  topics: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(130px,1fr))",
     gap: "1.6rem",
@@ -29,7 +29,7 @@ const boxChooseFlashcardStyle = () => ({
     },
   },
 
-  flashcardItem: {
+  topicItem: {
     minHeight: "130px",
     height: "100%",
     backgroundColor: "var(--bg-color-accent)",
@@ -47,16 +47,16 @@ const boxChooseFlashcardStyle = () => ({
     },
   },
 
-  flashcardImg: {
+  topicImg: {
     width: "5rem",
     height: "5rem",
     marginBottom: "12px",
   },
 
-  flashcardTitle: {
+  topicTitle: {
     fontSize: "1.6rem",
     fontWeight: 400,
   },
 });
 
-export default boxChooseFlashcardStyle;
+export default boxChooseTopicStyle;
