@@ -20,12 +20,14 @@ const TitleGame = () => {
 
   return (
     <div className={classes.title}>
-      <p className={`${classes.nTotal} flex-center`}>
-        Question&nbsp;<span>1</span>&nbsp;/&nbsp;
-        <span>6</span>
-        <span>{` - Score: 15`}</span>
+      <div className={`${classes.nTotal} flex-center`}>
+        <p>
+          Question&nbsp;<span>1</span>&nbsp;/&nbsp;
+          <span>6</span>
+          <span>{` - Score: 15`}</span>
+        </p>
         <IconWrap className="ml-5 cur-pointer" toolTips={toolTips} />
-      </p>
+      </div>
       <h1 className="flex-center">
         <span className="mr-8">text</span> <SpeakerIcon text="text" />
       </h1>

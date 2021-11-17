@@ -1,4 +1,4 @@
-import { makeStyles, Tooltip } from "@material-ui/core";
+import { IconButton, makeStyles, Tooltip } from "@material-ui/core";
 import React from "react";
 import iconWrapStyle from "./style";
 
@@ -10,8 +10,8 @@ const IconWrap = ({ toolTips, className }) => {
   return (
     <div className={`${classes.iconWrap} ${className}`}>
       {toolTips.map((toolTip, index) => (
-        <Tooltip title={toolTip.title} placement="bottom" key={index}>
-          <div className={classes.icon}>{toolTip.icon}</div>
+        <Tooltip title={toolTip.title} key={index}>
+          <IconButton className={classes.icon}>{toolTip.icon} </IconButton>
         </Tooltip>
       ))}
     </div>
