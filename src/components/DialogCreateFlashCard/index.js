@@ -7,11 +7,11 @@ import {
   DialogTitle,
   Grid,
   makeStyles,
+  Switch,
 } from "@material-ui/core";
 import { Loop } from "@material-ui/icons";
 import React from "react";
 import { useForm } from "react-hook-form";
-import SelectCustom from "../Custom/Select";
 import TextFieldCustom from "../Custom/TextField";
 import { dialogMUIRoot } from "../globalStyle";
 
@@ -21,11 +21,12 @@ const DialogCreateFlashCard = ({
   validationSchema,
   onCancel,
   handleCreateFlashCard,
+  handleChangeMode,
+  isPublic,
   children,
   loading,
 }) => {
   const classes = useStyle();
-
   const {
     handleSubmit,
     register,
@@ -65,7 +66,7 @@ const DialogCreateFlashCard = ({
             </Grid>
 
             <Grid item xs={12} md={6}>
-              {children}
+              {children[0]}
             </Grid>
 
             <Grid item xs={12} md={6}>
@@ -82,16 +83,17 @@ const DialogCreateFlashCard = ({
               />
             </Grid>
             <Grid item xs={12} md={6}>
-              <SelectCustom
-                formId="mode"
-                labelName="Display Mode*"
-                disabled={loading}
-                inputProps={{
-                  ...register("mode"),
-                }}
-                menuItems={[{ name: "Private" }, { name: "Public" }]}
-                error={Boolean(errors.mode)}
-                errorText={errors.mode?.message}
+              {children[1]}
+            </Grid>
+
+            <Grid item xs={12} md={12}>
+              <label className={classes.labelCheck}>
+                Publicize My Flashcard
+              </label>
+              <Switch
+                className={classes.switchCheck}
+                checked={isPublic}
+                onChange={handleChangeMode}
               />
             </Grid>
           </Grid>

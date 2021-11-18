@@ -14,28 +14,30 @@ const UploadButton = ({
   fileType,
   loading,
   image,
+  id,
   title,
   handleUploadFile,
   loadingOfForm,
   removeFile,
+  name,
   ...otherProps
 }) => {
   const classes = useStyle();
   return (
-    <div className="w-100 h-100">
+    <>
       {!loading && !image && (
-        <>
+        <div className="w-100 h-100">
           <input
             className={classes.input}
             accept={`${fileType}/*`}
-            id="button-file"
+            id={`${id}`}
             htmlFor="contained-button-file"
             type="file"
             disabled={loadingOfForm}
             onChange={(event) => handleUploadFile(event, fileType)}
             {...otherProps}
           />
-          <label htmlFor="button-file">
+          <label htmlFor={`${id}`}>
             <Button
               className={`${classes.btn} w-100 h-100`}
               variant="contained"
@@ -48,7 +50,7 @@ const UploadButton = ({
               {title}
             </Button>
           </label>
-        </>
+        </div>
       )}
 
       {loading && !image && (
@@ -65,7 +67,7 @@ const UploadButton = ({
           />
         </div>
       )}
-    </div>
+    </>
   );
 };
 

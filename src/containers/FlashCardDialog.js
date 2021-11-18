@@ -10,21 +10,24 @@ import { createFlashcard } from "../apis/flashcard";
 const validationSchema = yup.object().shape({
   name: yup.string().trim().required("Input Flashcard Name"),
   topic: yup.string().required("Input Topic"),
-  mode: yup.string().required("Input Mode"),
 });
 
 const FlashCardDialog = ({ onCancel, isRerender }) => {
-  const [image, setImage] = useState("");
+  const [picture, setPicture] = useState("");
+  const [topicIcon, setIcon] = useState("");
+  const [isPublic, updateMode] = useState(true);
+
   const [loading, setLoading] = useState(false);
+
   const dispatch = useDispatch();
 
-  const handleCreateFlashCard = async ({ name, mode, topic }) => {
+  const handleCreateFlashCard = async ({ name, topic }) => {
     setLoading(true);
-
-    let picture = "";
-    if (image) {
+    let flashcardPicture = "";
+    let icon = "";
+    if (picture) {
       // upload to firebase
-      const { error, data } = await uploadImageToFirebase(image);
+      const { error, data } = await uploadImageToFirebase(picture);
       if (error) {
         const errorUploadPayload = {
           message: "Upload image was fail",
@@ -32,17 +35,32 @@ const FlashCardDialog = ({ onCancel, isRerender }) => {
         };
         return dispatch(setMessage(errorUploadPayload));
       }
-      picture = data;
+      flashcardPicture = data;
+    }
+
+    if (topicIcon) {
+      // upload to firebase
+      const { error, data } = await uploadImageToFirebase(topicIcon);
+      if (error) {
+        const errorUploadPayload = {
+          message: "Upload image was fail",
+          type: "error",
+        };
+        return dispatch(setMessage(errorUploadPayload));
+      }
+      icon = data;
     }
 
     const paramsApi = {
       name,
-      picture,
+      picture: flashcardPicture,
       topicTitle: topic.toLowerCase(),
-      isPublic: mode === "Public" ? true : false,
+      topicIcon: icon,
+      isPublic,
     };
 
     const apiResponse = await createFlashcard(paramsApi);
+
     const success = apiResponse?.success;
 
     setLoading(false);
@@ -61,18 +79,30 @@ const FlashCardDialog = ({ onCancel, isRerender }) => {
     }
   };
 
+  const handleChangeMode = (event) => {
+    updateMode(event.target?.checked);
+  };
+
   return (
     <DialogCreateFlashCard
       validationSchema={validationSchema}
       onCancel={onCancel}
       handleCreateFlashCard={handleCreateFlashCard}
       loading={loading}
+      isPublic={isPublic}
+      handleChangeMode={handleChangeMode}
     >
       <FileUpload
-        title="Flashcard Picture"
-        name="picture"
+        title="Flashcard Picture*"
+        id="flashcard-picture"
         loadingOfForm={loading}
-        onChangeFile={(image) => setImage(image)}
+        onChangeFile={(picture) => setPicture(picture)}
+      />
+      <FileUpload
+        title="Topic Icon*"
+        id="topic-icon"
+        loadingOfForm={loading}
+        onChangeFile={(icon) => setIcon(icon)}
       />
     </DialogCreateFlashCard>
   );

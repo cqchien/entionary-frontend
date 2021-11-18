@@ -65,4 +65,19 @@ export const dialogMUIRoot = () => ({
   breakLine: {
     borderColor: "var(--border-color)",
   },
+
+  labelCheck: {
+    color: "var(--label-color)",
+    fontSize: "1.5rem",
+  },
+
+  switchCheck: {
+    "& .MuiSwitch-colorSecondary.Mui-checked": {
+      color: "rgb(255, 167, 38)",
+    },
+
+    "& .MuiSwitch-colorSecondary.Mui-checked + .MuiSwitch-track": {
+      backgroundColor: "rgb(255, 167, 38)",
+    },
+  },
 });
