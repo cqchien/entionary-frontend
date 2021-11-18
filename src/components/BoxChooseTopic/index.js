@@ -1,7 +1,6 @@
 import { makeStyles } from "@material-ui/core";
 import React from "react";
 import boxChooseTopicStyle from "./style";
-import topicLogo from "../../assets/icons/online-education.png";
 import Loading from "../Custom/Loading";
 
 const useStyle = makeStyles(boxChooseTopicStyle);
@@ -26,9 +25,9 @@ const BoxChooseTopic = ({ loading, topics, playGameWithTopic }) => {
                   onClick={() => playGameWithTopic(topic._id)}
                 >
                   <img
-                    src={topicLogo}
+                    src={topic.icon}
                     className={classes.topicImg}
-                    alt={"topic"}
+                    alt={"topic icon"}
                   />
                   <h3 className={classes.topicTitle}>{topic.title}</h3>
                 </div>

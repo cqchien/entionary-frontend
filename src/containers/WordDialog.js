@@ -27,12 +27,12 @@ const WordDialog = ({ onCancel, isRerender }) => {
   const [categories, setCategories] = useState([]);
   const [wordChoice, updateWord] = useState({
     word: "",
-    pronunciation: "",
     antonyms: [],
     synonyms: [],
     definition: "",
     type: "",
     example: "",
+    pronunciation: "",
   });
   let timer = null;
 
@@ -44,11 +44,10 @@ const WordDialog = ({ onCancel, isRerender }) => {
     try {
       const apiResponse = await searchWord(word);
       const { results, pronunciation } = apiResponse.data;
-
       updateWord((state) => ({
         ...state,
         word,
-        pronunciation: pronunciation.all,
+        pronunciation,
       }));
       updateWordQueryResults(results);
       let wordType = [];
@@ -139,6 +138,7 @@ const WordDialog = ({ onCancel, isRerender }) => {
 
     const word = {
       ...wordChoice,
+      pronunciation: wordChoice.pronunciation[wordChoice.type],
       picture,
     };
 

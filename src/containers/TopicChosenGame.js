@@ -17,11 +17,10 @@ const TopicChosenGame = ({ playGameWithTopic }) => {
       const success = apiResponse?.success;
       if (success) {
         const flashcards = apiResponse.data?.flashcards;
-
         let topicsInFLashcards = [];
         flashcards.forEach((flashcard) => {
           const isTopicExist = topicsInFLashcards.some(
-            (topic) => topic._id === flashcard.topic._id
+            (topic) => topic.title === flashcard.topic.title
           );
           if (!isTopicExist) {
             topicsInFLashcards.push(flashcard.topic);

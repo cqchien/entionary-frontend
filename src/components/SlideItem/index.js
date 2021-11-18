@@ -11,10 +11,11 @@ const SlideItem = ({
   type,
   pronunciation,
   example,
+  synonyms,
+  anonyms,
   picture,
 }) => {
   const classes = useStyle({ picture });
-
   return (
     <div className={`${classes.root} ani-fade`}>
       <div className={classes.picture} />
@@ -23,10 +24,16 @@ const SlideItem = ({
           <span>{word}</span>
           <SpeakerIcon text={word} />
         </h3>
-        <h2 className={classes.mean}>Definition: {definition}</h2>
-        {type && <p className={classes.type}>({type})</p>}
         {pronunciation && <p className={classes.phonetic}>/{pronunciation}/</p>}
-        {example && <p className={classes.example}>Example: {example}</p>}
+        {type && <p className={classes.type}>({type})</p>}
+        <h2 className={classes.mean}>Definition: {definition}</h2>
+        {synonyms?.length > 0 && (
+          <p className={classes.phonetic}>Synonyms: {synonyms.join(", ")}</p>
+        )}
+        {anonyms?.length > 0 && (
+          <p className={classes.phonetic}>Anonyms: {anonyms.join(", ")}</p>
+        )}
+        ;{example && <p className={classes.example}>Example: {example}</p>}
       </div>
     </div>
   );
