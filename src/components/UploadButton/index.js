@@ -19,7 +19,6 @@ const UploadButton = ({
   handleUploadFile,
   loadingOfForm,
   removeFile,
-  name,
   ...otherProps
 }) => {
   const classes = useStyle();
