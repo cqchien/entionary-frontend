@@ -6,20 +6,20 @@ import { setMessage } from "../redux/reducers/message.reducer";
 import { GAME } from "../constant/game";
 
 const getAnswers = (words = [], wordAnswer = {}) => {
-  const answerIndex = words.findIndex(
-    ({ word }) => word._id === wordAnswer._id
-  );
+  const answerIndex = words.findIndex((word) => word._id === wordAnswer._id);
   const listWords = [...words];
   listWords.splice(answerIndex, 1);
   const answerList = listWords.sort(() => Math.random() - 0.5).slice(0, 3);
   answerList.push(words[answerIndex]);
+  delete [...listWords];
   return answerList.sort(() => Math.random() - 0.5);
 };
 
-const Game = ({ topicTitle, setPlayGame }) => {
+const Game = ({ topicTitle, onBack }) => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const [words, updateWords] = useState([]);
+  const [isFinish, setFinishGame] = useState(false);
   const [question, updateQuestion] = useState({
     wordQuestion: {},
     answerList: [],
@@ -51,7 +51,8 @@ const Game = ({ topicTitle, setPlayGame }) => {
         if (wordsWithTopic.length > 3) {
           updateWords(wordsWithTopic);
         } else {
-          setPlayGame(false);
+          onBack();
+
           const failPayload = {
             message: "At least 4 words in topic. Please, choose again",
             type: "warning",
@@ -66,8 +67,10 @@ const Game = ({ topicTitle, setPlayGame }) => {
 
     getFlashcards();
 
-    return () => {};
-  }, [dispatch, setPlayGame, topicTitle]);
+    return () => {
+      onBack();
+    };
+  }, [dispatch, onBack, topicTitle]);
 
   useEffect(() => {
     updateQuestion({
@@ -78,49 +81,45 @@ const Game = ({ topicTitle, setPlayGame }) => {
     return () => {};
   }, [words]);
 
-  const finishGame = () => {
-    updateStatusPlayer((preState) => ({
-      ...preState,
+  const handleAnswer = (answerWord) => {
+    const isCorrect = answerWord._id === question.wordQuestion._id;
+    const checkFinish =
+      statusPlayer.currentQuestion === question.numberQuestions;
+    updateStatusPlayer((prevState) => ({
+      ...prevState,
+      currentQuestion: checkFinish
+        ? prevState.currentQuestion
+        : prevState.currentQuestion + 1,
+      currentScore: isCorrect
+        ? prevState.currentScore + GAME.CORRECT_SCORE
+        : prevState.currentScore === 0
+        ? prevState.currentScore
+        : prevState.currentScore - GAME.WRONG_SCORE,
     }));
-  };
 
-  const handleCorrectAnswer = (answerWord) => {
-    if (statusPlayer.currentQuestion === question.numberQuestions) {
-      finishGame();
-      return;
+    if (checkFinish) {
+      return setFinishGame(true);
     }
 
     const answerWordIndex = words.findIndex(
-      (word) => word._id === answerWord._id
+      (word) => word._id === question.wordQuestion._id
     );
     const wordQuestion = words[answerWordIndex + 1];
-    const answerList = getAnswers(words, wordQuestion);
 
+    const answerList = getAnswers(words, wordQuestion);
     updateQuestion((prevState) => ({
       ...prevState,
       wordQuestion,
       answerList,
-      currentQuestion: prevState.currentQuestion + 1,
-    }));
-    updateStatusPlayer((prevState) => ({
-      ...prevState,
-      currentQuestion: prevState.currentQuestion + 1,
-      currentScore: prevState.currentScore + GAME.CORRECT_SCORE,
     }));
   };
 
-  const handleAnswer = (answerWord) => {
-    const isCorrect = answerWord.word === question.wordQuestion.word;
-    if (isCorrect) {
-      return handleCorrectAnswer(answerWord);
-    } else {
-      handleWrongAnswer(answerWord);
-    }
-  };
   return (
     <GameContent
       loading={loading}
       question={question}
+      isFinish={isFinish}
+      onBack={onBack}
       statusPlayer={statusPlayer}
       handleAnswer={handleAnswer}
     />

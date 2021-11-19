@@ -4,12 +4,18 @@ import ResultGame from "./ResultGame";
 import gameStyle from "./style";
 import TimeBar from "./TimeBar";
 import TitleGame from "./TitleGame";
-import logoUrl from "../../assets/images/logo-entionary.png";
 import Loading from "../Custom/Loading";
 
 const useStyle = makeStyles(gameStyle);
 
-const GameContent = ({ question, loading, statusPlayer, handleAnswer }) => {
+const GameContent = ({
+  question,
+  loading,
+  onBack,
+  statusPlayer,
+  handleAnswer,
+  isFinish,
+}) => {
   const classes = useStyle();
   return (
     <>
@@ -32,27 +38,25 @@ const GameContent = ({ question, loading, statusPlayer, handleAnswer }) => {
               {/* Answer List */}
               <div className={`flex-grow-1 ${classes.answerList}`}>
                 {question.answerList.map((answerWord, index) => {
-                  if (answerWord.picture) {
-                    return (
-                      <div
-                        key={answerWord._id}
-                        className={classes.answerItem}
-                        onClick={() => handleAnswer(answerWord)}
-                      >
-                        <img src={answerWord.picture} alt={"answer"} />
-                      </div>
-                    );
-                  } else {
-                    return (
-                      <div key={answerWord._id} className={classes.answerItem}>
-                        <img src={logoUrl} alt={"answer"} />
-                      </div>
-                    );
-                  }
+                  return (
+                    <div
+                      key={answerWord._id}
+                      className={classes.answerItem}
+                      onClick={() => handleAnswer(answerWord)}
+                    >
+                      <img src={answerWord?.picture} alt={"answer "} />
+                    </div>
+                  );
                 })}
               </div>
+
               {/* Result */}
-              {/* <ResultGame /> */}
+              {isFinish && (
+                <ResultGame
+                  statusPlayer={statusPlayer}
+                  onBack={onBack}
+                />
+              )}
             </div>
           </div>
         </div>

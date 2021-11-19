@@ -16,7 +16,7 @@ const GamePage = () => {
   return (
     <div className={"flex-center"}>
       {isPlayGame ? (
-        <Game topicTitle={topicTitle} setPlayGame={setPlayGame} />
+        <Game topicTitle={topicTitle} onBack={() => setPlayGame(false)} />
       ) : (
         <TopicChosenGame playGameWithTopic={playGameWithTopic} />
       )}
