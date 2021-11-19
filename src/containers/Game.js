@@ -117,24 +117,25 @@ const Game = ({ topicTitle, onBack }) => {
     if (!scoresGame) {
       return localStorage.setItem("gameResult", JSON.stringify(initialValue));
     }
+    if (isFinish) {
+      const result = scoresGame?.result;
+      const topicIndex = result?.findIndex(({ topic }) => topic === topicTitle);
+      const newResult = {
+        topic: topicTitle ? topicTitle : "",
+        score: statusPlayer.currentScore,
+      };
 
-    const result = scoresGame?.result;
-    const topicIndex = result?.findIndex(({ topic }) => topic === topicTitle);
-    const newResult = {
-      topic: topicTitle ? topicTitle : "",
-      score: statusPlayer.currentScore,
-    };
+      if (topicIndex < 0) {
+        scoresGame.result.push(newResult);
+        return localStorage.setItem("gameResult", JSON.stringify(scoresGame));
+      }
 
-    if (topicIndex < 0) {
-      scoresGame.result.push(newResult);
-      return localStorage.setItem("gameResult", JSON.stringify(scoresGame));
-    }
+      const score = result ? result[topicIndex]?.score : 0;
 
-    const score = result ? result[topicIndex]?.score : 0;
-
-    if (score <= statusPlayer.currentScore) {
-      result[topicIndex] = newResult;
-      return localStorage.setItem("gameResult", JSON.stringify(scoresGame));
+      if (score <= statusPlayer.currentScore) {
+        result[topicIndex] = newResult;
+        return localStorage.setItem("gameResult", JSON.stringify(scoresGame));
+      }
     }
 
     return () => {};
