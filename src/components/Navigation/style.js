@@ -43,11 +43,6 @@ export const navStyle = (theme) => ({
     },
   },
 
-  searchIcon: {
-    fontSize: iconSize,
-    color: "var(--label-color)",
-  },
-
   loginBtn: {
     height: "3.7rem",
     minWidth: "12rem",
@@ -56,4 +51,9 @@ export const navStyle = (theme) => ({
   loginLabel: {
     fontSize: "1.4rem",
   },
+
+  emailUser : {
+    fontSize: "1.6rem",
+    fontWeight: "500"
+  }
 });

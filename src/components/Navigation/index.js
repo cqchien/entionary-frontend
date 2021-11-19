@@ -5,8 +5,6 @@ import { navStyle } from "./style";
 import logoUrl from "../../assets/images/logo-entionary.png";
 import { useSelector } from "react-redux";
 import { ROUTES } from "../../constant/routePath";
-import SearchInputCustom from "../Custom/SearchInput";
-import { Search } from "@material-ui/icons";
 import MenuSettingUser from "../MenuSettingUser";
 
 const useStyle = makeStyles(navStyle);
@@ -14,7 +12,7 @@ const useStyle = makeStyles(navStyle);
 const Navigation = () => {
   const classes = useStyle();
 
-  const { isLogin, avatar } = useSelector((state) => state.user);
+  const { isLogin, avatar, email } = useSelector((state) => state.user);
 
   const [anchorMenu, setAnchorMenu] = useState(null);
 
@@ -38,10 +36,7 @@ const Navigation = () => {
           <div className={`${classes.control} flex-center--ver`}>
             {/* Search */}
             <div className="mr-5">
-              <SearchInputCustom
-                placeholder="Input keyword..."
-                prefixIcon={<Search className={classes.searchIcon} />}
-              />
+              <h2 className={classes.emailUser}>{email}</h2>
             </div>
             {/* Avatar */}
             {isLogin ? (

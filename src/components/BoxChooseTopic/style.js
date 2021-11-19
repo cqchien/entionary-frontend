@@ -41,8 +41,13 @@ const boxChooseTopicStyle = () => ({
   },
 
   topicTitle: {
-    fontSize: "1.6rem",
-    fontWeight: 400,
+    fontSize: "2rem",
+    fontWeight: 500,
+  },
+
+  score: {
+    fontSize: "1.5rem",
+    fontWeight: 300,
   },
 });
 

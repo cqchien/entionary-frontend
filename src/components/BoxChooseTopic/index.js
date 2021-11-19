@@ -11,7 +11,6 @@ const BoxChooseTopic = ({
   playGameWithTopic,
   bestResultTopics,
 }) => {
-  // console.log(bestResultTopics);
   const classes = useStyle();
   return (
     <>
@@ -24,6 +23,11 @@ const BoxChooseTopic = ({
           </div>
           <Grid container spacing={4}>
             {topics?.map((topic, index) => {
+              let result = bestResultTopics.find(
+                (result) => result.topic === topic.title
+              );
+              result = result ? result : { score: 0 };
+
               return (
                 <Grid item xs={12} md={3} key={index}>
                   <div
@@ -37,6 +41,7 @@ const BoxChooseTopic = ({
                       alt={"topic icon"}
                     />
                     <h3 className={classes.topicTitle}>{topic.title}</h3>
+                    <p className={classes.score}>Best Score: {result.score}</p>
                   </div>
                 </Grid>
               );
