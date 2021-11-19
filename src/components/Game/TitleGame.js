@@ -15,21 +15,21 @@ const toolTips = [
   },
 ];
 
-const TitleGame = () => {
+const TitleGame = ({ wordQuestion, numberQuestions, statusPlayer }) => {
   const classes = useStyle();
-
   return (
     <div className={classes.title}>
       <div className={`${classes.nTotal} flex-center`}>
         <p>
-          Question&nbsp;<span>1</span>&nbsp;/&nbsp;
-          <span>6</span>
-          <span>{` - Score: 15`}</span>
+          Question&nbsp;<span>{statusPlayer.currentQuestion}</span>&nbsp;/&nbsp;
+          <span>{numberQuestions}</span>
+          <span>{` - Score: ${statusPlayer.currentScore}`}</span>
         </p>
         <IconWrap className="ml-5 cur-pointer" toolTips={toolTips} />
       </div>
       <h1 className="flex-center">
-        <span className="mr-8">text</span> <SpeakerIcon text="text" />
+        <span className="mr-8">{wordQuestion.word}</span>{" "}
+        <SpeakerIcon text={wordQuestion.word} />
       </h1>
     </div>
   );

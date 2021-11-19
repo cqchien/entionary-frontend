@@ -9,7 +9,7 @@ import Loading from "../Custom/Loading";
 
 const useStyle = makeStyles(gameStyle);
 
-const GameContent = ({ words, loading }) => {
+const GameContent = ({ question, loading, statusPlayer, handleAnswer }) => {
   const classes = useStyle();
   return (
     <>
@@ -20,39 +20,37 @@ const GameContent = ({ words, loading }) => {
           <div className={classes.root}>
             <div className="d-flex flex-dir-col h-100">
               {/* Title */}
-              <TitleGame />
+              <TitleGame
+                wordQuestion={question.wordQuestion}
+                numberQuestions={question.numberQuestions}
+                statusPlayer={statusPlayer}
+              />
 
               {/* Time bar */}
               <TimeBar />
 
               {/* Answer List */}
               <div className={`flex-grow-1 ${classes.answerList}`}>
-                <div
-                  className={classes.answerItem}
-                  onClick={() => console.log("answer")}
-                >
-                  <img src={logoUrl} alt={"answer"} />
-                </div>
-                <div
-                  className={classes.answerItem}
-                  onClick={() => console.log("answer")}
-                >
-                  <img src={logoUrl} alt={"answer"} />
-                </div>
-                <div
-                  className={classes.answerItem}
-                  onClick={() => console.log("answer")}
-                >
-                  <img src={logoUrl} alt={"answer"} />
-                </div>
-                <div
-                  className={classes.answerItem}
-                  onClick={() => console.log("answer")}
-                >
-                  <img src={logoUrl} alt={"answer"} />
-                </div>
+                {question.answerList.map((answerWord, index) => {
+                  if (answerWord.picture) {
+                    return (
+                      <div
+                        key={answerWord._id}
+                        className={classes.answerItem}
+                        onClick={() => handleAnswer(answerWord)}
+                      >
+                        <img src={answerWord.picture} alt={"answer"} />
+                      </div>
+                    );
+                  } else {
+                    return (
+                      <div key={answerWord._id} className={classes.answerItem}>
+                        <img src={logoUrl} alt={"answer"} />
+                      </div>
+                    );
+                  }
+                })}
               </div>
-
               {/* Result */}
               {/* <ResultGame /> */}
             </div>
