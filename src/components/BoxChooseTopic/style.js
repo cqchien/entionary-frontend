@@ -16,19 +16,6 @@ const boxChooseTopicStyle = () => ({
     },
   },
 
-  topics: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(130px,1fr))",
-    gap: "1.6rem",
-    padding: "2.4rem",
-    overflowY: "auto",
-    maxHeight: "calc(100% - 9rem)",
-
-    "&::-webkit-scrollbar": {
-      width: "0px !important",
-    },
-  },
-
   topicItem: {
     minHeight: "130px",
     height: "100%",
