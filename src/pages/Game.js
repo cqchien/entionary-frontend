@@ -6,17 +6,17 @@ import { useTitle } from "../Hook/useTitle";
 const GamePage = () => {
   useTitle("Game");
   const [isPlayGame, setPlayGame] = useState(false);
-  const [topicId, updateTopicId] = useState("");
+  const [topicTitle, updateTopicTitle] = useState("");
 
-  const playGameWithTopic = (topicId) => {
+  const playGameWithTopic = (title) => {
     setPlayGame(true);
-    updateTopicId(topicId);
+    updateTopicTitle(title);
   };
 
   return (
     <div className={"flex-center"}>
       {isPlayGame ? (
-        <Game topicId={topicId} />
+        <Game topicTitle={topicTitle} setPlayGame={setPlayGame} />
       ) : (
         <TopicChosenGame playGameWithTopic={playGameWithTopic} />
       )}

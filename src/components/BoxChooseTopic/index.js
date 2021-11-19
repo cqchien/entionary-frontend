@@ -22,7 +22,7 @@ const BoxChooseTopic = ({ loading, topics, playGameWithTopic }) => {
                 <div
                   key={index}
                   className={classes.topicItem}
-                  onClick={() => playGameWithTopic(topic._id)}
+                  onClick={() => playGameWithTopic(topic.title)}
                 >
                   <img
                     src={topic.icon}
