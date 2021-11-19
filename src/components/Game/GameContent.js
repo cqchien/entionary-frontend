@@ -12,6 +12,7 @@ const GameContent = ({
   question,
   loading,
   onBack,
+  restTime,
   statusPlayer,
   handleAnswer,
   isFinish,
@@ -33,7 +34,7 @@ const GameContent = ({
               />
 
               {/* Time bar */}
-              <TimeBar />
+              <TimeBar restTime={restTime} />
 
               {/* Answer List */}
               <div className={`flex-grow-1 ${classes.answerList}`}>
@@ -52,10 +53,7 @@ const GameContent = ({
 
               {/* Result */}
               {isFinish && (
-                <ResultGame
-                  statusPlayer={statusPlayer}
-                  onBack={onBack}
-                />
+                <ResultGame statusPlayer={statusPlayer} onBack={onBack} />
               )}
             </div>
           </div>

@@ -31,7 +31,7 @@ const gameStyle = (theme) => ({
       fontSize: "2rem",
     },
   },
-  
+
   answerList: {
     display: "flex",
     flexWrap: "wrap",
@@ -84,6 +84,7 @@ const gameStyle = (theme) => ({
     width: "80%",
     flexBasis: "30px",
     textAlign: "center",
+    minHeight: "25px",
     border: "solid 2px var(--grey)",
     margin: "0 auto 1.2rem",
     borderRadius: "12px",

@@ -20,6 +20,7 @@ const Game = ({ topicTitle, onBack }) => {
   const dispatch = useDispatch();
   const [words, updateWords] = useState([]);
   const [isFinish, setFinishGame] = useState(false);
+  const [restTime, setRestTime] = useState(GAME.TOTAL_TIME);
   const [question, updateQuestion] = useState({
     wordQuestion: {},
     answerList: [],
@@ -31,6 +32,7 @@ const Game = ({ topicTitle, onBack }) => {
     currentScore: 0,
   });
 
+  // Call Api to set word
   useEffect(() => {
     setLoading(true);
 
@@ -72,6 +74,7 @@ const Game = ({ topicTitle, onBack }) => {
     };
   }, [dispatch, onBack, topicTitle]);
 
+  // Update question
   useEffect(() => {
     updateQuestion({
       wordQuestion: words[0],
@@ -80,6 +83,22 @@ const Game = ({ topicTitle, onBack }) => {
     });
     return () => {};
   }, [words]);
+
+  // set time
+  useEffect(() => {
+    const intervalTime = setInterval(() => {
+      const newRestTime = restTime - GAME.RESET_TIME;
+      if (newRestTime <= 0) {
+        setRestTime(0);
+        return setFinishGame(true);
+      }
+      setRestTime(newRestTime);
+    }, GAME.RESET_TIME);
+
+    return () => {
+      if (intervalTime) clearInterval(intervalTime);
+    };
+  }, [restTime]);
 
   const handleAnswer = (answerWord) => {
     const isCorrect = answerWord._id === question.wordQuestion._id;
@@ -119,6 +138,7 @@ const Game = ({ topicTitle, onBack }) => {
       loading={loading}
       question={question}
       isFinish={isFinish}
+      restTime={restTime}
       onBack={onBack}
       statusPlayer={statusPlayer}
       handleAnswer={handleAnswer}
