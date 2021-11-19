@@ -9,9 +9,7 @@ const getRefreshToken = () => {
 };
 
 const updateAccessToken = (token) => {
-  const localToken = JSON.parse(
-    localStorage.getItem("entionaryToken", JSON.stringify(token))
-  );
+  const localToken = JSON.parse(localStorage.getItem("entionaryToken"));
   localToken.access.token = token;
   return localStorage.setItem("entionaryToken", JSON.stringify(localToken));
 };

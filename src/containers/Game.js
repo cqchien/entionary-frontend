@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import GameContent from "../components/Game/GameContent";
 import { getAllFlashcards } from "../apis/flashcard";
 import { setMessage } from "../redux/reducers/message.reducer";
@@ -16,8 +16,9 @@ const getAnswers = (words = [], wordAnswer = {}) => {
 };
 
 const Game = ({ topicTitle, onBack }) => {
-  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
+  const { email } = useSelector((state) => state.user);
+  const [loading, setLoading] = useState(false);
   const [words, updateWords] = useState([]);
   const [isFinish, setFinishGame] = useState(false);
   const [restTime, setRestTime] = useState(GAME.TOTAL_TIME);
@@ -99,6 +100,28 @@ const Game = ({ topicTitle, onBack }) => {
       if (intervalTime) clearInterval(intervalTime);
     };
   }, [restTime]);
+
+  useEffect(() => {
+    const scoresGame = JSON.parse(localStorage.getItem("gameResult"));
+
+    const gameResult = {
+      user: email,
+      result: [
+        {
+          topic: topicTitle,
+          score: statusPlayer.currentScore,
+        },
+      ],
+    };
+    const result = scoresGame?.result;
+    const topicIndex = result.findIndex(({ topic }) => topic === topicTitle);
+
+    if (result[topicIndex].score <= statusPlayer.currentScore || !scoresGame) {
+      localStorage.setItem("gameResult", JSON.stringify(gameResult));
+    }
+
+    return () => {};
+  }, [email, isFinish, statusPlayer, topicTitle]);
 
   const handleAnswer = (answerWord) => {
     const isCorrect = answerWord._id === question.wordQuestion._id;
