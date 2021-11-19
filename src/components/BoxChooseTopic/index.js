@@ -5,7 +5,13 @@ import Loading from "../Custom/Loading";
 
 const useStyle = makeStyles(boxChooseTopicStyle);
 
-const BoxChooseTopic = ({ loading, topics, playGameWithTopic }) => {
+const BoxChooseTopic = ({
+  loading,
+  topics,
+  playGameWithTopic,
+  bestResultTopics,
+}) => {
+  // console.log(bestResultTopics);
   const classes = useStyle();
   return (
     <>
