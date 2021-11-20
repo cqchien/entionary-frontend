@@ -11,6 +11,7 @@ const FlashcardDetailPage = React.lazy(() =>
   import("../pages/FlashcardDetail")
 );
 const GamePage = React.lazy(() => import("../pages/Game.js"));
+const LogOut = React.lazy(() => import("../pages/LogOut.js"));
 
 const routes = [
   {
@@ -22,6 +23,12 @@ const routes = [
     path: ROUTES.LOGIN,
     exact: true,
     component: () => <LoginPage />,
+  },
+  {
+    path: ROUTES.LOGOUT,
+    exact: true,
+    protect: true,
+    component: () => <LogOut />,
   },
   {
     path: ROUTES.REGISTER,

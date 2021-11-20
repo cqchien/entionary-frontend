@@ -18,9 +18,14 @@ const setToken = (token) => {
   return localStorage.setItem("entionaryToken", JSON.stringify(token));
 };
 
+const removeToken = (token) => {
+  return localStorage.removeItem("entionaryToken");
+};
+
 module.exports = {
   getAccessToken,
   setToken,
+  removeToken,
   getRefreshToken,
   updateAccessToken,
 };
