@@ -32,11 +32,11 @@ const TopicChosenGame = ({ playGameWithTopic }) => {
       } else {
         dispatch(setMessage(apiResponse));
       }
+      setLoading(false);
     };
 
     getFlashcards();
 
-    setLoading(false);
     return () => {};
   }, [dispatch]);
 

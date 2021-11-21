@@ -76,7 +76,6 @@ const FlashCardDialog = ({ onCancel, isRerender }) => {
     } else {
       dispatch(setMessage(apiResponse));
     }
-
     setLoading(false);
   };
 

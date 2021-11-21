@@ -32,11 +32,11 @@ const Flashcards = ({ isRerender }) => {
       } else {
         dispatch(setMessage(apiResponse));
       }
+      setLoading(false);
     };
 
     getFlashcards(paginateOptions);
 
-    setLoading(false);
     return () => {};
   }, [dispatch, currentPage, isRerender]);
 

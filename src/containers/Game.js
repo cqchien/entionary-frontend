@@ -65,11 +65,11 @@ const Game = ({ topicTitle, onBack }) => {
       } else {
         dispatch(setMessage(apiResponse));
       }
+      setLoading(false);
     };
 
     getFlashcards();
 
-    setLoading(false);
     return () => {
       onBack();
     };
