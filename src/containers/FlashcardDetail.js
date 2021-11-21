@@ -46,11 +46,11 @@ const FlashcardDetail = ({ isRerender }) => {
       } else {
         dispatch(setMessage(apiResponse));
       }
-      setLoading(false);
     };
-
+    
     getDetailFlashcard();
-
+    
+    setLoading(false);
     return () => {};
   }, [dispatch, id, isRerender]);
 

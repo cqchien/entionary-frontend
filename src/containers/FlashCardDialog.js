@@ -23,6 +23,7 @@ const FlashCardDialog = ({ onCancel, isRerender }) => {
 
   const handleCreateFlashCard = async ({ name, topic }) => {
     setLoading(true);
+
     let flashcardPicture = "";
     let icon = "";
     if (picture) {
@@ -63,8 +64,6 @@ const FlashCardDialog = ({ onCancel, isRerender }) => {
 
     const success = apiResponse?.success;
 
-    setLoading(false);
-
     if (success) {
       const payloadSuccess = {
         message: "Create flashcard successfully",
@@ -77,6 +76,8 @@ const FlashCardDialog = ({ onCancel, isRerender }) => {
     } else {
       dispatch(setMessage(apiResponse));
     }
+
+    setLoading(false);
   };
 
   const handleChangeMode = (event) => {

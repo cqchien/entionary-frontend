@@ -39,8 +39,6 @@ const ForgetPassword = () => {
     const apiResponse = await resetPassword({ email, password, codeToVerify });
     const success = apiResponse?.success;
 
-    setLoading(false);
-
     if (success) {
       const payloadSuccess = {
         message: "You have reset password successfully. Try login again.",
@@ -49,10 +47,11 @@ const ForgetPassword = () => {
       dispatch(setMessage(payloadSuccess));
       setTimeout(() => {
         history.push("/login");
-      }, 2000)
+      }, 2000);
     } else {
       dispatch(setMessage(apiResponse));
     }
+    setLoading(false);
   };
 
   const handleSendCode = async ({ email }) => {

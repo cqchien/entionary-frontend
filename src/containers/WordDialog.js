@@ -44,6 +44,7 @@ const WordDialog = ({ onCancel, isRerender }) => {
     try {
       const apiResponse = await searchWord(word);
       const { results, pronunciation } = apiResponse.data;
+      console.log(results, pronunciation);
       updateWord((state) => ({
         ...state,
         word,
@@ -86,7 +87,7 @@ const WordDialog = ({ onCancel, isRerender }) => {
     wordQueryResults.forEach((word) => {
       if (word.partOfSpeech === type) {
         const object = {};
-        object.name = word.typeOf.join(",");
+        object.name = word.typeOf?.join(",");
         categoryOfWords.push(object);
       }
     });
@@ -138,14 +139,14 @@ const WordDialog = ({ onCancel, isRerender }) => {
 
     const word = {
       ...wordChoice,
-      pronunciation: wordChoice.pronunciation[wordChoice.type],
+      pronunciation: wordChoice.pronunciation[wordChoice.type]
+        ? wordChoice.pronunciation[wordChoice.type]
+        : wordChoice.pronunciation["all"],
       picture,
     };
 
     const apiResponse = await addWordToFlashcard({ id, word });
     const success = apiResponse?.success;
-
-    setLoading(false);
 
     if (success) {
       const payloadSuccess = {
@@ -159,6 +160,8 @@ const WordDialog = ({ onCancel, isRerender }) => {
     } else {
       dispatch(setMessage(apiResponse));
     }
+
+    setLoading(false);
   };
 
   return (
