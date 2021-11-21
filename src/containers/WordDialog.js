@@ -44,7 +44,6 @@ const WordDialog = ({ onCancel, isRerender }) => {
     try {
       const apiResponse = await searchWord(word);
       const { results, pronunciation } = apiResponse.data;
-      console.log(results, pronunciation);
       updateWord((state) => ({
         ...state,
         word,
@@ -101,10 +100,9 @@ const WordDialog = ({ onCancel, isRerender }) => {
       const categoryArr = category.split(",");
       return (
         categoryArr.length &&
-        word.typeOf.every((value, index) => value === categoryArr[index])
+        word.typeOf?.every((value, index) => value === categoryArr[index])
       );
     })[0];
-
     let { antonyms, definition, partOfSpeech, examples, synonyms } =
       wordWithSpecificCategory;
     const example = examples ? examples[0] : "";
