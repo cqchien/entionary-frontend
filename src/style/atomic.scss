@@ -2,10 +2,6 @@
   cursor: pointer;
 }
 
-.cur-help {
-  cursor: help;
-}
-
 // button
 ._btn {
   color: #fff !important;
@@ -78,27 +74,9 @@
   }
 }
 
-#_overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: var(--bg-color-sec);
-  opacity: 0.65;
-  display: none;
-}
-
 .phonetic {
   color: var(--phonetic-color);
   letter-spacing: 1px;
-}
-
-.entionary-label {
-  color: var(--label-color);
-  font-weight: 400;
-  font-size: 1.6rem;
-  margin: 0.8rem 0;
 }
 
 .entionary-title {
@@ -108,19 +86,6 @@
   margin-bottom: 1rem;
   letter-spacing: 0.75px;
   font-weight: 500;
-}
-
-.entionary-sub-title {
-  color: var(--label-color);
-  font-weight: 500;
-  font-size: 1.6rem;
-  margin: 0.8rem auto;
-  line-height: 1.5;
-}
-
-.entionary-box {
-  margin-top: 3.2rem;
-  margin-bottom: 3.2rem;
 }
 
 .entionary-container {
@@ -133,125 +98,6 @@
   color: var(--label-color);
   cursor: pointer;
 }
-
-.entionary-link {
-  font-size: 1.6rem;
-  color: var(--text-color);
-
-  &:hover,
-  &:active {
-    color: var(--secondary-color);
-  }
-}
-
-.entionary-break {
-  width: 100%;
-  height: 1px;
-  margin: 0.8rem 0;
-  background-color: var(--border-color);
-}
-
-.entionary-game {
-  &-box {
-    padding: 0 0.8rem;
-  }
-
-  &-title {
-    display: flex;
-    align-items: center;
-    padding: 1.2rem 0;
-    border-bottom: solid 1px var(--border-color);
-
-    h1 {
-      color: var(--title-color);
-      font-size: 2.4rem;
-      font-weight: 500;
-      margin-left: 0.8rem;
-      text-transform: uppercase;
-    }
-
-    img {
-      width: 4.8rem;
-      height: 4.8rem;
-    }
-  }
-
-  @media only screen and (min-width: 576px) {
-    &-box {
-      background-color: var(--bg-color-sec);
-      padding: 2.4rem 3.6rem;
-      box-shadow: 0px 5px 18px 1px rgb(17 17 17 / 10%);
-      border-radius: 8px;
-    }
-
-    &-title {
-      font-size: 2.8rem;
-      margin-top: 0;
-
-      img {
-        width: 5.6rem;
-        height: 5.6rem;
-      }
-    }
-  }
-}
-
-// answer
-.right {
-  color: var(--right-color);
-}
-.wrong {
-  color: var(--error-color);
-}
-
-// switch
-.entionary-switch {
-  height: 3rem;
-  width: 6rem;
-
-  position: relative;
-
-  background-color: transparent;
-  border: solid 1px var(--border-color);
-  border-radius: 25px;
-
-  &::before {
-    content: "";
-    height: 3rem;
-    width: 3rem;
-    background-color: var(--secondary-color);
-    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
-    border-radius: 50%;
-    transition: transform 0.25s;
-
-    position: absolute;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-
-    cursor: pointer;
-  }
-
-  &.active {
-    background-color: var(--secondary-color);
-
-    &::before {
-      transform: translate(100%, -50%);
-      background-color: var(--accent-color);
-    }
-  }
-
-  &.large {
-    width: 7.2rem;
-    height: 3.6rem;
-
-    &::before {
-      width: 3.5rem;
-      height: 3.5rem;
-    }
-  }
-}
-
 // arrow navigation
 .nav-arrow {
   position: absolute;
@@ -282,42 +128,5 @@
   &.next {
     right: 50px;
     border-left: 1.8rem solid var(--primary-color);
-  }
-}
-
-.entionary-favorite {
-  color: var(--label-color);
-  font-size: 2.2rem;
-  cursor: pointer;
-  transition: all 0.35s;
-  &:hover,
-  &:active {
-    transform: scale(1.1);
-  }
-
-  &.active {
-    color: #f14054;
-  }
-}
-
-.disabled {
-  pointer-events: none;
-}
-
-.notfound-title {
-  font-size: 2rem;
-  color: var(--label-color);
-  text-align: center;
-}
-
-.entionary-setting-icon {
-  color: var(--label-color);
-  font-size: 2.8rem;
-  cursor: pointer;
-  transition: all 0.25s;
-
-  &:hover,
-  &:active {
-    color: var(--primary-color);
   }
 }

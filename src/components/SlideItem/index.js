@@ -17,7 +17,7 @@ const SlideItem = ({
 }) => {
   const classes = useStyle({ picture });
   return (
-    <div className={`${classes.root} ani-fade`}>
+    <div className={`${classes.root}`}>
       <div className={classes.picture} />
       <div className={`${classes.content} flex-center-col`}>
         <h3 className={`${classes.word} flex-center--ver`}>
